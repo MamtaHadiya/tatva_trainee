@@ -1,0 +1,162 @@
+*{	margin: 0; padding: 0; box-sizing: border-box;
+				font-family: Roboto;
+			}
+.main-wrapper{
+	background-image: url('C:/xampp/htdocs/tatvasoft/assets/img/bg-img.png');
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 930px;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+			}
+	#logo{
+		margin-top: 10px;
+		margin-left: 17px;
+	}
+	#navbarNav{
+		margin-left: 350px;
+	}
+	a{
+		color: #ffffff;
+	}
+	a:hover {
+	color: #ffffff;
+}
+img.white_logo_transparent_background {
+  				width: 175px;
+				height: 130px;
+				margin: 0 49px 190px 0;
+				object-fit: contain;
+			}
+.book_btn{
+width: 160px;
+height: 40px;
+background: rgba(0, 0, 0, 0.0); 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+.log_btn{
+width: 83px;
+height: 40px;
+background: rgba(0, 0, 0, 0.0); 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+
+.helper_btn{
+width: 161px;
+height: 40px;
+background: rgba(0, 0, 0, 0.0); 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+			.Lorem-ipsum-text {
+			  width: 388px;
+			  height: 46px;
+			  margin: 150px 120px 22px 41px;
+			  font-size: 50px;
+			  font-weight: 500;
+			  font-stretch: normal;
+			  font-style: normal;
+			  line-height: 1.08;
+			  letter-spacing: normal;
+			  text-align: center;
+			  color: #fff;
+			}
+			.Forma-1-copy-12{
+				margin: 10px 120px 22px 41px;
+				color: #fff;
+			}
+			.button{
+				top: 483px;
+				left: 668px;
+				width: 225px;
+				height: 54px;
+				border: 1px solid #FFFFFF;
+				border-radius: 27px;
+				background-color: rgba(4, 149, 149, 0.5);
+				color: white;
+				
+			}
+			.icon_line{
+				margin-top: 100px;
+				margin-bottom: 100px;
+			}
+			.column{
+				float: left;
+				width: 11.33%;
+			}
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			.column h5{
+				color: #ffffff;
+			}
+			.down_arrow{
+				padding-bottom: 100px;
+			}
+			.round_img{
+				border-radius: 50%;
+				width: 320px;
+				height: 320px;
+				margin: 20px;
+			}
+			.img_info{
+				width: 320px;
+				margin: 20px;
+				display: block;
+				justify-content: space-between;
+			}
+			#two_bg{
+				background: url('C:/xampp/htdocs/tatvasoft/assets/img/blog-left-bg.png') left top no-repeat, url('C:/xampp/htdocs/tatvasoft/assets/img/blog-right-bg.png') right top no-repeat;
+				background-repeat: no-repeat;
+			}
+			.below_cards{
+				display: inline;
+				height: 135px;
+			}
+			#email_btn{
+				width: 233px;
+				height: 40px;
+				border-radius: 20px;
+				text-align: left;
+			}
+			#sub_btn{
+				width: 88px;
+				height: 40px;
+				background-color: #FF7B6D;
+				color: white;
+			}
+			.upper_footer{
+				height: 131px;
+				background-color: #111111;
+			}
+			.lower_footer{
+				height: 64px;
+				background-color: #292929;
+			}
+			.logo_footer{
+				float: left;
+				padding-top: 20px;
+				margin-left: 105px;
+			}
+			ul#link_page li{
+				float: left;
+				display: inline;
+				margin-left: 20px;
+				margin-top: 50px;
+				height: 18px;
+			}
+			.footer_btn{
+				width: 99px;
+				height: 40px;
+				float: right;
+				border-radius: 18px;
+				background-color: #EED507;
+			}
