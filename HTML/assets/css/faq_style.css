@@ -7,6 +7,10 @@ height: 70px;
 background-color: #525252;
 opacity: 0.8;
 }
+nav{
+background-color: #525252;
+opacity: 0.8;
+}
 
 #logo{
 margin-left: 15px;
@@ -14,10 +18,10 @@ width: 73px;
 height: 54px;
 }
 
-#navbarNav{
-margin-left: 520px;
 }
-
+#nav-link{
+ color: #ffffff; 
+}
 a{
 color: #ffffff;
 align-content: center;
@@ -80,16 +84,19 @@ color: white;
 	margin-left: 308px;
 	text-align: center;
 }
-
-hr.hr_img{
-width: 124px;
+hr{
+  width: 124px;
+  margin-left: 215px;
+  margin-right: 215px;
+}
+hr.hr_img{ 
 height: 1px;
 margin-top: 2.1em;
 background: #CCCCCC 0% 0% no-repeat padding-box;
 margin-bottom: 50px;
 }
 hr.hr_img:after{
-	content: url('C:/xampp/htdocs/tatvasoft/assets/img/separator.png');
+	content: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/separator.png');
 	display: inline-block;
 	position: relative;
 	top: -0.6em;
@@ -199,4 +206,120 @@ margin-top: 80px;
 height: 16px;
 color: #9BA0A3;
 text-align: center;
+}
+
+
+.group-18{
+  padding-top: 80px;
+  padding-bottom: 31px;
+}
+.price_section_1{
+  width: 1560px;
+  padding-left: 504px;
+  padding-right: 504px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 50px;
+}
+
+.hrs{
+  height: 58px;
+  font-size: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+
+}
+.price_ex_service{
+  width: 1560px;
+  padding-left: 210px;
+  padding-right: 210px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.price_column{
+  float: left;
+  width: 17%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.price_line_image{
+width: 108px;
+height: 108px;
+border: 1px solid #B0C9CE;
+text-align: center;
+border-radius: 50%;
+align-items: center;
+display: inline-block;
+vertical-align: center;
+position: relative;
+}
+.center_img{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.price_30-min{
+  color: #1D7A8C;
+  font-size: 20px;
+}
+
+.price_section_2{
+  width: 1560px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 50px;
+  background: #F6F6F6 0% 0% no-repeat padding-box;
+}
+
+.card-text{
+  color: #4F4F4F;
+  font-size: 10px;
+}
+.card{
+  background: #F6F6F6 0% 0% no-repeat padding-box;
+  border: none;
+}
+.price_section_3{
+  width: 1560px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 50px;
+}
+.before_img{
+  text-align: right;
+  width: 359px;
+}
+div.before_img:after{
+  content: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/the-best-img-1.png');
+  position: relative;
+}
+.left{
+  width: 360px;
+}
+.middle{
+  width: 375px;
+}
+.right{
+  width: 311px;
+}
+.row:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.lower_para{
+  width: 275px;
+  color: #646464;
+  font-size: 12px;
 }

@@ -6,50 +6,57 @@
 	<title>FAQ</title>
 	<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<!-- Main CSS -->
+	<!-- roboto fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<!-- Main CSS -->
 		<link rel="stylesheet" href="assets/css/faq_style.css">
 </head>
 <body>
 	<!-- main_wrapper -->
 	<div class="main_wrapper">
 		<!--header -->
-		<header class="header">
-			<nav class="navbar navbar-expand-lg header-nav">
-				<div class="navbar-header" id="logo">
-					<img src="assets/img/logo-small.png" width="73px" height="54px">
-				</div>
-				 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    			<span class="navbar-toggler-icon"></span>
-  				</button>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <a class="navbar-brand" href="#"><img src="assets/img/logo-small.png" width="73px" height="54px" id="logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  				<div class="collapse navbar-collapse" id="navbarNav">
-			    <ul class="nav header-navbar-rht navbar-nav ms-auto " style="color: #000000;">
-			      <li class="nav-item Rounded-Rectangle">
-			        <a class="nav-link " href="#"><button class="book_now_btn">Book Now</button></a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#"><button class="ps_btn">Prices & services</button></a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#"> Warranty</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#"> Blog</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#"> Contact</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link Rounded-Rectangle" href="#"><button class="log_btn">Login</button></a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link Rounded-Rectangle" href="#"><button class="helper_btn">Beacome a Helper</button></a>
-			      </li>
-			    </ul>
-			  </div>
-			</nav>
-		</header>
-		<!-- /header -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><button class="book_now_btn">Book Now</button></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><button class="ps_btn">Prices & services</button></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="#"> Warranty</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="#"> Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="#"> Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><button class="my-lg-0 log_btn">Login</button></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><button class="my-lg-0 helper_btn">Beacome a Helper</button></a>
+      </li>
+    </ul>
+    <!--<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+
+</header>
+<!-- /header -->
 
 		<div>
 			<img src="assets/img/faq-banner.png">
@@ -58,10 +65,11 @@
 	</div>
 	<!-- /main_wrapper -->
 
+	<section>
 	<div class="middle_section">
 		<h2><b>FAQs</b></h2>
 		<span>
-			<hr class="hr_img">
+			<hr class="hr_img" align="center" style="margin-left: 400px;">
 		</span>
 		<p class="single_line">Whether you are Customer or Service provider, </p>
 		<p class="single_line"> We have tried our best to solve all your queries and questions.</p>
@@ -104,6 +112,8 @@
 			<button class="submit_btn">submit</button>
 		</span>
 	</div>
+</section>
+
 	<footer>
 		<div class="upper_footer">
 			<div class="logo_footer">
