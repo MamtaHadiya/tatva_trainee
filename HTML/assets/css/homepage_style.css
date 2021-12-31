@@ -113,9 +113,26 @@ color: white;
 				display: block;
 				justify-content: space-between;
 			}
-			#two_bg{
-				background: url('C:/xampp/htdocs/tatvasoft/assets/img/blog-left-bg.png') left top no-repeat, url('C:/xampp/htdocs/tatvasoft/assets/img/blog-right-bg.png') right top no-repeat;
-				background-repeat: no-repeat;
+			.two_bg{
+				background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-left-bg.png'), 
+  url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-right-bg.png');
+  background-repeat: no-repeat;
+  background-position: left, right;
+  
+			}
+			.what_our_customer_say{
+				height: 680px; 
+				background-color: #F4F5F8; 
+				padding-top: 35px;
+			}
+			.what_our_customer_say h2{
+				margin-bottom: 30px;
+			}
+			.card{
+				border-left: 3px solid darkblue;
+			}
+			.card span{
+				float: left; margin-left: 10px; padding-top: 35px;
 			}
 			.below_cards{
 				display: inline;
@@ -160,3 +177,28 @@ color: white;
 				border-radius: 18px;
 				background-color: #EED507;
 			}
+@media screen and (max-width: 992px){
+	*{
+    overflow-x: hidden;
+  }
+  .header{
+    width: 100%;
+  }
+  .main-wrapper{
+  	width: auto;
+  	height: auto;
+  }
+  .Lorem-ipsum-text{
+  	height: auto;
+  }
+  .icon_line{
+  	height: auto;
+  }
+  .column{
+  	width: 62px;
+  	height: auto;
+  }
+  .what_our_customer_say{
+  	height: auto;
+  }
+}

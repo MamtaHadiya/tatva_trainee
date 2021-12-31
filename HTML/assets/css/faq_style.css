@@ -364,6 +364,70 @@ div.before_img:after{
 
 }
 
+
+/* css for service provider page */
+
+.service_banner{
+  background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/become-a-pro-banner.png');
+  background-repeat: no-repeat;
+  width: 1560px;
+  height: 930px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  border: 1px solid black;
+}
+.register_now{
+  width: 430px;
+  height: 664px;
+  margin: 150px auto 0px auto;
+  padding: 20px 36px 20px 36px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  
+}
+.not_robot{
+  width: 302px;
+  height: 76px;
+  padding: 10px;
+}
+.get_started_btn{
+  width: 166px;
+height: 46px;
+background: #1D7A8C 0% 0% no-repeat padding-box;
+border-radius: 23px;
+margin: auto;
+color: #FFFFFF;
+}
+.form-check a{
+  color: #1FB6FF;
+}
+.two_bg{
+  width: 1560px;
+  height: 917px;
+  background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-left-bg.png'), 
+  url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-right-bg.png');
+  background-repeat: no-repeat;
+  background-position: left, right;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.how_it_work{
+  width: 800px;
+  margin: auto;
+}
+.read_more{
+  margin-top: 50px;
+}
+.side_img{
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+/* complete css for srvice provider page */
+
+
 @media screen and (max-width: 992px){
   *{
     overflow-x: hidden;
@@ -402,6 +466,24 @@ div.before_img:after{
   .middle_section_for_about{
     width: 100%;
     padding: 0 15px 0;
+  }
+  .service_banner{
+    width: auto;
+    height: auto;
+  }
+  .register_now{
+    height: auto;
+  }
+  .two_bg{
+    width: auto;
+    height: auto;
+    background: none;
+  }
+  .how_it_work{
+    width: auto;
+  }
+  .side_img{
+    float: left;
   }
   .footer{
     width: 100%;
