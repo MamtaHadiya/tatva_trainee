@@ -428,6 +428,87 @@ color: #FFFFFF;
 /* complete css for srvice provider page */
 
 
+
+
+/* css for upcoming service page */
+
+.left_border{
+  border-left: 2px solid #ffffff;
+}
+.welcome_name{
+  margin-top: 70px;
+  width: 1560px;
+  height: 119px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F9F9F9 0% 0% no-repeat padding-box;
+}
+.menu_content{
+  width: 1560px;
+  height: auto;
+}
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 262px;
+  height: 712px;
+  margin: 0px 32px 0px 210px;
+  background: #1D7A8C 0% 0% no-repeat padding-box;
+  position: absolute;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+  padding: 15px;
+  text-align: left;
+}
+ 
+.sidebar a.active {
+  background-color: #204060;
+  color: #ffffff;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #204060;
+  color: #ffffff;
+}
+
+
+.content{
+  width: 845px;
+  margin-top: 31px;
+  margin-left: 503px;
+}
+.table_head{
+  width: 845px;
+  height: 49px;
+  background: #F9F9F9 0% 0% no-repeat padding-box;
+}
+.table_body tr{
+  height: 70px;
+}
+.cancel_btn{
+  width: 80px;
+  height: 34px;
+  background: #FF6B6B 0% 0% no-repeat padding-box;
+  border-radius: 17px;
+}
+
+/* complete css for upcoming service page */
+
+/* css for service history page */
+.rate_sp_btn{
+  width: 70px;
+  height: 34px;
+  background: #6DA9B5 0% 0% no-repeat padding-box;
+  border-radius: 17px;
+}
+
 @media screen and (max-width: 992px){
   *{
     overflow-x: hidden;
@@ -485,13 +566,48 @@ color: #FFFFFF;
   .side_img{
     float: left;
   }
+/* upcomming service page */
+  .left_border{
+    border-left: none;
+  }
+  .welcome_name{
+    width: auto;
+    height: auto;
+  }
+  .menu_content{
+    width: 100%;
+    margin: 0px;
+  }
+  .sidebar{
+    width: 200px;
+    height: auto;
+    position: relative;
+    margin-left: 5px;
+    float: left;
+  }
+  .sidebar a{
+    padding: 5px;
+  }
+  .content{
+    width: auto;
+    margin-top: 0px;
+    margin-left: 200px;
+  }
+  /* complete upcomming service page */
+
   .footer{
     width: 100%;
     height: auto;
+    text-align: center;
   }
   .logo_footer{
     width: 100%;
     height: auto;
+  }
+  ul.link_page li{
+    width: 100%;
+    float: none;
+    margin-top: 10px;
   }
   .footer_hr{
     width: 100%;
