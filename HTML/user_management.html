@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Management</title>
+	<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<!-- roboto fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<!-- Main CSS -->
+		<link rel="stylesheet" href="assets/css/user_style.css">
+</head>
+<body>
+<!--Main Navigation-->
+<header> 
+
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+  <!-- Navbar -->
+	  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+	      <!-- Toggle button -->
+		     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+	  		</button><!-- 
+	  <button class="navbar-toggler" type="button"
+	              data-mdb-toggle="collapse"
+	              data-mdb-target="#sidebarMenu"
+	              aria-controls="sidebarMenu"
+	              aria-expanded="false"
+	              aria-label="Toggle navigation"
+	              >
+	        <i class="fas fa-bars"></i>
+	      </button> -->
+
+	      <!-- Brand -->
+	      <a class="navbar-brand" href="#">
+	        <h1 style="color: white;">helperhand</h1>
+	      </a>
+
+	      <!-- Right links -->
+	      <ul class="navbar-nav ml-auto d-flex flex-row">
+	        
+	        <!-- Icon -->
+	        <li class="nav-item">
+	          <a class="nav-link me-3 me-lg-0" href="#">
+	            <img src="assets/img/user.png">
+	          </a>
+	        </li>
+	        <!-- Icon -->
+	        <li class="nav-item me-3 me-lg-0">
+	          <a class="nav-link text-light" href="#">James Smith</a>
+	        </li>
+	        <!-- Icon -->
+	        <li class="nav-item">
+	          <a class="nav-link me-3 me-lg-0" href="#">
+	            <img src="assets/img/logout.png">
+	          </a>
+	        </li>
+	      </ul>
+	  </nav>
+	  <!-- Navbar -->
+  </div>
+  <!-- Container wrapper -->
+
+  <!-- Sidebar -->
+  <div class="leftmenu">
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse nav-light">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Service Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Role Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Coupon Code Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Escalation Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Service Requests</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Service Providers</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple active">User Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple" >Finance Module</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Zip Code Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Rating Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Inquiry Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Newsletter Management</a>
+        <a href="#" class="list-group-item list-group-item-action py-2 ripple">Contant Management</a>
+      </div>
+    </div>
+  </nav>
+  </div>
+  <!-- Sidebar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<div class="main_content">
+<div class="user_management">
+	<div class="row">
+		<div class="col-sm-6 col-12">
+			<h2><b>User Management</b></h2>
+		</div>
+		<div class="col-sm-6 col-12">
+			<button class="add_btn" style="float: right;"><img src="assets/img/add.png"> Add New User</button>
+		</div>
+	</div>
+	<div class="single_line_form">
+		<form>
+			<div class="form-row align-itam-center">
+				<div class="col-auto user_clm">
+					<select class="form-control">
+						<option>User name</option>
+						<option>...</option>
+					</select>	
+				</div>
+				<div class="col-auto">
+					<select class="form-control user_clm">
+						<option>User role</option>
+						<option>...</option>
+					</select>
+				</div>
+				<div class="col-auto">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">+49</div>
+						</div>
+						<input type="text" name="phone" class="form-control" placeholder="Phone No">
+					</div>
+				</div>
+				<div class="col-auto">
+					<input type="text" name="zip_code" class="form-control" placeholder="Zip code">
+				</div>
+				<div class="col-auto">
+					<button class="serch_btn">Serch</button>
+				</div>
+				<div class="col-auto">
+					<button class="clear_btn">Clear</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="table_section">
+		<table class="table">
+			<thead class="table_head">
+				<tr>
+					<th>User Name <img src="assets/img/sort.png"></th>
+					<th>User Type</th>
+					<th>Role</th>
+					<th>Postal Code <img src="assets/img/sort.png"></th>
+					<th>City</th>
+					<th>Radius <img src="assets/img/sort.png"></th>
+					<th>User Status <img src="assets/img/sort.png"></th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td>Lyum watson </td>
+					<td>Call Center </td>
+					<td>Inquiry Manager </td>
+					<td>123456 </td>
+					<td>Berlin </td>
+					<td></td>
+					<td><button class="btn btn-success">Active</button></td>
+					<td>
+						<div class="dropleft dropdown">
+							<img src="assets/img/group-38.png" class="dropbtn">
+							<div class="dropdown_menu">
+								<a href="#">Edit</a>
+								<a href="#">Deactivate</a>
+								<a href="#">Service History</a>
+							</div>
+						</div></td>
+				</tr>
+				<tr>
+					<td><span style="display: inline;">
+				<p>Show entries</p>
+			</span></td>
+			<td><form><select class="form-control" style="width: 70px;">
+					<option>10</option>
+				</select></form></td>
+				<td colspan="3"></td>
+				<td colspan="3" align="right">
+					<div class="btn-group" role="group">
+						<button class="btn btn-secondary"><img src="assets/img/keyboard-right-arrow-button-copy.png"></button>
+						<button class="btn btn-secondary">1</button>
+						<button class="btn btn-secondary">2</button>
+						<button class="btn btn-secondary">3</button>
+						<button class="btn btn-secondary">4</button>
+						<button class="btn btn-secondary">5</button>
+						<button class="btn btn-secondary"><img src="assets/img/keyboard-right-arrow-button-copy.png"></button>
+					</div>
+				</td>
+			</tr>
+
+			</tbody>
+			</table>
+	</div>
+</div>
+<p style="margin-left: 300px;">©2018 Helperland. All rights reserved.</p>
+</div>
+<!--Main layout-->
+		<!-- jQuery -->
+		<script src="assets/js/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="assets/js/popper.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		
+		<!-- Slick JS -->
+		<script src="assets/js/slick.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="assets/js/script.js"></script>
+</body>
+</html>
