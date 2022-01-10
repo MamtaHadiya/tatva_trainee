@@ -23,6 +23,55 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: relative;
+  background: #F9F9F9 0% 0% no-repeat padding-box;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+.drop_img{
+  float: right;
+  position: relative;
+  padding-top: 10px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+
+
+
+/*.dropdown_btn{
+  display: block;
+  cursor: pointer;
+}
+.dropdown_cotainer{
+  display: none;
+}*/
+
 /*.navbar-toggler{
   background: white;
   color: black;
@@ -85,8 +134,12 @@
   display: flex;
   justify-content: center;
 }
-.user_clm{
-  width: 190px;
+
+input.cal_img{
+  background-image: url('../../assets/img/admin-calendar-blue.png');
+  background-repeat: no-repeat;
+  text-indent: 10px;
+  background-position: 8px 8px;
 }
 .serch_btn{
   width: 84px;
@@ -100,8 +153,8 @@
   border: 1px solid #DEDDDD;
 }
 .table_section{
-  width: 1053px;
-  height: 776px;
+  width: 1053px;/*
+  height: 776px;*/
   margin-top: 20px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 1px solid #E1E1E1;
@@ -127,10 +180,13 @@
 }
 .dropdown_menu a{
   display: block;
-  width: 75px;
   text-align: left;
   letter-spacing: 0px;
   color: #646464;
+  text-decoration: none;
+}
+.dropdown_menu a:hover{
+  color: #1FB6FF;
 }
 .dropdown:hover .dropdown_menu{
   display: block;

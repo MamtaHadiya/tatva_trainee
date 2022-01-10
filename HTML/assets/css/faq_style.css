@@ -105,7 +105,7 @@ color: white;
 }
 
 .hr_img hr:after{
-	content: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/separator.png');
+	content: url('../../assets/img/separator.png');
 	display: inline-block;
 	position: relative;
 	top: -0.6em;
@@ -320,7 +320,7 @@ position: relative;
   width: 359px;
 }
 div.before_img:after{
-  content: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/the-best-img-1.png');
+  content: url('../../assets/img/the-best-img-1.png');
   position: relative;
 }
 .left{
@@ -362,7 +362,7 @@ div.before_img:after{
 /* css for service provider page */
 
 .service_banner{
-  background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/become-a-pro-banner.png');
+  background-image: url('../../assets/img/become-a-pro-banner.png');
   background-repeat: no-repeat;
   width: 1560px;
   height: 930px;
@@ -398,8 +398,8 @@ color: #FFFFFF;
 .two_bg{
   width: 1560px;
   height: 917px;
-  background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-left-bg.png'), 
-  url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-right-bg.png');
+  background-image: url('../../assets/img/blog-left-bg.png'), 
+  url('../../assets/img/blog-right-bg.png');
   background-repeat: no-repeat;
   background-position: left, right;
   align-content: center;
@@ -552,7 +552,7 @@ color: #FFFFFF;
   .two_bg{
     width: auto;
     height: auto;
-    background: none;
+    text-align: center;
   }
   .how_it_work{
     width: auto;

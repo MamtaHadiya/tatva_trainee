@@ -2,26 +2,26 @@
 				font-family: Roboto;
 			}
 .main-wrapper{
-	background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/bg-img.png');
+	background-image: url('../../assets/img/bg-img.png');
 	background-repeat: no-repeat;
 	width: 100%;
 	height: 930px;
 	background-position: center;
 	background-size: cover;
 	position: relative;
-			}
-	#logo{
-		margin-top: 10px;
-		margin-left: 17px;
-	}
-	#navbarNav{
-		margin-left: 350px;
-	}
-	a{
-		color: #ffffff;
-	}
-	a:hover {
-	color: #ffffff;
+}
+#logo{
+	margin-top: 10px;
+	margin-left: 17px;
+}
+a{
+color: #ffffff;
+align-content: center;
+text-align: center;
+}
+
+a:hover {
+color: #ffffff;
 }
 img.white_logo_transparent_background {
   				width: 175px;
@@ -54,9 +54,8 @@ border: 1px solid #FFFFFF;
 border-radius: 20px;
 color: white;
 }
-			.Lorem-ipsum-text {
+.Lorem-ipsum-text {
 			  width: 388px;
-			  height: 46px;
 			  margin: 150px 120px 22px 41px;
 			  font-size: 50px;
 			  font-weight: 500;
@@ -114,8 +113,8 @@ color: white;
 				justify-content: space-between;
 			}
 			.two_bg{
-				background-image: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-left-bg.png'), 
-  url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/blog-right-bg.png');
+				background-image: url('../../assets/img/blog-left-bg.png'), 
+  url('../../assets/img/blog-right-bg.png');
   background-repeat: no-repeat;
   background-position: left, right;
   
@@ -134,10 +133,6 @@ color: white;
 			.card span{
 				float: left; margin-left: 10px; padding-top: 35px;
 			}
-			.below_cards{
-				display: inline;
-				height: 135px;
-			}
 			#email_btn{
 				width: 233px;
 				height: 40px;
@@ -150,33 +145,40 @@ color: white;
 				background-color: #FF7B6D;
 				color: white;
 			}
-			.upper_footer{
-				height: 131px;
-				background-color: #111111;
-			}
-			.lower_footer{
-				height: 64px;
-				background-color: #292929;
-			}
-			.logo_footer{
-				float: left;
-				padding-top: 20px;
-				margin-left: 105px;
-			}
-			ul#link_page li{
-				float: left;
-				display: inline;
-				margin-left: 20px;
-				margin-top: 50px;
-				height: 18px;
-			}
-			.footer_btn{
-				width: 99px;
-				height: 40px;
-				float: right;
-				border-radius: 18px;
-				background-color: #EED507;
-			}
+			
+.footer{
+ background: #111111 0% 0% no-repeat padding-box; 
+ color: #ffffff;
+ margin: 0px;
+ padding: 0px;
+}
+.upper_footer{
+	height: 131px;
+	background-color: #111111;
+}
+.logo_footer{
+	padding-top: 20px;
+	padding-left: 40px;
+}
+
+ul.link_page li{
+float: left;
+display: inline;
+margin-top: 50px;
+font-size: 10px;
+padding-left: 20px;
+}
+.lower_footer{
+	height: 64px;
+	background-color: #292929;
+}
+.footer_btn{
+	width: 99px;
+	height: 40px;
+	float: right;
+	border-radius: 18px;
+	background-color: #EED507;
+}
 @media screen and (max-width: 992px){
 	*{
     overflow-x: hidden;
@@ -190,6 +192,8 @@ color: white;
   }
   .Lorem-ipsum-text{
   	height: auto;
+  	overflow-y: hidden;
+  	line-height: normal;
   }
   .icon_line{
   	height: auto;
@@ -199,6 +203,28 @@ color: white;
   	height: auto;
   }
   .what_our_customer_say{
+  	height: auto;
+  }
+  .footer{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .upper_footer{
+  	height: auto;
+  }
+  .logo_footer{
+    width: 100%;
+    height: auto;
+  }
+  ul.link_page li{
+    width: 100%;
+    float: none;
+    margin-top: 10px;
+  }
+  .lower_footer{
+  	width: 100%;
   	height: auto;
   }
 }

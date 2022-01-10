@@ -17,7 +17,7 @@
 	<div class="main-wrapper">
 		<!--header -->
 		<header class="header">
-			<nav class="navbar navbar-expand-lg header-nav">
+			<nav class="navbar navbar-expand-lg header-nav navbar-dark">
 				<div class="navbar-header" id="logo">
 					<img src="assets/img/white-logo-transparent-background.png" >
 				</div>
@@ -26,7 +26,7 @@
   				</button>
 
   				<div class="collapse navbar-collapse" id="navbarNav">
-			    <ul class="nav header-navbar-rht navbar-nav ms-auto " style="color: #000000;">
+			    <ul class="navbar-nav ml-auto" style="color: #000000;">
 			      <li class="nav-item">
 			        <a class="nav-link " href="#"><button class="book_btn">Book a Cleaner</button></a>
 			      </li>
@@ -46,13 +46,10 @@
 			        <a class="nav-link" href="#"><button class="log_btn">Login</button></a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link Rounded-Rectangle" href="#"><button class="helper_btn">Beacome a Helper</button></a>
+			        <a class="nav-link" href="#"><button class="helper_btn">Beacome a Helper</button></a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link"> <img src="assets/img/ic-flag.png" alt="Flag"></a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link arrow"> <img src="assets/img/sp-arrow-down.png" alt=""></a>
+			        <a class="nav-link"> <img src="assets/img/ic-flag.png" alt="Flag"> <img src="assets/img/sp-arrow-down.png" alt=""></a>
 			      </li>
 			    </ul>
 			  </div>
@@ -261,41 +258,56 @@
 				</div>
 			</div>
 
-			<div class="below_cards py-5">
-				<img src="assets/img/right-arrow.png" style="float:left;">
-				<span style="float:left; margin-left: 400px;">
-					<h5><b>GET OUR NEWSLETTER</b></h5>
-					<span>
-						<button id="email_btn">YOUR EMAIL</button>
-						<button id="sub_btn">Submit</button>
-					</span>
-				</span>
-				<img src="assets/img/layer-598.png" style="float:right;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2 col-12">
+						<img src="assets/img/right-arrow.png" style="float:left;">
+					</div>
+					<div class="col-md-8 col-12">
+						<center>
+						<h5><b>GET OUR NEWSLETTER</b></h5><br>
+						<span>
+							<button id="email_btn">YOUR EMAIL</button>
+							<button id="sub_btn">Submit</button>
+						</span>
+						</center>
+					</div>
+					<div class="col-md-2 col-12">
+						<img src="assets/img/layer-598.png" style="float:right;">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	</section>
 
 
-	<footer>
+	<footer class="footer">
 		<div class="upper_footer">
-			<div class="logo_footer">
-				<img src="assets/img/footer-logo.png">
-			</div>
-			<div class="footer_links">
-				<ul id="link_page">
-					<li style="margin-left:224px;"><a href="#"> HOME</a></li>
+			<div class="row">
+				<div class="col-md-3 col-12">
+					<div class="logo_footer">
+						<img src="assets/img/footer-logo.png">
+					</div>
+				</div>
+				<div class="col-md-7 col-12">
+					<ul class="link_page">
+					<li><a href="#"> HOME</a></li>
 					<li><a href="#"> ABOUT</a></li>
 					<li><a href="#"> TESTIMONIALS</a></li>
 					<li><a href="#"> FAQS</a></li>
 					<li><a href="#"> INSURANCE POLICY</a></li>
 					<li><a href="#"> IMPRESSUM</a></li>
-					<li style="margin-left:200px"><img src="assets/img/ic-facebook.png"></li>
-					<li><img src="assets/img/ic-instagram.png"></li>
 				</ul>
+				</div>
+				<div class="col-md-2 col-12">
+					<ul class="link_page">
+						<li><a href=""><img src="assets/img/ic-facebook.png"></li></a>
+						<li><a href=""><img src="assets/img/ic-instagram.png"></li></a>
+					</ul>
+				</div>
 			</div>
 		</div>
-
 		<div class="lower_footer">
 			<button class="footer_btn">OK!</button>
 			<p align="center" style="color:white; padding-top: 15px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac. <span style="color:blue">Privacy Policy</span></p>
