@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Helperland</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link href="~/css/homepage_style.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg header-nav navbar-dark fixed-top">
+            <div class="navbar-header" id="logo">
+                <img src="~/assets/img/white-logo-transparent-background.png">
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto" style="color: #000000;">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#"><button class="book_btn">Book a Cleaner</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Helperland" asp-action="Prices">Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Our Guarrantee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="log_btn">Login</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="helper_btn">Beacome a Helper</button></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                            <img src="~/assets/img/ic-flag.png" alt="Flag"><span class="fa-caret-down"></span>
+                        </a>
+                        <ul class="dropdown-menu bg-dark text-light">
+                            <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
+                            <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- /header -->
+    <div class="main-body">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="upper_footer">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <div class="logo_footer">
+                        <img src="~/assets/img/footer-logo.png">
+                    </div>
+                </div>
+                <div class="col-md-7 col-12">
+                    <ul class="link_page">
+                        <li><a href="#"> HOME</a></li>
+                        <li><a href="#"> ABOUT</a></li>
+                        <li><a href="#"> TESTIMONIALS</a></li>
+                        <li><a href="#"> FAQS</a></li>
+                        <li><a href="#"> INSURANCE POLICY</a></li>
+                        <li><a href="#"> IMPRESSUM</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-12">
+                    <ul class="link_page">
+                        <li><a href=""><img src="~/assets/img/ic-facebook.png"></a></li>
+                        <li><a href=""><img src="~/assets/img/ic-instagram.png"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="lower_footer">
+            <button class="footer_btn">OK!</button>
+            <p align="center" style="color:white; padding-top: 15px;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac.
+                <span style="color:blue">Privacy Policy</span>
+            </p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

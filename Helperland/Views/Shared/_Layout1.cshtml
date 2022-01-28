@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Prices</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/css/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <!--header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <a class="navbar-brand" href="#"><img src="~/assets/img/logo-small.png" id="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="book_now_btn">Book Now</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="ps_btn">Prices & services</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#"> Warranty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#"> Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#"> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="my-lg-0 log_btn">Login</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button class="my-lg-0 helper_btn">Beacome a Helper</button></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <!-- /header -->
+    <div class="main-body">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <!--Footer-->
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <div class="logo_footer">
+                        <img src="~/assets/img/footer-logo.png">
+                    </div>
+                </div>
+                <div class="col-md-7 col-12">
+                    <ul class="link_page">
+                        <li><a href="#"> HOME</a></li>
+                        <li><a href="#"> ABOUT</a></li>
+                        <li><a href="#"> TESTIMONIALS</a></li>
+                        <li><a href="#"> FAQS</a></li>
+                        <li><a href="#"> INSURANCE POLICY</a></li>
+                        <li><a href="#"> IMPRESSUM</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-12">
+                    <ul class="link_page">
+                        <li><a href=""><img src="~/assets/img/ic-facebook.png"></a></li>
+                        <li><a href=""><img src="~/assets/img/ic-instagram.png"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer_hr">
+            <p class="footer_para">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</p>
+        </div>
+    </footer>
+    <!--/footer-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

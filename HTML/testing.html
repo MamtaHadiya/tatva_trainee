@@ -58,8 +58,7 @@
   <div class="hr_img">
         <hr>
   </div>
-  <center>
-  <table width="553px">
+  <table width="553px" align="center">
     <tr>
       <th height="59px" style="font-size: 20px; background: #1D7A8C 0% 0% no-repeat padding-box; color: #FFFFFF;">One Time</th>
     </tr>
@@ -76,7 +75,6 @@
       <td><img src="assets/img/forma-1_5.png">Lower prices</td>
     </tr>
   </table>
-  </center>
 </div>
 </section>
 
@@ -141,8 +139,45 @@
         <img src="assets/img/group-18_3.png">
               <div class="card-body pl-2 pr-2" style="text-align: left;">
               <h5 class="card-title"><b>Bedroom and Living Room</b></h5>
-              <p class="card-text"><img src="assets/img/vector-smart-object-copy.png"> Dust all accessible surfaces</p>
-              <p class="card-text"><img src="assets/img/vector-smart-object-copy.png"> Wipe down all mirrors and glass fixtures</p>
+              <p class="card-text">
+                  <img src="assets/img/vector-smart-object-copy.png" id="more" onclick="show()">
+              <img src="assets/img/down-arrow.png" id="less" onclick="show()"> Dust all accessible surfaces</p>
+              <div id="div1">dominate the industry in scale and scope with an adaptable, extensive network that consistently delivers exceptional results.</div>
+              <p class="card-text"><img src="assets/img/vector-smart-object-copy.png" id="more" onclick="show()">
+              <img src="assets/img/down-arrow.png" id="less" onclick="show()"> Wipe down all mirrors and glass fixtures</p>
+              <div id="div2">dominate the industry in scale and scope with an adaptable, extensive network that consistently delivers exceptional results.</div>
+              <style type="text/css">
+                #less{
+                  display: none;
+                }
+                #div1,#div2{
+                  display: none;
+                }
+              </style>
+              <script type="text/javascript">
+                function show() {
+                  var divs = ["div1","div2"];
+                  var i, divId, div;
+                  var lessInfo = document.getElementById('less');
+                  var moreInfo = document.getElementById('more');
+                  for (i = 0; i < divs.lenght; i++) {
+                    divId = divs[i];
+                    div = document.getElementById(divId);
+                    if (div.style.display === "none") {
+                      lessInfo.style.display = "inline";
+                      moreInfo.style.display = "none";
+                      div.style.display = "block";
+
+                    }
+                    else{
+                      lessInfo.style.display = "none";
+                      moreInfo.style.display = "inline";
+                      div.style.display = "none";
+                    }
+
+                  }
+                }
+              </script>
               <p class="card-text"><img src="assets/img/vector-smart-object-copy.png"> Clean all floor surfaces</p>
               <p class="card-text"><img src="assets/img/vector-smart-object-copy.png"> Take out garbage and recycling</p>
               </div>

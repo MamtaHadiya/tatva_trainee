@@ -234,15 +234,12 @@ text-align: center;
 }
 .price_section_1{
   width: 1560px;
-  /*padding-left: 504px;
-  padding-right: 504px;*/
+  padding-left: 504px;
+  padding-right: 504px;
   text-align: center;
-  /*align-items: center;
-  align-content: center;*/
+  align-items: center;
+  align-content: center;
   margin-bottom: 50px;
-}
-.price_section_1 table{
-  text-align: center;
 }
 
 .hrs{
@@ -560,7 +557,6 @@ color: #FFFFFF;
   width: 360px;
   height: 67px;
   background: #1D7A8C 0% 0% no-repeat padding-box;
-  border: 5px solid black;
   color: #FFFFFF;
   display: flex;
   align-items: center;

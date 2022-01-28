@@ -1,0 +1,851 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+nav {
+    background-color: #525252;
+    opacity: 0.8;
+}
+
+#logo {
+    margin-left: 15px;
+    width: 73px;
+    height: 54px;
+}
+
+}
+
+#nav-link {
+    color: #ffffff;
+}
+
+a {
+    color: #ffffff;
+    align-content: center;
+    text-align: center;
+}
+
+    a:hover {
+        color: #ffffff;
+    }
+
+.nav-item {
+    margin-left: 10px;
+}
+
+.book_now_btn {
+    width: 111px;
+    height: 38px;
+    background: #29626D 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    color: white;
+}
+
+.ps_btn {
+    width: 161px;
+    height: 40px;
+    background: #525252 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    color: white;
+}
+
+.log_btn {
+    width: 83px;
+    height: 40px;
+    background: #29626D 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    color: white;
+}
+
+.helper_btn {
+    width: 161px;
+    height: 40px;
+    background: #29626D 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    color: white;
+}
+
+/*  faq page */
+.banner {
+    width: 1560px;
+    margin-top: 80px;
+}
+
+.middle_section {
+    width: 1560px;
+    margin: 0px;
+    padding-left: 308px;
+    padding-right: 320px;
+    margin-top: 32px;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*.container{
+	margin-left: 308px;
+	text-align: center;
+  border: 2px solid blue;
+}
+
+@media screen and (max-width: 992px){
+  .container{
+    width: 100%;
+  }
+}*/
+
+.hr_img {
+    width: 124px;
+    margin: auto;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    margin-bottom: 50px;
+    /*margin-left: 400px;*/
+}
+
+    .hr_img hr:after {
+        content: url('../../assets/img/separator.png');
+        display: inline-block;
+        position: relative;
+        top: -0.6em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
+
+.single_line {
+    line-height: 5px;
+}
+
+.user_faq {
+    display: flex;
+    flex-direction: column;
+}
+
+.For-Customer {
+    width: 472px;
+    height: 66px;
+    margin: 0px;
+    background-color: #1d7a8c;
+    font-family: Roboto;
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+}
+
+.service_btn {
+    width: 472px;
+    height: 66px;
+    margin: 0px;
+    background-color: #e6e6e6;
+    font-family: Roboto;
+    font-size: 24px;
+    line-height: 2.17;
+    text-align: center;
+    color: #000;
+    padding: 0px;
+    border-bottom: 5px solid #1d7a8c;
+}
+
+
+
+.big_para {
+    width: 894px;
+    height: 160px;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #646464;
+    margin-left: 55px;
+}
+
+/* /faq */
+.get-our-newsletter {
+    height: 21px;
+    color: #353548;
+    margin-top: 55px;
+}
+
+.email_btn {
+    width: 233px;
+    height: 40px;
+    background: #F4F5F8 0% 0% no-repeat padding-box;
+    border: 1px solid #565656;
+    border-radius: 20px;
+}
+
+.submit_btn {
+    width: 88px;
+    height: 40px;
+    background: #FF7B6D 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    margin-bottom: 40px;
+}
+
+.form_submit_btn {
+    width: 163px;
+    height: 46px;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    color: #ffffff;
+}
+
+/* .upper_footer{
+width: 1560px;
+height: 195px;
+background: #111111 0% 0% no-repeat padding-box;
+} */
+.footer {
+    width: 1560px;
+    background: #111111 0% 0% no-repeat padding-box;
+    color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+}
+
+.logo_footer {
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+ul.link_page li {
+    float: left;
+    display: inline;
+    margin-top: 50px;
+    font-size: 10px;
+    padding-left: 20px;
+}
+
+.footer_hr {
+    width: 1320px;
+    height: 1px;
+    background: #424242 0% 0% no-repeat padding-box;
+}
+
+.footer_para {
+    color: #9BA0A3;
+    text-align: center;
+}
+
+
+/* price page */
+.group-18 {
+    padding-top: 80px;
+    padding-bottom: 31px;
+}
+
+.price_section_1 {
+    width: 1560px;
+    /*padding-left: 504px;
+  padding-right: 504px;*/
+    text-align: center;
+    /*align-items: center;
+  align-content: center;*/
+    margin-bottom: 50px;
+}
+.price_section_1 table{
+    text-align: center;
+}
+.hrs {
+    height: 58px;
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.price_ex_service {
+    width: 1560px;
+    padding-left: 210px;
+    padding-right: 210px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.price_column {
+    margin: auto;
+    width: 17%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.price_line_image {
+    width: 108px;
+    height: 108px;
+    border: 1px solid #B0C9CE;
+    text-align: center;
+    border-radius: 50%;
+    align-items: center;
+    display: inline-block;
+    vertical-align: center;
+    position: relative;
+}
+
+.center_img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.price_30-min {
+    color: #1D7A8C;
+    font-size: 20px;
+}
+
+.price_section_2 {
+    width: 1560px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 50px;
+    background: #F6F6F6 0% 0% no-repeat padding-box;
+}
+
+.card-text {
+    color: #4F4F4F;
+    font-size: 10px;
+}
+
+.card {
+    background: #F6F6F6 0% 0% no-repeat padding-box;
+    border: none;
+}
+
+.price_section_3 {
+    width: 1560px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 50px;
+}
+
+.before_img {
+    text-align: right;
+    width: 359px;
+}
+
+div.before_img:after {
+    content: url('../../assets/img/the-best-img-1.png');
+    position: relative;
+}
+
+.left {
+    width: 360px;
+}
+
+.middle {
+    width: 375px;
+}
+
+.right {
+    width: 311px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.lower_para {
+    width: 275px;
+    color: #646464;
+    font-size: 12px;
+}
+
+/* /price page */
+
+.middle_section_for_about {
+    width: 1560px;
+    margin: 0px;
+    padding-left: 284px;
+    padding-right: 284px;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* css for service provider page */
+
+.service_banner {
+    background-image: url('../../assets/img/become-a-pro-banner.png');
+    background-repeat: no-repeat;
+    width: 1560px;
+    height: 930px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border: 1px solid black;
+}
+
+.register_now {
+    width: 430px;
+    height: 664px;
+    margin: 150px auto 0px auto;
+    padding: 20px 36px 20px 36px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+
+.not_robot {
+    width: 302px;
+    height: 76px;
+    padding: 10px;
+}
+
+.get_started_btn {
+    width: 166px;
+    height: 46px;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    margin: auto;
+    color: #FFFFFF;
+}
+
+.form-check a {
+    color: #1FB6FF;
+}
+
+.two_bg {
+    width: 1560px;
+    height: 917px;
+    background-image: url('../../assets/img/blog-left-bg.png'), url('../../assets/img/blog-right-bg.png');
+    background-repeat: no-repeat;
+    background-position: left, right;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.how_it_work {
+    width: 800px;
+    margin: auto;
+}
+
+.read_more {
+    margin-top: 50px;
+}
+
+.side_img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
+/* complete css for srvice provider page */
+
+
+
+
+/* css for upcoming service page */
+
+.left_border {
+    border-left: 2px solid #ffffff;
+}
+
+.welcome_name {
+    margin-top: 70px;
+    width: 1560px;
+    height: 119px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+}
+
+.menu_content {
+    width: 1560px;
+    height: auto;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 262px;
+    height: 712px;
+    margin: 0px 32px 0px 210px;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    position: absolute;
+    overflow: auto;
+}
+
+    .sidebar a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: 1px solid #ffffff;
+        padding: 15px;
+        text-align: left;
+    }
+
+        .sidebar a.active {
+            background-color: #204060;
+            color: #ffffff;
+        }
+
+        .sidebar a:hover:not(.active) {
+            background-color: #204060;
+            color: #ffffff;
+        }
+
+
+.content {
+    width: 845px;
+    margin-top: 31px;
+    margin-left: 503px;
+}
+
+.table_head {
+    width: 845px;
+    height: 49px;
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+}
+
+.table_body tr {
+    height: 70px;
+}
+
+.cancel_btn {
+    width: 80px;
+    height: 34px;
+    background: #FF6B6B 0% 0% no-repeat padding-box;
+    border-radius: 17px;
+}
+
+/* complete css for upcoming service page */
+
+/* css for service history page */
+.rate_sp_btn {
+    width: 70px;
+    height: 34px;
+    background: #6DA9B5 0% 0% no-repeat padding-box;
+    border-radius: 17px;
+}
+
+/* css for book a service page */
+
+.service_section {
+    width: 1560px;
+    padding: 20px 210px 20px 210px;
+    text-align: left;
+}
+
+.mini_header {
+    height: 67px;
+    background: #F3F3F3 0% 0% no-repeat padding-box;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.btn_link {
+    width: 180px;
+    height: 67px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini_header a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.active {
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+}
+
+    .active a {
+        color: #ffffff;
+    }
+
+.btn_link:hover {
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+}
+
+.extra_service_selected {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.continue_btn {
+    width: 141px;
+    height: 46px;
+    float: right;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    color: #FFFFFF;
+    margin-bottom: 170px;
+}
+
+.payment_summery {
+    width: 360px;
+    height: 67px;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    border: 5px solid black;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.right_section {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 7px #00000059;
+    padding: 0px;
+}
+
+.last_line {
+    width: 360px;
+    height: 46px;
+    background: #F3F3F3 0% 0% no-repeat padding-box;
+    color: #8D8D8D;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.Questions p {
+    font-size: 14px;
+    color: #4F4F4F;
+}
+
+.Questions a {
+    color: #1D7A8C;
+}
+/* complete css for book a service page */
+@media only screen and (max-width: 992px) {
+    * {
+        overflow-x: hidden;
+    }
+
+    .header {
+        width: 100%;
+    }
+
+    .banner img,
+    .map_img img {
+        width: auto;
+        height: 200px;
+    }
+
+    .middle_section {
+        width: 100%;
+        padding: 0 15px 0;
+    }
+
+    .hr_img {
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .user_faq {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .For-Customer,
+    .service_btn {
+        width: 100%;
+        /*padding: 0 15px;*/
+        font-size: 20px;
+    }
+
+    .big_para {
+        width: 100%;
+        height: auto;
+        margin-left: 0px;
+    }
+
+    .middle_section_for_about {
+        width: 100%;
+        padding: 0 15px 0;
+    }
+
+    .service_banner {
+        width: auto;
+        height: auto;
+    }
+
+    .register_now {
+        height: auto;
+    }
+
+    .two_bg {
+        width: auto;
+        height: auto;
+        text-align: center;
+    }
+
+    .how_it_work {
+        width: auto;
+    }
+
+    .side_img {
+        float: left;
+    }
+    /* price page */
+    .price_section_1 {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+        .price_section_1 table {
+            width: auto;
+        }
+
+    .price_ex_service {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .price_column {
+        margin: auto;
+        padding: 0px;
+        width: auto;
+    }
+
+    .price_section_2 {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+
+    .price_section_3 {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+
+    ..before_img {
+        width: auto;
+        text-align: center;
+        margin: auto;
+    }
+
+    .left {
+        margin: auto;
+        text-align: center;
+    }
+    /* upcomming service page */
+    .left_border {
+        border-left: none;
+    }
+
+    .welcome_name {
+        width: auto;
+        margin-top: 71px;
+        margin-bottom: 15px;
+    }
+
+    .menu_content {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .sidebar {
+        width: auto;
+        height: auto;
+        position: relative;
+        margin: 15px;
+        padding: 10px;
+    }
+
+        .sidebar a {
+            padding: 5px 10px;
+        }
+
+    .content {
+        width: auto;
+        margin: 0px 15px 15px 15px;
+        overflow: auto;
+    }
+    /* complete upcomming service page */
+
+
+    /*book a service page*/
+    .service_section {
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .mini_header {
+        height: auto;
+        padding: 0px;
+    }
+
+    .btn_link {
+        width: auto;
+        height: auto;
+    }
+
+    .extra_service_selected {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment_summery {
+        width: 100%;
+        height: auto;
+    }
+
+    .last_line {
+        width: 100%;
+        height: auto;
+        padding-left: 10px;
+    }
+    /* complete book a service page */
+
+    .footer {
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    .logo_footer {
+        width: 100%;
+        height: auto;
+    }
+
+    ul.link_page li {
+        width: 100%;
+        float: none;
+        margin-top: 10px;
+    }
+
+    .footer_hr {
+        width: 100%;
+    }
+
+    .footer_para {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+}

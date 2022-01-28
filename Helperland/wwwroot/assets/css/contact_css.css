@@ -1,0 +1,167 @@
+*{	margin: 0; padding: 0; box-sizing: border-box;
+				font-family: Roboto;
+
+}
+.header{
+width: 1560px;
+height: 70px;
+background-color: #525252;
+opacity: 0.8;
+}
+nav{
+background-color: #525252;
+opacity: 0.8;
+}
+
+#logo{
+margin-left: 15px;
+width: 73px;
+height: 54px;
+}
+
+}
+#nav-link{
+ color: #ffffff; 
+}
+a{
+color: #ffffff;
+align-content: center;
+text-align: center;
+}
+
+a:hover {
+color: #ffffff;
+}
+.nav-item{
+	margin-left: 10px;
+}
+.book_now_btn{
+width: 111px;
+height: 38px;
+background: #29626D 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+
+.ps_btn{
+width: 161px;
+height: 40px;
+background: #525252 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+
+.log_btn{
+width: 83px;
+height: 40px;
+background: #29626D 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+
+.helper_btn{
+width: 161px;
+height: 40px;
+background: #29626D 0% 0% no-repeat padding-box;
+border: 1px solid #FFFFFF;
+border-radius: 20px;
+color: white;
+}
+.banner{
+  width: 1560px;
+  margin-top: 80px;
+}
+.middle_section{
+	width: 1560px;
+	margin: 0px;
+	padding-left: 308px;
+	padding-right: 320px;
+	text-align: center;
+	align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hr_img{ 
+  width: 124px;
+  /*margin-left: 215px;*/
+  /*margin-right: 215px;*/
+  /*height: 1px;*/
+  margin-top: 2.1em;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  margin-bottom: 50px;
+  /*margin-left: 400px;*/
+}
+
+.hr_img hr:after{
+	content: url('C:/xampp/htdocs/tatvasoft/HTML/assets/img/separator.png');
+	display: inline-block;
+	position: relative;
+	top: -0.6em;
+	font-size: 1.5em;
+	padding: 0 0.25em;
+	background: white;
+}
+
+.get-our-newsletter{
+height: 21px;
+color: #353548;
+margin-top: 55px;
+}
+
+.email_btn{
+width: 233px;
+height: 40px;
+background: #F4F5F8 0% 0% no-repeat padding-box;
+border: 1px solid #565656;
+border-radius: 20px;
+}
+.submit_btn{
+width: 88px;
+height: 40px;
+background: #FF7B6D 0% 0% no-repeat padding-box;
+border-radius: 20px;
+color: white;
+border: none;
+margin-left: 10px;
+margin-bottom: 40px;
+}
+
+.form_submit_btn{
+  width: 163px;
+  height: 46px;
+  background: #1D7A8C 0% 0% no-repeat padding-box;
+  border-radius: 23px;
+  color: #ffffff;
+}
+.footer{
+  width: 1560px;
+ background: #111111 0% 0% no-repeat padding-box; 
+ color: #ffffff;
+ margin: 0px;
+ padding: 0px;
+}
+.logo_footer{
+padding-top: 20px;
+padding-left: 40px;
+			}
+
+ul.link_page li{
+float: left;
+display: inline;
+margin-top: 50px;
+font-size: 10px;
+padding-left: 20px;
+}
+.footer_hr{
+width: 1320px;
+height: 1px;
+background: #424242 0% 0% no-repeat padding-box;
+}
+.footer_para{
+color: #9BA0A3;
+text-align: center;
+}
