@@ -8,9 +8,12 @@ nav {
     background-color: #7e7e7e;
     opacity:0.8;
 }
-.nav_link{
-    color:#ffffff;
+.nav_link {
+    color: #ffffff;
+    align-content: center;
+    text-align: center;
 }
+
 .main-body{
     width: 1560px;
     margin: 0px;
@@ -31,16 +34,6 @@ nav {
     margin-top: 10px;
     margin-left: 17px;
 }
-
-a {
-    color: #ffffff;
-    align-content: center;
-    text-align: center;
-}
-
-    a:hover {
-        color: #ffffff;
-    }
 
 img.white_logo_transparent_background {
     width: 175px;
@@ -226,6 +219,8 @@ ul.link_page li {
     border-radius: 18px;
     background-color: #EED507;
 }
+
+
 
 @media screen and (max-width: 992px) {
     * {

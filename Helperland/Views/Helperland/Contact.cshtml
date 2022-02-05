@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="banner">
+    <img src="~/assets/img/group-16_2.png">
+</div>
+
+<section>
+    <div class="middle_section">
+        <div class="title">
+            <h2>Contact us</h2>
+            <div class="hr_img">
+                <hr>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <img src="~/assets/img/forma-1_2.png">
+                    <p>1111 Lorem ipsum text 100,</p>
+                    <p>Lorem ipsum AB</p>
+                </div>
+                <div class="col-md-4 col-12">
+                    <img src="~/assets/img/phone-call.png">
+                    <p>+49 (40) 123 56 7890</p>
+                    <p>+49 (40) 987 56 0000</p>
+                </div>
+                <div class="col-md-4 col-12">
+                    <img src="~/assets/img/vector-smart-object.png">
+                    <p>info@helperland.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <h2>Get in touch with us</h2>
+            <form action="">
+                <div class="row mt-3">
+                    <div class="col">
+                        <input class="form-control" type="text" name="fname" placeholder="First Name">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="lname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="input-group">
+                            <span class="input-group-text">+49</span>
+                            <input class="form-control" type="tel" name="mobile" placeholder="Mobile No">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="email" name="email" placeholder="Email Address">
+                    </div>
+                </div>
+                <select class="form-select mt-3 form-control">
+                    <option>Subject</option>
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                <textarea class="form-control mt-3" rows="5" placeholder="Message"></textarea>
+                <button type="submit" class="form_submit_btn my-3">Submit</button>
+            </form>
+        </div>
+
+        <div class="map_img">
+            <img src="~/assets/img/group-16.png">
+        </div>
+        <div>
+            <h6 class="get-our-newsletter"><b>GET OUR NEWSLETTER</b></h6>
+            <span>
+                <button class="email_btn">YOUR EMAIL</button>
+                <button class="submit_btn">submit</button>
+            </span>
+        </div>
+    </div>
+</section>

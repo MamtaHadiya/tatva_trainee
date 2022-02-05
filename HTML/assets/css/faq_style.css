@@ -6,6 +6,7 @@ background-color: #525252;
 opacity: 0.8;
 }
 
+
 #logo{
 margin-left: 15px;
 width: 73px;
@@ -16,13 +17,13 @@ height: 54px;
 #nav-link{
  color: #ffffff; 
 }
-a{
+.nav-link{
 color: #ffffff;
 align-content: center;
 text-align: center;
 }
 
-a:hover {
+.nav-link:hover {
 color: #ffffff;
 }
 .nav-item{
@@ -83,18 +84,6 @@ color: white;
   align-items: center;
 }
 
-
-/*.container{
-	margin-left: 308px;
-	text-align: center;
-  border: 2px solid blue;
-}
-
-@media screen and (max-width: 992px){
-  .container{
-    width: 100%;
-  }
-}*/
 
 .hr_img{ 
   width: 124px;

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Forgot password";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="row justify-content-md-center" style="margin-top:100px; margin-bottom:100px">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Forget Password
+                <span class="btn float-sm-right bg-danger"><a asp-controller="Helperland" asp-action="Index">&times;</a></span>
+            </div>
+            <div class="card-body">
+                <div class="text-danger">@ViewBag.error</div>
+                <form asp-controller="Account" asp-action="Forgotpass" method="post">
+                    <input class="form-control mt-3" type="text" name="email" placeholder="Email Address" />
+                    <input type="submit" value="send" class="form-control rounded_btn mt-3" />
+
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Account" asp-action="Login" class="text-primary">Login Now</a>
+            </div>
+        </div>
+    </div>
+</div>

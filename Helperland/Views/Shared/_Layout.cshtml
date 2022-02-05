@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +8,43 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
     <link href="~/css/homepage_style.css" rel="stylesheet" />
+    <style>
+        hr {
+            border: none;
+            width: 124px;
+            border: 1px solid #d7d7d7;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hr {
+            text-align: center;
+        }
+
+            .hr img {
+                position: relative;
+                top: -31px;
+                background: white no-repeat;
+                padding: 0 1.8px;
+            }
+
+        .register_btn {
+            width: 150px;
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .rounded_btn {
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -21,7 +59,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="color: #000000;">
                     <li class="nav-item">
-                        <a class="nav-link " href="#"><button class="book_btn">Book a Cleaner</button></a>
+                        <button class="book_btn">Book a Cleaner</button>
+                        @*<a class="nav-link " href="#"></a>*@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Helperland" asp-action="Prices">Prices</a>
@@ -33,71 +72,83 @@
                         <a class="nav-link" href="#">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact us</a>
+                        <a class="nav-link" asp-controller="Helperland" asp-action="Contact">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><button class="log_btn">Login</button></a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><button class="log_btn">Login</button></a>
+                        @*<a class="nav-link"><button data-toggle="modal" data-target="#login" data-dismiss="modal" class="log_btn">Login</button></a>*@
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button class="helper_btn">Beacome a Helper</button></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
-                            <img src="~/assets/img/ic-flag.png" alt="Flag"><span class="fa-caret-down"></span>
-                        </a>
-                        <ul class="dropdown-menu bg-dark text-light">
-                            <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
-                            <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- /header -->
-    <div class="main-body">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+                            <li class="nav-item">
+                                <a  class="nav-link" asp-controller="Account" asp-action="ProviderSignup">
+                                    <button type="button" class="helper_btn">Beacome a Helper</button>
+                                </a>
 
-    <footer class="footer">
-        <div class="upper_footer">
-            <div class="row">
-                <div class="col-md-3 col-12">
-                    <div class="logo_footer">
-                        <img src="~/assets/img/footer-logo.png">
+                            </li>
+                            <li class="dropdown nav-item">
+                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                                    <img src="~/assets/img/ic-flag.png" alt="Flag"><span class="fa-caret-down"></span>
+                                </a>
+                                <ul class="dropdown-menu bg-dark text-light">
+                                    <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
+                                    <li><a><img src="~/assets/img/ic-flag.png" alt="Flag"></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- /header -->
+            <div class="main-body">
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
+
+            <footer class="footer">
+                <div class="upper_footer">
+                    <div class="row">
+                        <div class="col-md-3 col-12">
+                            <div class="logo_footer">
+                                <img src="~/assets/img/footer-logo.png">
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-12">
+                            <ul class="link_page">
+                                <li><a asp-controller="Helperland" asp-action="Index"> HOME</a></li>
+                                <li><a asp-controller="Helperland" asp-action="About"> ABOUT</a></li>
+                                <li><a href="#"> TESTIMONIALS</a></li>
+                                <li><a asp-controller="Helperland" asp-action="Faq"> FAQS</a></li>
+                                <li><a href="#"> INSURANCE POLICY</a></li>
+                                <li><a href="#"> IMPRESSUM</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <ul class="link_page">
+                                <li><a href=""><img src="~/assets/img/ic-facebook.png"></a></li>
+                                <li><a href=""><img src="~/assets/img/ic-instagram.png"></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-7 col-12">
-                    <ul class="link_page">
-                        <li><a href="#"> HOME</a></li>
-                        <li><a href="#"> ABOUT</a></li>
-                        <li><a href="#"> TESTIMONIALS</a></li>
-                        <li><a href="#"> FAQS</a></li>
-                        <li><a href="#"> INSURANCE POLICY</a></li>
-                        <li><a href="#"> IMPRESSUM</a></li>
-                    </ul>
+                <div class="lower_footer">
+                    <button class="footer_btn">OK!</button>
+                    <p align="center" style="color:white; padding-top: 15px;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac.
+                        <span style="color:blue">Privacy Policy</span>
+                    </p>
                 </div>
-                <div class="col-md-2 col-12">
-                    <ul class="link_page">
-                        <li><a href=""><img src="~/assets/img/ic-facebook.png"></a></li>
-                        <li><a href=""><img src="~/assets/img/ic-instagram.png"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="lower_footer">
-            <button class="footer_btn">OK!</button>
-            <p align="center" style="color:white; padding-top: 15px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac.
-                <span style="color:blue">Privacy Policy</span>
-            </p>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+            </footer>
+
+
+
+
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            @RenderSection("Scripts", required: false)
+
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+        </body>
+        </html>

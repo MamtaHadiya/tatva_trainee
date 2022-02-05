@@ -4,16 +4,53 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Prices</title>
+    <title>@ViewData["Title"] - Helperland</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="~/css/Style.css" rel="stylesheet" />
+    <style>
+        hr {
+            border: none;
+            width: 124px;
+            border: 1px solid #d7d7d7;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hr {
+            text-align: center;
+        }
+
+            .hr img {
+                position: relative;
+                top: -31px;
+                background: white no-repeat;
+                padding: 0 1.8px;
+            }
+
+        .register_btn {
+            width: 150px;
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .rounded_btn {
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <!--header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <a class="navbar-brand" href="#"><img src="~/assets/img/logo-small.png" id="logo"></a>
+            <a class="navbar-brand" asp-controller="Helperland" asp-action="Index"><img src="~/assets/img/logo-small.png" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,13 +70,13 @@
                         <a class="nav-link text-light" href="#"> Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#"> Contact</a>
+                        <a class="nav-link text-light"  asp-controller="Helperland" asp-action="Contact"> Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><button class="my-lg-0 log_btn">Login</button></a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><button class="my-lg-0 log_btn">Login</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><button class="my-lg-0 helper_btn">Beacome a Helper</button></a>
+                        <a class="nav-link" asp-controller="Account" asp-action="ProviderSignup"><button class="my-lg-0 helper_btn">Beacome a Helper</button></a>
                     </li>
                 </ul>
             </div>
@@ -63,10 +100,10 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <ul class="link_page">
-                        <li><a href="#"> HOME</a></li>
-                        <li><a href="#"> ABOUT</a></li>
+                        <li><a  asp-controller="Helperland" asp-action="Index"> HOME</a></li>
+                        <li><a  asp-controller="Helperland" asp-action="About"> ABOUT</a></li>
                         <li><a href="#"> TESTIMONIALS</a></li>
-                        <li><a href="#"> FAQS</a></li>
+                        <li><a  asp-controller="Helperland" asp-action="Faq"> FAQS</a></li>
                         <li><a href="#"> INSURANCE POLICY</a></li>
                         <li><a href="#"> IMPRESSUM</a></li>
                     </ul>

@@ -1,0 +1,263 @@
+﻿@model Helperland.Models.UserClass
+
+@{
+    ViewData["Title"] = "Customer Signup";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="row justify-content-md-center" style="margin-top:100px; margin-bottom:100px">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4>Create an account</h4>
+            </div>
+            <form asp-action="RegisterCostomer">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Email" class="form-control" placeholder="E-mail address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 input-group">
+                            <span class="input-group-text">+49</span>
+                            <input asp-for="Mobile" class="form-control" name="mobile" placeholder="Mobile No">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Confirmpwd" class="form-control" placeholder="Confirm password" />
+                            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">I have read the <a href="">privacy policy.</a></label>
+                    </div>
+                </div>
+                <div class="container-fluid" align="center">
+                    <input type="submit" value="Register" class="register_btn m-auto" />
+                    <p class="m-auto">Already registered?<a href="" data-toggle="modal" data-target="#login" data-dismiss="modal" class="text-primary">Login now</a></p>
+                </div>
+            </form>
+    </div>
+</div>
+</div>
+
+<!--login  Modal -->
+<div class="modal fade text-dark" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-sm">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLongTitle">Login to your account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input class="form-control" placeholder="Email Address" />
+                    <input class="form-control mt-3" placeholder="Password" />
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Remember Me</label>
+                    </div>
+                </div>
+                <div class="" align="center">
+                    <input type="submit" value="login" class="form-control rounded_btn" /><br>
+                    <a href="" data-toggle="modal" data-target="#ForgetPass" data-dismiss="modal" class="m-auto text-primary">Forget password?</a><br />
+                    <p>Don't have an account?<a href="" data-toggle="modal" data-target="#CreateAccount" data-dismiss="modal" class="text-primary">Create an account</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Create Account Modal -->
+<div class="modal fade" id="CreateAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-lg">
+            <div class="container-fluid">
+                <center>
+                    <h2 class="modal-title" id="exampleModalLongTitle"></h2>
+                    <div class="hr">
+                        <hr>
+                        <img src="~/assets/img/separator.png">
+                    </div>
+                </center>
+            </div>
+            <form asp-action="RegisterCostomer">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Email" class="form-control" placeholder="E-mail address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 input-group">
+                            <span class="input-group-text">+49</span>
+                            <input asp-for="Mobile" class="form-control" name="mobile" placeholder="Mobile No">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Confirmpwd" class="form-control" placeholder="Confirm password" />
+                            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">I have read the <a href="">privacy policy.</a></label>
+                    </div>
+                </div>
+                <div class="container-fluid" align="center">
+                    <input type="submit" value="Register" class="register_btn m-auto" />
+                    <p class="m-auto">Already registered?<a href="" data-toggle="modal" data-target="#login" data-dismiss="modal" class="text-primary">Login now</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Forget password  Modal -->
+<div class="modal fade" id="ForgetPass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-sm">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forget password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input class="form-control" placeholder="Email Address" />
+                </div>
+                <div class="">
+                    <input type="submit" value="Send" class="form-control rounded_btn" /><br>
+                    <a href="" data-toggle="modal" data-target="#login" data-dismiss="modal" class="text-primary mx-auto">Login now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--HelperRegistration  Modal -->
+<div class="modal fade" id="HelperRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="container-fluid">
+                <h2 class="modal-title" id="exampleModalLongTitle" align="center">Register as Helper!</h2>
+            </div>
+            <form asp-action="ProviderSignup" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="modal-body">
+                    <input asp-for="FirstName" type="text" name="fanme" class="form-control mt-4" placeholder="First Name">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <input asp-for="LastName" type="text" name="lanme" class="form-control mt-3" placeholder="last Name">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <input asp-for="Email" type="email" name="email" class="form-control mt-3" placeholder="Email Address">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="input-group mt-3">
+                        <span class="input-group-text">+49</span>
+                        <input asp-for="Mobile" class="form-control" type="tel" name="mobile" placeholder="Mobile No">
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                    <input asp-for="Password" type="password" name="password" class="form-control mt-3" placeholder="password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <input asp-for="Password" type="password" name="c_password" class="form-control mt-3" placeholder="conform password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="form-group form-check mt-3">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"> I accept <a href="" class="text-primary">terms and conditions</a> & <a href="" class="text-primary">privacy policy</a>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="container-fluid" align="center">
+                    <center>
+                        <button type="submit" class="rounded_btn mb-3"> Getting started <img src="assets/img/arrow-white.png"></button>
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RegisterCostomer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">-->
+@*<label asp-for="Firstname" class="control-label"></label>*@
+<!--<input asp-for="FirstName" class="form-control" />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
+</div>
+<div class="form-group">-->
+@*<label asp-for="Lastname" class="control-label"></label>*@
+<!--<input asp-for="LastName" class="form-control" />
+    <span asp-validation-for="LastName" class="text-danger"></span>
+</div>
+<div class="form-group">-->
+@*<label asp-for="Email" class="control-label"></label>*@
+<!--<input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="form-group">-->
+@*<label asp-for="Mobile" class="control-label"></label>*@
+<!--<input asp-for="Mobile" class="form-control" />
+    <span asp-validation-for="Mobile" class="text-danger"></span>
+</div>
+<div class="form-group">-->
+@*<label asp-for="Password" class="control-label"></label>*@
+<!--<input asp-for="Password" class="form-control" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+</div>
+<div class="form-group">-->
+@*<label asp-for="Password" class="control-label"></label>*@
+<!--<input asp-for="Password" class="form-control" placeholder="Conform Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>-->
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

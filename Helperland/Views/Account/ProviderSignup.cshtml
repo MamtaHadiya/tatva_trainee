@@ -1,0 +1,90 @@
+﻿@model Helperland.Models.UserClass
+
+@{
+    ViewData["Title"] = "Service Provider";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<!--main wrapper-->
+<div class="service_banner">
+    <div class="register_now">
+        <form asp-action="ProviderSignup" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <center><h2><b>Register Now!</b></h2></center>
+            <input asp-for="FirstName" class="form-control mt-4" placeholder="First Name" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+            <input asp-for="LastName" class="form-control mt-3" placeholder="last Name" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            <input asp-for="Email" class="form-control mt-3" placeholder="Email Address" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="input-group mt-3">
+                <span class="input-group-text">+49</span>
+                <input asp-for="Mobile" class="form-control" placeholder="Mobile No" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <input asp-for="Password" class="form-control mt-3" placeholder="password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Confirmpwd" class="form-control mt-3" placeholder="conform password">
+            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+            <div class="form-group form-check mt-3">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input"> I accept <a href="">terms and conditions</a> & <a href="">privacy policy</a>
+                </label>
+            </div>
+
+            <center><button type="submit" class="get_started_btn mt-3"> Get started <img src="~/assets/img/arrow-white.png"></button></center>
+        </form>
+    </div>
+    <div class="mt-4">
+        <center>
+            <a href=""><img src="~/assets/img/group-18_5.png"></a>
+        </center>
+    </div>
+</div>
+<!-- /main_wrapper -->
+
+<section>
+    <div class="two_bg mt-4">
+        <div class="how_it_work">
+            <center><h2><b>How it works</b></h2></center>
+            <div class="container my-3">
+                <div class="row my-3">
+                    <div class="col-md-6 col-12">
+                        <h3><b>Register Yourself</b></h3>
+                        <p>provide your basic information to register yourself as a service provider.</p>
+                        <p class="read_more">Read more <img src="~/assets/img/shape-2.png"></p>
+                    </div>
+                    <div class="col-md-6 col-12" align="right">
+                        <img src="~/assets/img/group-29.png" class="side_img">
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-md-6 col-12">
+                        <img src="~/assets/img/group-29.png" class="side_img">
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <h3><b>Get service requests</b></h3>
+                        <p>You will get service requests from customers depends on service area and profile.</p>
+                        <p class="read_more">Read more <img src="~/assets/img/shape-2.png"></p>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-md-6 col-12">
+                        <h3><b>complete service</b></h3>
+                        <p>Accept service from your customers and complte your work.</p>
+                        <p class="read_more">Read more <img src="~/assets/img/shape-2.png"></p>
+                    </div>
+                    <div class="col-md-6 col-12" align="right">
+                        <img src="~/assets/img/group-29.png" class="side_img">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h6 class="get-our-newsletter"><b>GET OUR NEWSLETTER</b></h6>
+            <span>
+                <button class="email_btn">YOUR EMAIL</button>
+                <button class="submit_btn">submit</button>
+            </span>
+        </div>
+    </div>
+</section>
