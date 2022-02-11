@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "eWYPefat94P9TyhRCweSWmxtGorWQFQAs8Bhjdf4LpD0wUPfktV5vohfynyXJMSGVLuF5cZEEbO7TchcHrQoDQ==",
+  "dgSpecHash": "p8ZBm4QHJ0HsYh3zHh7pjHQaaSMpL91fOtirlpZAhq+42MdLHUKzePTSvoSk+GaZVt0yGFxEv5fb/DgH+Dmpsw==",
   "success": true,
   "projectFilePath": "C:\\xampp\\htdocs\\tatvasoft\\Helperland\\Helperland.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\jquery\\1.12.4\\jquery.1.12.4.nupkg.sha512",
+    "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\jquery.ui\\1.12.1.1\\jquery.ui.1.12.1.1.nupkg.sha512",
     "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Bhavesh_Pc\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",

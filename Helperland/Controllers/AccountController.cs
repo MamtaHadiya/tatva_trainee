@@ -1,6 +1,7 @@
 ﻿using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Helperland.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Helperland.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly Data.ApplicationDbContext _db;
 
         public object Session { get; private set; }
 
@@ -22,34 +23,51 @@ namespace Helperland.Controllers
 
         public IActionResult RegisterCostomer()
         {
-            return View("RegisterCostomer");
+            return View();
         }
-        [HttpPost]
-        public IActionResult RegisterCostomer(UserClass user)
+
+            [HttpPost]
+        public IActionResult CustomerSignup(User user)
         {
             if (ModelState.IsValid)
             {
-                //UserClass newUser = new UserClass
-                //{
-                //    //UserTypeId = 1,
-                //    IsRegisteredUser = true,
-                //    WorksWithPets = 1,
-                //    CreatedDate = DateTime.Now,
-                //    ModifiedDate = DateTime.Now,
-                //    ModifiedBy = 1,
-                //    IsApproved = 1,
-                //    IsActive = 1,
-                //    IsDeleted = 1
-                //};
                 user.UserTypeId = 1;
                 user.IsRegisteredUser = true;
-                user.WorksWithPets = 1;
+                user.WorksWithPets = true;
                 user.CreatedDate = DateTime.Now;
                 user.ModifiedDate = DateTime.Now;
                 user.ModifiedBy = 1;
-                user.IsApproved = 1;
-                user.IsActive = 1;
-                user.IsDeleted = 1;
+                user.IsApproved = true;
+                user.IsActive = true;
+                user.IsDeleted = true;
+                _db.Add(user);
+                _db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+
+            }
+            else
+            {
+                ViewBag.Message = "Requirement Doesn't Matching";
+                return RedirectToAction("Login");
+            }
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegisterCostomer(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                user.UserTypeId = 1;
+                user.IsRegisteredUser = true;
+                user.WorksWithPets = true;
+                user.CreatedDate = DateTime.Now;
+                user.ModifiedDate = DateTime.Now;
+                user.ModifiedBy = 1;
+                user.IsApproved = true;
+                user.IsActive = true;
+                user.IsDeleted = true;
                 _db.Add(user);
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Helperland");
@@ -62,20 +80,22 @@ namespace Helperland.Controllers
         {
             return View();
         }
+        
         [HttpPost]
-        public IActionResult ProviderSignup(UserClass user)
+        public IActionResult ProviderSignup(User user)
         {
             if (ModelState.IsValid)
             {
                 user.UserTypeId = 2;
                 user.IsRegisteredUser = true;
-                user.WorksWithPets = 1;
+                user.WorksWithPets = true;
                 user.CreatedDate = DateTime.Now;
                 user.ModifiedDate = DateTime.Now;
                 user.ModifiedBy = 2;
-                user.IsApproved = 1;
-                user.IsActive = 1;
-                user.IsDeleted = 1;
+                user.IsApproved = true;
+                user.IsActive = true;
+                user.IsDeleted = true;
+                user.ZipCode = "395010";
                 _db.Add(user);
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Helperland");
@@ -89,12 +109,13 @@ namespace Helperland.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult Login(Loginclass objUser)
         {
             if (ModelState.IsValid)
             {
-                var details = (from userlist in _db.User
+                var details = (from userlist in _db.Users
                                where userlist.Email == objUser.Username && userlist.Password == objUser.Password
                                select new
                                {
@@ -108,12 +129,13 @@ namespace Helperland.Controllers
                 {
                     //Session["username"] = objUser.Username.ToString();
                     HttpContext.Session.SetString("username", objUser.Username);
+                    ModelState.Clear();
                     return View("Success");
                 }
                 else
                 {
                     ViewBag.error = "Invalid Account";
-                    return View("Index", "Helperland");
+                    return View();
                 }
             }
             return View();
@@ -133,7 +155,7 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Forgotpass(String email)
         {
-            var data = (from userlist in _db.User
+            var data = (from userlist in _db.Users
                         where userlist.Email == email
                         select new
                         {
@@ -160,8 +182,8 @@ namespace Helperland.Controllers
         {
             if (Password != null && Cfrmpwd != null && Password.Equals(Cfrmpwd))
             {
-                UserClass user = new UserClass();
-                var data = (from userlist in _db.User
+                User user = new User();
+                var data = (from userlist in _db.Users
                             where userlist.Email == Email
                             select new
                             {
@@ -182,16 +204,16 @@ namespace Helperland.Controllers
                     user.Mobile = data[0].Mobile;
                     user.UserTypeId = 2;
                     user.IsRegisteredUser = true;
-                    user.WorksWithPets = 1;
+                    user.WorksWithPets = true;
                     user.CreatedDate = DateTime.Now;
                     user.ModifiedDate = DateTime.Now;
                     user.ModifiedBy = 2;
-                    user.IsApproved = 1;
-                    user.IsActive = 1;
-                    user.IsDeleted = 1;
+                    user.IsApproved = true;
+                    user.IsActive = true;
+                    user.IsDeleted = true;
                     user.Password = Password;
 
-                    _db.User.Update(user);
+                    _db.Users.Update(user);
                     _db.SaveChanges();
                     return View("Login");
                 }

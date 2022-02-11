@@ -9,6 +9,8 @@ namespace Helperland.Models
 {
     public class UserClass
     {
+
+
         [Key]
         public int UserId { get; set; }
 
@@ -38,14 +40,27 @@ namespace Helperland.Models
         [Compare("Password",ErrorMessage ="Confirm password does not match,please Type again")]
         public string Confirmpwd { get; set; }
 
+
         public int UserTypeId { get; set; }
+        public int? Gender { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
-        public byte WorksWithPets { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public string PaymentGatewayUserRef { get; set; }
+        public string ZipCode { get; set; }
+        public bool WorksWithPets { get; set; }
+        public int? LanguageId { get; set; }
+        public int? NationalityId { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         public int ModifiedBy { get; set; }
-        public int IsApproved { get; set; }
-        public int IsActive { get; set; }
-        public int IsDeleted { get; set; }
+        public bool IsApproved { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public int? Status { get; set; }
+        public string BankTokenId { get; set; }
+        public string TaxNo { get; set; }
+
+        
     }
 }

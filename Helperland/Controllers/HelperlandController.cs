@@ -1,6 +1,7 @@
 ﻿using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Helperland.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace Helperland.Controllers
         
         public IActionResult Index()
         {
-            return View("Index", "_Layout");
+            return View("Index");
         }
-        
+
         public IActionResult Prices()
         {
-            return View("Prices", "_Layout1");
+            return View("Prices");
         }
 
         public IActionResult Contact()

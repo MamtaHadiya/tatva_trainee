@@ -6,45 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Helperland</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
     @*<link rel="stylesheet" href="~/css/site.css" />*@
     <link href="~/css/homepage_style.css" rel="stylesheet" />
-    <style>
-        hr {
-            border: none;
-            width: 124px;
-            border: 1px solid #d7d7d7;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hr {
-            text-align: center;
-        }
-
-            .hr img {
-                position: relative;
-                top: -31px;
-                background: white no-repeat;
-                padding: 0 1.8px;
-            }
-
-        .register_btn {
-            width: 150px;
-            height: 40px;
-            background: #29626D 0% 0% no-repeat padding-box;
-            border: 1px solid #FFFFFF;
-            border-radius: 20px;
-            color: white;
-        }
-
-        .rounded_btn {
-            height: 40px;
-            background: #29626D 0% 0% no-repeat padding-box;
-            border: 1px solid #FFFFFF;
-            border-radius: 20px;
-            color: white;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -59,9 +28,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" style="color: #000000;">
                     <li class="nav-item">
-                        <button class="book_btn">Book a Cleaner</button>
-                        @*<a class="nav-link " href="#"></a>*@
-                    </li>
+                        <a class="nav-link " asp-controller="BookService" asp-action="SetupService">
+                            <button class="book_btn">Book a Cleaner</button>
+                        </a>
+                            @*<a class="nav-link " href="#"></a>*@
+</li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Helperland" asp-action="Prices">Prices</a>
                     </li>
@@ -76,7 +47,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Account" asp-action="Login"><button class="log_btn">Login</button></a>
-                        @*<a class="nav-link"><button data-toggle="modal" data-target="#login" data-dismiss="modal" class="log_btn">Login</button></a>*@
                     </li>
                             <li class="nav-item">
                                 <a  class="nav-link" asp-controller="Account" asp-action="ProviderSignup">

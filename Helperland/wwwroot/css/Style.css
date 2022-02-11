@@ -583,7 +583,14 @@ div.before_img:after {
 .btn_link:hover {
     background: #1D7A8C 0% 0% no-repeat padding-box;
 }
-
+.check_btn {
+    width: 180px;
+    height: 46px;
+    float: right;
+    background: #1D7A8C 0% 0% no-repeat padding-box;
+    border-radius: 23px;
+    color: #FFFFFF;
+}
 .extra_service_selected {
     display: flex;
     flex-direction: row;
@@ -604,7 +611,6 @@ div.before_img:after {
     width: 360px;
     height: 67px;
     background: #1D7A8C 0% 0% no-repeat padding-box;
-    border: 5px solid black;
     color: #FFFFFF;
     display: flex;
     align-items: center;

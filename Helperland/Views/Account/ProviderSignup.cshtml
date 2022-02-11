@@ -1,40 +1,91 @@
-﻿@model Helperland.Models.UserClass
+﻿@model Helperland.Models.User
 
 @{
     ViewData["Title"] = "Service Provider";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+
+    <link href="~/css/Style.css" rel="stylesheet" />
+    <style>
+        .rounded_btn {
+            width: 150px;
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#HelperRegistration").modal('show');
+        });
+    </script>
+</head>
+
+<!--HelperRegistration  Modal -->
+
+<form asp-action="ProviderSignup">
+    <div class="modal fade" id="HelperRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="container-fluid">
+                    <h2 class="modal-title" id="exampleModalLongTitle" align="center">Register as Helper!</h2>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Email" class="form-control" placeholder="E-mail address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 input-group">
+                            <span class="input-group-text">+49</span>
+                            <input asp-for="Mobile" class="form-control" name="mobile" placeholder="Mobile No">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Confirmpwd" class="form-control" placeholder="Confirm password" />
+                            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+                        </div>
+                    </div><div class="form-group form-check mt-3">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"> I accept <a href="" class="text-primary">terms and conditions</a> & <a href="" class="text-primary">privacy policy</a>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="container-fluid" align="center">
+                    <center>
+                        <button type="submit" class="rounded_btn mb-3"> Getting started <img src="~/assets/img/arrow-white.png"></button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <!--main wrapper-->
 <div class="service_banner">
-    <div class="register_now">
-        <form asp-action="ProviderSignup" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <center><h2><b>Register Now!</b></h2></center>
-            <input asp-for="FirstName" class="form-control mt-4" placeholder="First Name" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-            <input asp-for="LastName" class="form-control mt-3" placeholder="last Name" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-            <input asp-for="Email" class="form-control mt-3" placeholder="Email Address" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-            <div class="input-group mt-3">
-                <span class="input-group-text">+49</span>
-                <input asp-for="Mobile" class="form-control" placeholder="Mobile No" />
-                <span asp-validation-for="Mobile" class="text-danger"></span>
-            </div>
-            <input asp-for="Password" class="form-control mt-3" placeholder="password">
-            <span asp-validation-for="Password" class="text-danger"></span>
-            <input asp-for="Confirmpwd" class="form-control mt-3" placeholder="conform password">
-            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
-            <div class="form-group form-check mt-3">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input"> I accept <a href="">terms and conditions</a> & <a href="">privacy policy</a>
-                </label>
-            </div>
-
-            <center><button type="submit" class="get_started_btn mt-3"> Get started <img src="~/assets/img/arrow-white.png"></button></center>
-        </form>
-    </div>
-    <div class="mt-4">
+    <div style="margin-top:400px;">
         <center>
             <a href=""><img src="~/assets/img/group-18_5.png"></a>
         </center>
