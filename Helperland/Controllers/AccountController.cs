@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using System.Net.Mail;
+using System.Net;
 
 namespace Helperland.Controllers
 {
@@ -129,12 +132,14 @@ namespace Helperland.Controllers
                 {
                     //Session["username"] = objUser.Username.ToString();
                     HttpContext.Session.SetString("username", objUser.Username);
+                    HttpContext.Session.SetInt32("userid", details.Select(x => x.UserId).FirstOrDefault());
                     ModelState.Clear();
                     return View("Success");
                 }
                 else
                 {
                     ViewBag.error = "Invalid Account";
+                    ModelState.Clear();
                     return View();
                 }
             }
@@ -155,36 +160,105 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Forgotpass(String email)
         {
-            var data = (from userlist in _db.Users
-                        where userlist.Email == email
-                        select new
-                        {
-                            userlist.UserId,
-                            userlist.FirstName,
-                            userlist.Email,
-                            userlist.Password
+            //string resetCode = Guid.NewGuid().ToString();
+            //var verifyUrl = "/Account/UpdatePass/" + resetCode;
+            //var data = (from userlist in _db.Users
+            //            where userlist.Email == email
+            //            select new
+            //            {
+            //                userlist.UserId,
+            //                userlist.FirstName,
+            //                userlist.Email,
+            //                userlist.Password
 
-                        }).ToList();
-            if (data.FirstOrDefault() != null)
+            //            }).ToList();
+            var user = _db.Users.Where(x => x.Email.Equals(email)).FirstOrDefault();
+            if (user != null)
             {
-                ViewBag.Data = email;
-                return View("UpdatePass");
+                var token = Guid.NewGuid().ToString();
+                var UserId = user.UserId;
+                var passwordResetLink = Url.Action("UpdatePass", "Account", new { ID = UserId, Email = email, Token = token }, Request.Scheme);
+                var subject = "Password Reset Request";
+                var body = "Hi " + user.FirstName + ", <br/> you recently requested to reset your password for your account." +
+                    "Click the link below to reset it. " +
+                    "<br/><br/><a href='" + passwordResetLink + "'>" + passwordResetLink + "</a><br/><br/>" +
+                    "Thankyou";
+                SendEmail(user.Email, body, subject);
+                ViewBag.error = "Reset password link has been sent to your email id.";
+
             }
             else
             {
                 ViewBag.error = "Invalid Email";
                 return View();
             }
+            return View();
+        }
+
+        private void SendEmail(string emailAddress, string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("mmthadiya@gmail.com", emailAddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential networkCred = new NetworkCredential("mmthadiya@gmail.com", "MMta00Hdya");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = networkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+
+
+        //[HttpPost]
+        //public IActionResult Forgotpass(String email)
+        //{
+        //    var data = (from userlist in _db.Users
+        //                where userlist.Email == email
+        //                select new
+        //                {
+        //                    userlist.UserId,
+        //                    userlist.FirstName,
+        //                    userlist.Email,
+        //                    userlist.Password
+
+        //                }).ToList();
+        //    if (data.FirstOrDefault() != null)
+        //    {
+        //        ViewBag.Data = email;
+        //        return View("UpdatePass");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.error = "Invalid Email";
+        //        return View();
+        //    }
+        //}
+
+        public IActionResult UpdatePass(int ID, string Email, string Token)
+        {
+            if(Email == null || Token == null)
+            {
+                ViewBag.error = "Invalid Password reset token";
+            }
+            ViewBag.Email = Email;
+            return View();
         }
 
         [HttpPost]
-        public IActionResult UpdatePass(string Email, string Password, string Cfrmpwd)
+        public IActionResult UpdatePass(ChangePassClass objuser)
         {
-            if (Password != null && Cfrmpwd != null && Password.Equals(Cfrmpwd))
+            ViewBag.Email = objuser.Email;
+            if (ModelState.IsValid)
             {
                 User user = new User();
                 var data = (from userlist in _db.Users
-                            where userlist.Email == Email
+                            where userlist.Email == objuser.Email
                             select new
                             {
                                 userlist.UserId,
@@ -211,15 +285,15 @@ namespace Helperland.Controllers
                     user.IsApproved = true;
                     user.IsActive = true;
                     user.IsDeleted = true;
-                    user.Password = Password;
+                    user.Password = objuser.Password;
 
                     _db.Users.Update(user);
                     _db.SaveChanges();
                     return View("Login");
                 }
-                return View("Index", "Helperland");
+                return RedirectToAction("Index", "Helperland");
             }
-            return RedirectToAction("Index", "Helperland");
+            return View();
         }
     }
 }

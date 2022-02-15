@@ -260,11 +260,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-danger">@ViewBag.error</div>
-                    <form asp-controller="Account" asp-action="Forgotpass" method="post">
                         <input class="form-control mt-3" type="text" name="email" placeholder="Email Address" />
                         <input type="submit" value="send" class="form-control rounded_btn mt-3" />
 
-                    </form>
                 </div>
                 <div class="" align="center">
                     <a asp-action="Login" asp-controller="Account" class="text-primary mx-auto">Login now</a>

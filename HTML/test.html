@@ -3,319 +3,101 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Book Service</title>
+  <title>create account</title>
   <!-- Bootstrap CSS -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
- -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <!-- roboto fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-  <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <style type="text/css">
-    
-  </style>
 </head>
-<body>
-  <!-- main_wrapper -->
-  <div class="main_wrapper">
-    <!--header -->
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <a class="navbar-brand" href="#"><img src="assets/img/logo-small.png" width="73px" height="54px" id="logo"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<style>
+  .Create_Account{
+    width: 700px;
+    margin: auto;
+    text-align: center;
+  }
+        hr {
+            border: none;
+            width: 124px;
+            border: 1px solid #d7d7d7;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><button class="book_now_btn">Book Now</button></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><button class="ps_btn">Prices & services</button></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="#"> Warranty</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="#"> Blog</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="#"> Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><button class="my-lg-0 log_btn">Login</button></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><button class="my-lg-0 helper_btn">Beacome a Helper</button></a>
-      </li>
-    </ul>
-    <!--<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-  </div>
-</nav>
+        .hr {
+            text-align: center;
+        }
 
-</header>
-<!-- /header -->
-
-    <div class="banner">
-      <img src="assets/img/book-service-banner.jpg">
-    </div>
-    
-  </div>
-  <!-- /main_wrapper -->
-
-  <section>
-  <div class="middle_section">
-
-    <!-- Title -->
-    <div>
-      <h2><b>Set up your cleaning service</b></h2>
-      <div class="hr_img">
-        <hr>
-      </div>
-    </div>
-
-
-    <div class="service_section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-12">
-            <ul class="nav nav-tabs menubar">
-    <li class="menulink active" id="test"><a data-toggle="tab" href="#home"><img src="assets/img/setup-service.png"> Setup Service</a></li>
-    <li class="menulink" id="sample"><a data-toggle="tab" href="#menu1"><img src="assets/img/schedule.png"> Schedule & Plan</a></li>
-    <li class="menulink"><a data-toggle="tab" href="#menu2"><img src="assets/img/details.png"> Your Details</a></li>
-    <li class="menulink"><a data-toggle="tab" href="#menu3"><img src="assets/img/payment.png"> Make Payment</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-<h4 class="mt-3"><b>Enter your Postal Code</b></h4>
-      <form>
-        <table>
-          <tr>
-            <td width="250px"><input type="text" name="ZipCode" class="form-control" placeholder="Postal Code" maxlength="6" minlength="6" required></td>
-            <td><input type="submit" name="" value="Check Availability" class="check_btn ml-2"></td>
-          </tr>
-          
-        </table>
-      </form>
-    </div>
-<div id="menu1" class="tab-pane fade">
-                                <div class="row my-4">
-                                    <div class="col-md-6 col-12">
-                                        <h5><b>when do you need the cleaner</b></h5>
-                                        <form id="jsform" class="form-inline" method="get" action="about.html">
-                                            <input id="date_picker" type="date" name="datevalue" class="form-control mx-2" required>
-                                            <script language="javascript">
-                                                var today = new Date();
-                                                var dd = String(today.getDate() + 1).padStart(2, '0');
-                                                var mm = String(today.getMonth() + 1).padStart(2, '0');
-                                                var yyyy = today.getFullYear();
-
-                                                today = yyyy + '-' + mm + '-' + dd;
-                                                $('#date_picker').attr('min', today);
-                                            </script>
-                                            <select class="form-control" name="timevalue" onblur="abc()" required>
-                                                <option value="2.00">2:00 PM</option>
-                                                <option value="3.00">3:00 PM</option>
-                                            </select>
-                                        </form>
-
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <h5 align="left"><b>How long do you need cleaner</b></h5>
-                                        <form class="form-inline">
-                                            <select class="form-control">
-                                                <option value="3.0">3.0 hrs</option>
-                                                <option value="4.0">4.0 hrs</option>
-                                                <option value="5.0">5.0 hrs</option>
-                                            </select>
-                                        </form>
-                                        <script type="text/javascript">
-                                          function abc() {
-                                            document.getElementById('jsform').submit();
-                                          }
-                                          
-                                        </script>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="extra_service">
-                                    <h5 align="left"><b>Extra services</b></h5>
-                                    <div class="extra_service_selected">
-                                        <div>
-                                            <a asp-action="Cabinets">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/3.png" class="center_img">
-                                                </div>
-                                            </a>
-                                            <p>Inside cabinets</p>
-                                        </div>
-                                        <div>
-                                            <a asp-action="Fridge">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/@ViewBag.image5" class="center_img">
-                                                </div>
-                                            </a>
-                                            <p>Inside fridge</p>
-                                        </div>
-                                        <div>
-                                            <a asp-action="Oven">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/@ViewBag.image4" class="center_img">
-                                                </div>
-                                            </a>
-                                            <p>Inside oven</p>
-                                        </div>
-                                        <div>
-                                            <a asp-action="Laundry">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/@ViewBag.image2" class="center_img">
-                                                </div>
-                                            </a>
-                                            <p>Laundry <br>wash & dry</p>
-                                        </div>
-                                        <div>
-                                            <a asp-action="Windows">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/@ViewBag.image1" class="center_img">
-                                                </div>
-                                            </a>
-                                            <p>Interior <br>windows</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <!-- /extra services -->
-                                <div class="comment">
-                                    <h5><b>Comments</b></h5>
-                                    <form>
-                                        <textarea class="form-control" rows="3"></textarea>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" name="HavePets" required> I have pets at home</label>
-                                        </div>
-                                    </form>
-                                    <hr>
-                                </div>
-                                <button class="continue_btn">Continue</button>
-
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-          </div>
-          <script type="text/javascript">
-            function abc() {
-              var element = document.getElementById("test");
-              element.classList.remove("active");
-              var element1 = document.getElementById("home");
-              element1.classList.remove("active");
-              var element3 = document.getElementById("sample");
-              element3.classList.add("active");
-              var element4 = document.getElementById("menu1");
-              element4.classList.add("active");
+            .hr img {
+                position: relative;
+                top: -31px;
+                background: white no-repeat;
+                padding: 0 1.8px;
             }
-          </script>
-          <!-- /col-md-8 -->
-          <div class="col-md-4 col-12">
-            <div class="right_section">
-              <div class="payment_summery">
-                <h4><b>Payment Summary</b></h4>
-              </div>
-              <div class="px-3">
-                <p class="my-3">01/01/2018 @ 4:00 pm <br>1 bed, 1 bath.</p>
-                <p><b>Duration</b></p>
-                <p><span style="float: left;">Basic</span><span style="float: right;">3 Hrs</span></p><br>
-                <p><span style="float: left;">Inside cabinets (extra)</span><span style="float: right;">30 Mins</span></p><br>
-                <p><span style="float:left;"><b>Total Service Time</span><span style="float:right;">3.5 Hrs</span></b></p><br><hr>
-                <p><span style="float: left;">Per cleaning</span><b><span style="float: right;">$87</span></b></p><br>
-                <p><span style="float: left;">Discount</span><b><span style="float: right;">- $27</span></b></p><br><hr>
-                <h5><span style="float:left;">Total Payment</span></h5><h4><span style="float:right;">$63</span></h4><br>
-                <p><span style="float: left;">Effective Price</span><span style="float:right;">$50.4</span></p><br>
-                <p>*You will save 20% according to §35a EStG.</p>
-              </div>
-              <div class="last_line">
-                <p>See what is always included</p>
-              </div>
-            </div>
-            <!-- /right_section -->
-            <div class="Questions">
-              <h5 align="center"><b>Questions?</b></h5>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-              <p><img src="assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
-            <a href="#">For more help</a>
-            </div>
-          </div>
-          <!-- /col-md-4 -->
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <h6 class="get-our-newsletter"><b>GET OUR NEWSLETTER</b></h6>
-    <span>
-      <button class="email_btn">YOUR EMAIL</button>
-      <button class="submit_btn">submit</button>
-    </span>
 
+        .register_btn {
+            width: 150px;
+            height: 40px;
+            background: #29626D 0% 0% no-repeat padding-box;
+            border: 1px solid #FFFFFF;
+            border-radius: 20px;
+            color: white;
+        }
+    </style>
+<body>
+
+  <div class="Create_Account mt-5">
+                <h2 id="exampleModalLongTitle">Create an account</h2>
+                <div class="hr">
+                    <hr>
+                    <img src="~/assets/img/separator.png">
+                </div>
+    <form asp-action="RegisterCostomer" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="LastName" class="form-control" placeholder="Last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Email" class="form-control" placeholder="E-mail address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 input-group">
+                            <span class="input-group-text">+49</span>
+                            <input asp-for="Mobile" class="form-control" name="mobile" placeholder="Mobile No">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input asp-for="Confirmpwd" class="form-control" placeholder="Confirm password" />
+                            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3" align="left">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">I have read the <a href="">privacy policy.</a></label>
+                    </div>
+                    <input type="submit" value="Register" class="register_btn m-auto" />
+                </form>
+                <div class="mt-3">
+                <p class="m-auto">Already registered?<a asp-action="Login" asp-controller="Account" class="text-primary">Login now</a></p>
+            </div>
   </div>
-</section>
 
-  
-  <footer>
-    <div class="footer">
-      <div class="row">
-        <div class="col-md-3 col-12">
-          <div class="logo_footer">
-            <img src="assets/img/footer-logo.png">
-          </div>
-        </div>
-        <div class="col-md-7 col-12">
-          <ul class="link_page">
-          <li><a href="#"> HOME</a></li>
-          <li><a href="#"> ABOUT</a></li>
-          <li><a href="#"> TESTIMONIALS</a></li>
-          <li><a href="#"> FAQS</a></li>
-          <li><a href="#"> INSURANCE POLICY</a></li>
-          <li><a href="#"> IMPRESSUM</a></li>
-        </ul>
-        </div>
-        <div class="col-md-2 col-12">
-          <ul class="link_page">
-            <li><a href=""><img src="assets/img/ic-facebook.png"></li></a>
-            <li><a href=""><img src="assets/img/ic-instagram.png"></li></a>
-          </ul>
-        </div>
-      </div>
-      <hr class="footer_hr">
-      <p class="footer_para">©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</p>
-    </div>  
-  </footer>
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>
     
@@ -330,71 +112,3 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-  <style type="text/css">
-    .menubar{      
-      background: #F3F3F3 0% 0% no-repeat padding-box;
-      margin: auto;
-  
-    }
-    .menulink{
-      width: 180px;
-      text-align: center;
-    }
-    .menulink a{
-      color: #000000;
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-  <ul class="nav nav-tabs menubar">
-    <li class="menulink active"><a data-toggle="tab" href="#home"><img src="assets/img/setup-service.png"> Setup Service</a></li>
-    <li class="menulink"><a data-toggle="tab" href="#menu1"><img src="assets/img/schedule.png"> Schedule & Plan</a></li>
-    <li class="menulink"><a data-toggle="tab" href="#menu2"><img src="assets/img/details.png"> Your Details</a></li>
-    <li class="menulink"><a data-toggle="tab" href="#menu3"><img src="assets/img/payment.png"> Make Payment</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-<h4 class="mt-3"><b>Enter your Postal Code</b></h4>
-      <form>
-        <table>
-          <tr>
-            <td width="250px"><input type="text" name="ZipCode" class="form-control" placeholder="Postal Code" maxlength="6" minlength="6" required></td>
-            <td><input type="submit" name="" value="Check Availability" class="check_btn ml-2"></td>
-          </tr>
-          
-        </table>
-      </form>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
-
-
- -->

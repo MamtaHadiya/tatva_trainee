@@ -1,0 +1,357 @@
+﻿@{
+    ViewData["Title"] = "Book Service";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+    .active-tab {
+        background-color: white !important;
+        color: #2b5998 !important;
+    }
+
+    .tab {
+        background-color: #1D7A8C;
+        color: white;
+        cursor: pointer;
+        width: 180px;
+        height: 67px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .special {
+        background-color: green;
+    }
+</style>
+
+@*<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>*@
+<div class="banner">
+    <img src="~/assets/img/book-service-banner.jpg">
+</div>
+
+	
+<section>
+    <div class="middle_section">
+
+        <!-- Title -->
+        <div>
+            <h2><b>Set up your cleaning service</b></h2>
+            <div class="hr_img">
+                <hr>
+            </div>
+        </div>
+
+
+        <div class="service_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-12">
+                        <table class="tabs" width="100%">
+                            <tr>
+                                <td>
+                                    <div id="tab1" class="tab active-tab" onclick="Tab1Click()"><img src="~/assets/img/setup-service-white.png"> Setup Service</div>
+                                </td>
+                                <td>
+                                    <div id="tab2" class="tab" onclick="Tab2Click()"><img src="~/assets/img/schedule-white.png"> Schedule & Plan</div>
+                                </td>
+                                <td>
+                                    <div id="tab3" class="tab" onclick="Tab3Click()"><img src="~/assets/img/details-white.png"> Your Detail</div>
+                                </td>
+                                <td>
+                                    <div id="tab4" class="tab" onclick="Tab4Click()"><img src="~/assets/img/payment-white.png"> Make Payment</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div id="tabContent">
+                            <br /><br />
+                            <div id="tabContent1">
+                                <h4><b>Enter your Postal Code</b></h4>
+                                <form asp-controller="BookService" asp-action="SetupService" method="post">
+                                    <table class="">
+                                        <tr>
+                                            <td width="250px"><input type="text" id="ZipCode" name="ZipCode" value="123456" placeholder="Postal Code" maxlength="6" minlength="6" required /></td>
+                                            <td><input type="button" value="Check Availability" class="check_btn ml-2" onclick="SearchZipCode();" /></td>
+                                        </tr>
+                                        <tr class="text-danger">
+                                            <td>@ViewBag.error</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div id="tabContent2" style="display:none;">
+                                <div class="row my-4">
+                                    <div class="col-md-6 col-12">
+                                        <h5><b>when do you need the cleaner</b></h5>
+                                        <form class="form-inline">
+                                            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" />
+                                            <select class="form-control" id="StartTime" name="StartTime" />
+                                                <option value="1:00 PM">1:00 PM</option>
+                                                <option value="2:00 PM">2:00 PM</option>
+                                                <option value="3:00 PM">3:00 PM</option>
+                                                <option value="4:00 PM">4:00 PM</option>
+                                                <option value="5:00 PM">5:00 PM</option>
+                                            </select>
+                                            <script language="javascript">
+                                                var today = new Date();
+                                                var dd = String(today.getDate() + 1).padStart(2, '0');
+                                                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                                                var yyyy = today.getFullYear();
+
+                                                today = yyyy + '-' + mm + '-' + dd;
+                                                $('#StartDate').attr('min', today);
+                                            </script>
+
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <h5 align="left"><b>How long do you need cleaner</b></h5>
+                                        <form class="form-inline">
+                                            <select id="Hours" name="Hours" class="form-control">
+                                                <option value="3">3 Hrs</option>
+                                                <option value="3.5">3.5 Hrs</option>
+                                                <option value="4">4 Hrs</option>
+                                                <option value="4.5">4.5 Hrs</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="extra_service">
+                                    <h5 align="left"><b>Extra services</b></h5>
+                                    <div class="extra_service_selected">
+                                        <div>
+                                            <a asp-action="Cabinets">
+                                                <div class="price_line_image">
+                                                    <img src="~/assets/img/3.png" class="center_img">
+                                                </div>
+                                            </a>
+                                            <p>Inside cabinets</p>
+                                        </div>
+                                        <div>
+                                            <a asp-action="Fridge">
+                                                <div class="price_line_image">
+                                                    <img src="~/assets/img/5.png" class="center_img">
+                                                </div>
+                                            </a>
+                                            <p>Inside fridge</p>
+                                        </div>
+                                        <div>
+                                            <a asp-action="Oven">
+                                                <div class="price_line_image">
+                                                    <img src="~/assets/img/4.png" class="center_img">
+                                                </div>
+                                            </a>
+                                            <p>Inside oven</p>
+                                        </div>
+                                        <div>
+                                            <a asp-action="Laundry">
+                                                <div class="price_line_image">
+                                                    <img src="~/assets/img/2.png" class="center_img">
+                                                </div>
+                                            </a>
+                                            <p>Laundry <br>wash & dry</p>
+                                        </div>
+                                        <div>
+                                            <a asp-action="Windows">
+                                                <div class="price_line_image">
+                                                    <img src="~/assets/img/1.png" class="center_img">
+                                                </div>
+                                            </a>
+                                            <p>Interior <br>windows</p>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                                <!-- /extra services -->
+                                <div class="comment">
+                                    <h5><b>Comments</b></h5>
+                                    <form>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="HavePets" required> I have pets at home</label>
+                                        </div>
+                                    </form>
+                                    <hr>
+                                </div>
+                                <button class="continue_btn" onclick="SaveServiceDetail();">Continue</button>
+                            </div>
+
+                            <div id="tabContent3" style="display:none;">
+                                <div id="divAddress"></div><br />
+                                <input type="button" value="Continue" onclick="SaveAddress();" />
+                            </div>
+                            <div id="tabContent4" style="display:none;">
+                                You are booking service request for zipcode <span id="confirmZipCode"></span>
+                                <br /><br />
+                                <input type="button" value="Complete Booking" onclick="CompleteBooking();" />
+                            </div>
+                            <div id="successMessage" style="display:none; color: green;"></div>
+                            <br /><br />
+                        </div>
+                    </div>
+                    <!-- /col-md-8 -->
+                    <div class="col-md-4 col-12">
+                        <div class="right_section">
+                            <div class="payment_summery">
+                                <h4><b>Payment Summary</b></h4>
+                            </div>
+                            <div class="px-3">
+                                <p class="my-3">01/01/2018 4:00 pm <br>1 bed, 1 bath.</p>
+                                <p><b>Duration</b></p>
+                                <p><span style="float: left;">Basic</span><span style="float: right;">3 Hrs</span></p><br>
+                                <p><span style="float: left;">Inside cabinets (extra)</span><span style="float: right;">30 Mins</span></p><br>
+                                <p><span style="float:left;"><b>Total Service Time</b></span><span style="float:right;">3.5 Hrs</span></p><br><hr>
+                                <p><span style="float: left;">Per cleaning</span><b><span style="float: right;">$87</span></b></p><br>
+                                <p><span style="float: left;">Discount</span><b><span style="float: right;">- $27</span></b></p><br><hr>
+                                <h5><span style="float:left;">Total Payment</span></h5><h4><span style="float:right;">$63</span></h4><br>
+                                <p><span style="float: left;">Effective Price</span><span style="float:right;">$50.4</span></p><br>
+                                <p>*You will save 20% according to §35a EStG.</p>
+                            </div>
+                            <div class="last_line">
+                                <p>See what is always included</p>
+                            </div>
+                        </div>
+                        <!-- /right_section -->
+                        <div class="Questions">
+                            <h5 align="center"><b>Questions?</b></h5>
+                            <p><img src="~/assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
+                            <p><img src="~/assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
+                            <p><img src="~/assets/img/keyboard-right-arrow-button.png"> Which Helperland professional will come to my place?</p><hr>
+                            <a href="#">For more help</a>
+                        </div>
+                    </div>
+                    <!-- /col-md-4 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <h6 class="get-our-newsletter"><b>GET OUR NEWSLETTER</b></h6>
+        <span>
+            <button class="email_btn">YOUR EMAIL</button>
+            <button class="submit_btn">submit</button>
+        </span>
+
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    var globalVar = "Global to Booking page";
+    function Tab1Click() {
+        $("#tab1").addClass("active-tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+        $("#tab4").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent1").show();
+    }
+
+    function Tab2Click() {
+        $("#tab2").addClass("active-tab");
+        $("#tab1").removeClass("active-tab").addClass("tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+        $("#tab4").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent1").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent2").show();
+    }
+
+    function Tab3Click() {
+        $("#tab3").addClass("active-tab");
+        $("#tab1").removeClass("active-tab").addClass("tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+        $("#tab4").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent4").hide();
+        $("#tabContent3").show();
+        $("#divAddress").html("Loading Address view...")
+            .load('@Url.Action("GetAddress", "BookService")');
+    }
+    function Tab4Click() {
+        $("#tab4").addClass("active-tab");
+        $("#tab1").removeClass("active-tab").addClass("tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").show();
+    }
+
+
+    function SearchZipCode() {
+        var Zip = $("#ZipCode").val();
+        $.get("/BookService/SerchZipcode", { ZipCode:Zip }, function (data) {
+            if (data == true) {
+                alert("Zipcode Matched Successfuly.");
+                $("#tab2").addClass("active-tab");
+                $("#tab1").removeClass("active-tab").addClass("tab");
+                $("#tabContent1").hide();
+                $("#tabContent2").show();
+            }
+            else {
+                alert("We are not providing service in this area.We'll notify you if any helper would start working near your area.");
+            }    
+        });
+
+    }
+
+    function SaveServiceDetail() {
+        $("#tab3").addClass("active-tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+        $("#tabContent2").hide();
+        $("#tabContent4").hide();
+        $("#tabContent3").show();
+
+        $("#divAddress").html("Loading Address view...")
+            .load('@Url.Action("GetAddress", "BookService")');
+    }
+    function SaveAddress() {
+        $("#tab4").addClass("active-tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+        $("#tabContent3").hide();
+        $("#tabContent4").show();
+        $("#confirmZipCode").html($("#ZipCode").val());
+    }
+
+    function CompleteBooking() {
+        debugger;
+        var booking = {};
+        booking.zipCode = $("#ZipCode").val();
+        booking.bookingStartTime = $("#StartDate").val() + " " + $("#StartTime").val();
+        booking.hours = $("#Hours").val();
+        booking.address1 = $("#Address1").val();
+
+        $.ajax({
+            url: '@Url.Action("SaveBooking", "BookService")',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(booking),
+            success: function (resp) {
+                debugger;
+                $("#successMessage").show();
+                var html = "<br/><br/>Congratulations!<br/> Your Booking hass been confirmed for <br/><b>Service Date</b>: " + resp.Result.bookingStartTime + "<br/>" +
+                    "<b>Service Hours</b>: " + resp.Result.hours + "<br/>" +
+                    "<b>Zip Code</b>: " + resp.Result.zipCode + "<br/>";
+                $("#successMessage").html(html).fadeOut(7000);
+            },
+            error: function (err) {
+                debugger;
+                alert(err.responseText);
+            }
+        });
+    }
+</script>

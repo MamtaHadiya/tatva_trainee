@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Helperland.Models.ChangePassClass
+@{
     ViewData["Title"] = "Change password Page";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
@@ -8,14 +9,21 @@
         <div class="card">
             <div class="card-header">
                 Change Password
-                <span class="btn ml-lg-5 bg-danger"><a asp-controller="Account" asp-action="Index">&times;</a></span>
+                <span class="btn float-md-right bg-danger"><a asp-controller="Account" asp-action="Index">&times;</a></span>
             </div>
             <div class="card-body">
                 <div class="text-danger"></div>
-                <form asp-controller="Helperland" asp-action="UpdatePass" method="post">
-                    <input class="form-control mt-3" type="text" value="@ViewBag.Data" name="Email" readonly /> 
-                    <input class="form-control mt-3" type="password" name="password" placeholder="New password" required>
-                    <input class="form-control mt-3" type="password" name="Cfrmpwd" placeholder="confirm password" required>
+                <form asp-controller="Account" asp-action="UpdatePass" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <span class="text-danger">@ViewBag.error</span>
+                    <input asp-for="Email" class="form-control mt-3" value="@ViewBag.Email" name="Email" />
+
+                    <input asp-for="Password" class="form-control mt-3" placeholder="New password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <input asp-for="Confirmpwd" class="form-control mt-3" placeholder="confirm password">
+                    <span asp-validation-for="Confirmpwd" class="text-danger"></span>
+
                     <input type="submit" value="Save" class="form-control rounded_btn mt-3" />
 
                 </form>
