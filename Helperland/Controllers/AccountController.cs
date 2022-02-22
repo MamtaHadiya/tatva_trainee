@@ -149,7 +149,7 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            //HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userid");
             return RedirectToAction("Login");
         }

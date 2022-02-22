@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Helperland.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace Helperland.Controllers
 {
@@ -127,51 +129,41 @@ namespace Helperland.Controllers
             };
             _db.ServiceRequestAddresses.Add(requestAddress);
             _db.SaveChanges();
+            var Providers = _db.Users.Where(x => x.ZipCode.Equals(AddressData.PostalCode) && x.UserTypeId.Equals(2)).ToList();
+
+            
+            foreach(var provider in Providers)
+            {
+                var subject = "Service Request from Helperland";
+                var body = "Hi " + provider.FirstName + "Customer has booked Service at your Area. <br> You can take that service " +
+                    "by login in helperland account.<br>" +
+                    "Thankyou";
+                SendEmail(provider.Email, body, subject);
+            }
+
+
             return Json(true);
         }
-       
 
-        //[HttpPost]
-        //public IActionResult SaveBooking([FromBody] ServiceRequestModel booking)
-        //{
-        //    if (booking == null)
-        //        return Json(new SingeEntity<ServiceRequestModel>() { Result = null, Status = "ERROR", ErrorMessage = "Error in deserializing submitted data into booking object" }
-        //            , new System.Text.Json.JsonSerializerOptions()
-        //            {
-        //                PropertyNameCaseInsensitive = false
-        //            });
-        //    else
-        //    {
-        //        var result = new System.Dynamic.ExpandoObject();
-        //        return Json(new SingeEntity<ServiceRequestModel>() { Result = booking, Status = "OK" }
-        //            , new System.Text.Json.JsonSerializerOptions()
-        //            {
-        //                PropertyNameCaseInsensitive = false
-        //            });
-        //    }
-        //}
+        private void SendEmail(string emailAddress, string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("mmthadiya@gmail.com", emailAddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
 
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential networkCred = new NetworkCredential("mmthadiya@gmail.com", "MMta00Hdya");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = networkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
 
-    }
-    public class BaseList<T> where T : class
-    {
-        public int TotalCount { get; set; }
-        public T Result { get; set; }
-        public string Status { get; set; }
-        public string ErrorMessage { get; set; }
-    }
-
-    public class SingeEntity<T> where T : class
-    {
-        public T Result { get; set; }
-        public string Status { get; set; }
-        public string ErrorMessage { get; set; }
-    }
-    public class Address
-    {
-        public string Address1 { get; set; }
-    }
-    
-    
+    } 
 }
 

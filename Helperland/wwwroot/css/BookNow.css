@@ -1,0 +1,59 @@
+﻿.active-tab {
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.tab {
+    background-color: #1D7A8C;
+    color: white;
+    cursor: pointer;
+    width: 180px;
+    height: 67px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.AddressList {
+    border: 2px solid lightgray;
+    padding: 10px;
+}
+
+.HiddenForm {
+    display: none;
+    border: 2px solid lightgray;
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+    padding: 15px;
+    padding-bottom: 70px;
+}
+
+.FavoriteProvider {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+}
+
+.special {
+    background-color: green;
+    padding: 15px 10px 15px 10px;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.Check_img {
+    width: 50px;
+    height: 46px;
+    padding: 8px;
+    color: white;
+    border-radius: 30px;
+}
+
+.ok_btn {
+    width: 80px;
+    height: 40px;
+    background-color: #1D7A8C;
+    color: white;
+    border-radius: 20px;
+}

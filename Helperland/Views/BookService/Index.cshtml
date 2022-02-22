@@ -2,52 +2,7 @@
     ViewData["Title"] = "Book Service";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
-
-<style>
-    .active-tab {
-        background-color: white !important;
-        color: #000000 !important;
-    }
-
-    .tab {
-        background-color: #1D7A8C;
-        color: white;
-        cursor: pointer;
-        width: 180px;
-        height: 67px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .AddressList {
-        border: 2px solid lightgray;
-        padding: 10px;
-    }
-
-    .HiddenForm {
-        display: none;
-        border: 2px solid lightgray;
-        background: #F9F9F9 0% 0% no-repeat padding-box;
-        padding: 15px;
-        padding-bottom: 70px;
-    }
-
-    .FavoriteProvider {
-        border-top: 2px solid lightgray;
-        border-bottom: 2px solid lightgray;
-    }
-
-    .special {
-        background-color: green;
-        padding: 15px 10px 15px 10px;
-    }
-
-    .disabled {
-        pointer-events: none;
-    }
-</style>
+<link href="~/css/BookNow.css" rel="stylesheet" />
 
 @*<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>*@
 <div class="banner">
@@ -243,7 +198,7 @@
 
                             </div>
                             <div class="last_line">
-                                <p>See what is always included</p>
+                                <img src="~/assets/img/smiley.png" /><p>See what is always included</p>
                             </div>
                         </div>
                         <!-- /right_section -->
@@ -268,20 +223,61 @@
         </span>
 
     </div>
+
+    <!--Success model-->
+    <div class="modal fade" id="SuccessModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-sm">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body my-2">
+                    <center>
+                        <div class="bg-success Check_img"><img src="~/assets/img/ic-check.png" /></div>
+                        <h4>Booking has been successfully submitted</h4>
+                        <p>Service Request Id: <span id="ServiceId"></span></p>
+                        <button type="button" class="ok_btn" data-dismiss="modal">OK</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Error model-->
+    <div class="modal fade" id="ErrorModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-sm">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body my-2">
+                    <center>
+                        <div class="bg-danger Check_img"><p>&#10005;</p></div>
+                        <h4 class="text-danger">Error occured in booking</h4>
+                        <button type="button" class="ok_btn" data-dismiss="modal" aria-label="Close">OK</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <script type="text/javascript">
     var globalVar = "Global to Booking page";
-    var count1 = 0;
-    var count2 = 0;
-    var count3 = 0;
-    var count4 = 0;
-    var count5 = 0;
+    var count = [];
     var ExtraHours = 0;
     var TotalTime = 3;
     var HourlyRate = 50;
     var TotalPayment = 0;
+    for (var i = 1; i <= 5; i++) {
+        count[i] = 0;
+    }
     function Tab1Click() {
         $("#tab1").addClass("active-tab");
         $("#tab2").removeClass("active-tab").addClass("tab");
@@ -388,8 +384,8 @@
     }
 
     function AddBasic() {
-        if (count1 > 0 || count2 > 0 || count3 > 0 || count4 > 0 || count5 > 0) {
-            count1 = count2 = count3 = count4 = count5 = 0;
+        if (count[1] > 0 || count[2] > 0 || count[3] > 0 || count[4] > 0 || count[5] > 0) {
+            count[1] = count[2] = count[3] = count[4] = count[5] = 0;
             $("#Extra").empty();
             $("#Extra").html("<b>Extras<b>");
             document.getElementById('Image1').src = "/assets/img/3.png";
@@ -420,7 +416,7 @@
         $("#TotalPayment").html(TotalPayment + "$");
     }
     function Cabinets() {
-        if (count1 <= 0) {
+        if (count[1] <= 0) {
             ExtraHours += 0.5;
             TotalTime = (TotalTime + 0.5);
             TotalPayment = TotalTime * HourlyRate;
@@ -429,12 +425,12 @@
             document.getElementById('Image1').src = "/assets/img/3-green.png";
             document.getElementById("border1").style.border = "3px solid #1D7A8C";
             document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside cabinets</span><span class='float-right'>30 Mins</span></p><br>";
-            count1++;
+            count[1]++;
         }
     }
     function Fridge() {
         var image = document.getElementById('Image2');
-        if (count2 <= 0) {
+        if (count[2] <= 0) {
             ExtraHours += 0.5;
             TotalTime = (TotalTime + 0.5);
             TotalPayment = TotalTime * HourlyRate;
@@ -443,13 +439,13 @@
             image.src = "/assets/img/5-green.png";
             document.getElementById("border2").style.border = "3px solid #1D7A8C";
             document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p><br>";
-            count2++;
+            count[2]++;
         }
     }
 
     function Oven() {
         var image = document.getElementById('Image3');
-        if (count3 <= 0) {
+        if (count[3] <= 0) {
             ExtraHours += 0.5;
             TotalTime = (TotalTime + 0.5);
             TotalPayment = TotalTime * HourlyRate;
@@ -458,13 +454,13 @@
             image.src = "/assets/img/4-green.png";
             document.getElementById("border3").style.border = "3px solid #1D7A8C";
             document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside oven</span><span class='float-right'>30 Mins</span></p><br>";
-            count3++;
+            count[3]++;
         }
     }
 
     function Laundry() {
         var image = document.getElementById('Image4');
-        if (count4 <= 0) {
+        if (count[4] <= 0) {
             ExtraHours += 0.5;
             TotalTime = (TotalTime + 0.5);
             TotalPayment = TotalTime * HourlyRate;
@@ -473,13 +469,13 @@
             image.src = "/assets/img/2-green.png";
             document.getElementById("border4").style.border = "3px solid #1D7A8C";
             document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Laundry wash & dry</span><span class='float-right'>30 Mins</span></p><br>";
-            count4++;
+            count[4]++;
         }
     }
 
     function Windows() {
         var image = document.getElementById('Image5');
-        if (count5 <= 0) {
+        if (count[5] <= 0) {
             ExtraHours += 0.5;
             TotalTime = (TotalTime + 0.5);
             TotalPayment = TotalTime * HourlyRate;
@@ -488,7 +484,7 @@
             image.src = "/assets/img/1-green.png";
             document.getElementById("border5").style.border = "3px solid #1D7A8C";
             document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Interior windows</span><span class='float-right'>30 Mins</span></p><br>";
-            count5++;
+            count[5]++;
         }
     }
 
@@ -600,56 +596,22 @@
             data: booking
             }).done(function (response) {
                 if (response == "false") {
-                    alert("Error.");
+                    $("#ErrorModel").modal('show');
                 }
                 else {
-                    if (count1 == 1) {
-
-                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("1") }, function (data) {
-
-                        });
-                    }
-                    else if (count2 == 1) {
-                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("2") }, function (data) {
-
-                        });
-                    }
-                    else if (count3 == 1) {
-                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("3") }, function (data) {
-
-                        });
-                    }
-                    else if (count4 == 1) {
-                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("4") }, function (data) {
-
-                        });
-                    }
-                    else if (count5 == 1) {
-                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("5") }, function (data) {
-
-                        });
+                    for (var i = 1; i <= 5; i++) {
+                        if (count[i] == 1) {
+                            $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt(i) }, function (data) { });
+                        }
                     }
                     $.post("/BookService/AddServiceAddress", { ServiceId: parseInt(response.id), AddressId: parseInt($("input[type='radio'][name='Address']:checked").val()) }, function (data) {
-
-                    });
-                    alert("Success." + response.id);
+                        if (data) {
+                            $("#ServiceId").html(response.id);
+                            $("#SuccessModel").modal('show');
+                        }
+                    }); 
                 }
             });
-        //var booking = new Booking();
-        //var StartTime = $("#StartDate").val() + " " + $("#StartTime").val();
-        //booking.append("UserId", $("#UserId").val());
-        ////booking.append("ServiceStartDate", StartTime);
-        //booking.append("ZipCode", $("#ZipCode").val());
-        ////booking.append("ServiceHourlyRate", HourlyRate);
-        //booking.append("ServiceHours", $("#Basic").val());
-        //booking.append("SubTotal", $("#TotalTime").val());
-        //booking.append("TotalCost", $("#TotalPayment").val());
-        //booking.append("Comments", $("#Comment").val());
-        //booking.append("HasPets", $("#HavePets").val());
-
-        //$.post("/BookService/AddRequest", { RequestData: booking }, function (data) {
-        //    alert(data);
-        //});
     }
 
 

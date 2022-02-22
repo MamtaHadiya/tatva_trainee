@@ -161,9 +161,7 @@ C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Account
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Helperland\Faq.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Helperland\About.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Helperland\Contact.cshtml.g.cs
-C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\SetupService.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
-C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\SchedulePlan.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\View.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\Index.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\GetAddress.cshtml.g.cs
