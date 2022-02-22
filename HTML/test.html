@@ -1,114 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>create account</title>
-  <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <!-- roboto fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
-<style>
-  .Create_Account{
-    width: 700px;
-    margin: auto;
-    text-align: center;
-  }
-        hr {
-            border: none;
-            width: 124px;
-            border: 1px solid #d7d7d7;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hr {
-            text-align: center;
-        }
-
-            .hr img {
-                position: relative;
-                top: -31px;
-                background: white no-repeat;
-                padding: 0 1.8px;
-            }
-
-        .register_btn {
-            width: 150px;
-            height: 40px;
-            background: #29626D 0% 0% no-repeat padding-box;
-            border: 1px solid #FFFFFF;
-            border-radius: 20px;
-            color: white;
-        }
-    </style>
+  <head>
+    <title>Demo</title>
+  </head>
 <body>
-
-  <div class="Create_Account mt-5">
-                <h2 id="exampleModalLongTitle">Create an account</h2>
-                <div class="hr">
-                    <hr>
-                    <img src="~/assets/img/separator.png">
-                </div>
-    <form asp-action="RegisterCostomer" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <input asp-for="FirstName" class="form-control" placeholder="First name" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <input asp-for="LastName" class="form-control" placeholder="Last name" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row  mt-3">
-                        <div class="col-md-6 col-12">
-                            <input asp-for="Email" class="form-control" placeholder="E-mail address" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 col-12 input-group">
-                            <span class="input-group-text">+49</span>
-                            <input asp-for="Mobile" class="form-control" name="mobile" placeholder="Mobile No">
-                            <span asp-validation-for="Mobile" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-12">
-                            <input asp-for="Password" class="form-control" placeholder="Password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <input asp-for="Confirmpwd" class="form-control" placeholder="Confirm password" />
-                            <span asp-validation-for="Confirmpwd" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-check mt-3" align="left">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">I have read the <a href="">privacy policy.</a></label>
-                    </div>
-                    <input type="submit" value="Register" class="register_btn m-auto" />
-                </form>
-                <div class="mt-3">
-                <p class="m-auto">Already registered?<a asp-action="Login" asp-controller="Account" class="text-primary">Login now</a></p>
-            </div>
-  </div>
-
-    <!-- jQuery -->
-    <script src="assets/js/jquery.min.js"></script>
+      <input type="button" onclick="changeImage()" value="Change" />
     
-    <!-- Bootstrap Core JS -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    
-    <!-- Slick JS -->
-    <script src="assets/js/slick.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
+  <h1>Changing the Image</h1>
+  <div><img src="assets/img/3.png" id="Image1">
+    </div>
+<script>
+        function changeImage() {
+            var image = document.getElementById('Image1');
+            if (image.src.match("3.png")) {
+                image.src = "/3-green.png";
+            }
+            else {
+                image.src = "/3.png";
+            }
+        }
+    </script>
+<p><strong>Note:</strong> Click on the "Change" button to Change the water bottle in to the soft drink bottle</p>
 </body>
 </html>

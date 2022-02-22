@@ -149,7 +149,8 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("username");
+            //HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("userid");
             return RedirectToAction("Login");
         }
         public IActionResult Forgotpass()
@@ -160,18 +161,6 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Forgotpass(String email)
         {
-            //string resetCode = Guid.NewGuid().ToString();
-            //var verifyUrl = "/Account/UpdatePass/" + resetCode;
-            //var data = (from userlist in _db.Users
-            //            where userlist.Email == email
-            //            select new
-            //            {
-            //                userlist.UserId,
-            //                userlist.FirstName,
-            //                userlist.Email,
-            //                userlist.Password
-
-            //            }).ToList();
             var user = _db.Users.Where(x => x.Email.Equals(email)).FirstOrDefault();
             if (user != null)
             {
@@ -181,7 +170,7 @@ namespace Helperland.Controllers
                 var subject = "Password Reset Request";
                 var body = "Hi " + user.FirstName + ", <br/> you recently requested to reset your password for your account." +
                     "Click the link below to reset it. " +
-                    "<br/><br/><a href='" + passwordResetLink + "'>" + passwordResetLink + "</a><br/><br/>" +
+                    "<br/><br/><a href='" + passwordResetLink + "'>Link</a><br/><br/>" +
                     "Thankyou";
                 SendEmail(user.Email, body, subject);
                 ViewBag.error = "Reset password link has been sent to your email id.";

@@ -167,3 +167,4 @@ C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookSer
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\View.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\Index.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\GetAddress.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\AddressForm.cshtml.g.cs

@@ -2,10 +2,11 @@
     ViewData["Title"] = "Book Service";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+
 <style>
     .active-tab {
         background-color: white !important;
-        color: #2b5998 !important;
+        color: #000000 !important;
     }
 
     .tab {
@@ -20,8 +21,31 @@
         justify-content: center;
     }
 
+    .AddressList {
+        border: 2px solid lightgray;
+        padding: 10px;
+    }
+
+    .HiddenForm {
+        display: none;
+        border: 2px solid lightgray;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+        padding: 15px;
+        padding-bottom: 70px;
+    }
+
+    .FavoriteProvider {
+        border-top: 2px solid lightgray;
+        border-bottom: 2px solid lightgray;
+    }
+
     .special {
         background-color: green;
+        padding: 15px 10px 15px 10px;
+    }
+
+    .disabled {
+        pointer-events: none;
     }
 </style>
 
@@ -30,7 +54,7 @@
     <img src="~/assets/img/book-service-banner.jpg">
 </div>
 
-	
+
 <section>
     <div class="middle_section">
 
@@ -50,16 +74,16 @@
                         <table class="tabs" width="100%">
                             <tr>
                                 <td>
-                                    <div id="tab1" class="tab active-tab" onclick="Tab1Click()"><img src="~/assets/img/setup-service-white.png"> Setup Service</div>
+                                    <div id="tab1" class="tab active-tab" onclick="Tab1Click()"><img src="~/assets/img/setup-service.png" id="Setup"> Setup Service</div>
                                 </td>
                                 <td>
-                                    <div id="tab2" class="tab" onclick="Tab2Click()"><img src="~/assets/img/schedule-white.png"> Schedule & Plan</div>
+                                    <div id="tab2" class="tab disabled" onclick="Tab2Click()"><img src="~/assets/img/schedule-white.png" id="Schedule"> Schedule & Plan</div>
                                 </td>
                                 <td>
-                                    <div id="tab3" class="tab" onclick="Tab3Click()"><img src="~/assets/img/details-white.png"> Your Detail</div>
+                                    <div id="tab3" class="tab disabled" onclick="Tab3Click()"><img src="~/assets/img/details-white.png" id="Detail"> Your Detail</div>
                                 </td>
                                 <td>
-                                    <div id="tab4" class="tab" onclick="Tab4Click()"><img src="~/assets/img/payment-white.png"> Make Payment</div>
+                                    <div id="tab4" class="tab disabled" onclick="Tab4Click()"><img src="~/assets/img/payment-white.png" id="Payment"> Make Payment</div>
                                 </td>
                             </tr>
                         </table>
@@ -68,17 +92,14 @@
                             <br /><br />
                             <div id="tabContent1">
                                 <h4><b>Enter your Postal Code</b></h4>
-                                <form asp-controller="BookService" asp-action="SetupService" method="post">
+                                <form>
                                     <table class="">
                                         <tr>
-                                            <td width="250px"><input type="text" id="ZipCode" name="ZipCode" value="123456" placeholder="Postal Code" maxlength="6" minlength="6" required /></td>
+                                            <td width="250px"><input type="number" id="ZipCode" name="ZipCode" class="form-control" placeholder="Postal Code" maxlength="6" minlength="6" onfocus="CheckLogin();" required /></td>
                                             <td><input type="button" value="Check Availability" class="check_btn ml-2" onclick="SearchZipCode();" /></td>
                                         </tr>
-                                        <tr class="text-danger">
-                                            <td>@ViewBag.error</td>
-                                            <td></td>
-                                        </tr>
                                     </table>
+                                    <span class="text-danger" id="ErrorMessage"></span>
                                 </form>
                             </div>
                             <div id="tabContent2" style="display:none;">
@@ -86,8 +107,8 @@
                                     <div class="col-md-6 col-12">
                                         <h5><b>when do you need the cleaner</b></h5>
                                         <form class="form-inline">
-                                            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" />
-                                            <select class="form-control" id="StartTime" name="StartTime" />
+                                            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" required />
+                                            <select class="form-control" id="StartTime" name="StartTime" onblur="AddDuration();" required>
                                                 <option value="1:00 PM">1:00 PM</option>
                                                 <option value="2:00 PM">2:00 PM</option>
                                                 <option value="3:00 PM">3:00 PM</option>
@@ -103,14 +124,14 @@
                                                 today = yyyy + '-' + mm + '-' + dd;
                                                 $('#StartDate').attr('min', today);
                                             </script>
-
+                                            <span class="text-danger" id="DateTime"></span>
                                         </form>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <h5 align="left"><b>How long do you need cleaner</b></h5>
                                         <form class="form-inline">
-                                            <select id="Hours" name="Hours" class="form-control">
-                                                <option value="3">3 Hrs</option>
+                                            <select id="Hours" name="Hours" class="form-control" onblur="AddBasic();" onfocus="AddDuration();">
+                                                <option value="3" selected>3 Hrs</option>
                                                 <option value="3.5">3.5 Hrs</option>
                                                 <option value="4">4 Hrs</option>
                                                 <option value="4.5">4.5 Hrs</option>
@@ -123,41 +144,41 @@
                                     <h5 align="left"><b>Extra services</b></h5>
                                     <div class="extra_service_selected">
                                         <div>
-                                            <a asp-action="Cabinets">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/3.png" class="center_img">
+                                            <a onclick="Cabinets()">
+                                                <div class="price_line_image" id="border1">
+                                                    <img src="~/assets/img/3.png" class="center_img" id="Image1">
                                                 </div>
                                             </a>
                                             <p>Inside cabinets</p>
                                         </div>
                                         <div>
-                                            <a asp-action="Fridge">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/5.png" class="center_img">
+                                            <a onclick="Fridge()">
+                                                <div class="price_line_image" id="border2">
+                                                    <img src="~/assets/img/5.png" class="center_img" id="Image2">
                                                 </div>
                                             </a>
                                             <p>Inside fridge</p>
                                         </div>
                                         <div>
-                                            <a asp-action="Oven">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/4.png" class="center_img">
+                                            <a onclick="Oven()">
+                                                <div class="price_line_image" id="border3">
+                                                    <img src="~/assets/img/4.png" class="center_img" id="Image3">
                                                 </div>
                                             </a>
                                             <p>Inside oven</p>
                                         </div>
                                         <div>
-                                            <a asp-action="Laundry">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/2.png" class="center_img">
+                                            <a onclick="Laundry()">
+                                                <div class="price_line_image" id="border4">
+                                                    <img src="~/assets/img/2.png" class="center_img" id="Image4">
                                                 </div>
                                             </a>
                                             <p>Laundry <br>wash & dry</p>
                                         </div>
                                         <div>
-                                            <a asp-action="Windows">
-                                                <div class="price_line_image">
-                                                    <img src="~/assets/img/1.png" class="center_img">
+                                            <a onclick="Windows()">
+                                                <div class="price_line_image" id="border5">
+                                                    <img src="~/assets/img/1.png" class="center_img" id="Image5">
                                                 </div>
                                             </a>
                                             <p>Interior <br>windows</p>
@@ -169,9 +190,9 @@
                                 <div class="comment">
                                     <h5><b>Comments</b></h5>
                                     <form>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" id="Comment"></textarea>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" name="HavePets" required> I have pets at home</label>
+                                            <label><input type="checkbox" id="HavePets" name="HavePets"> I have pets at home</label>
                                         </div>
                                     </form>
                                     <hr>
@@ -181,34 +202,45 @@
 
                             <div id="tabContent3" style="display:none;">
                                 <div id="divAddress"></div><br />
-                                <input type="button" value="Continue" onclick="SaveAddress();" />
+                                <button class="btn btn-outline-success rounded-pill mb-3" id="AddNewAddress" onclick="AddForm();">+ Add New Address</button>
+                                <div id="HiddenForm" class="HiddenForm">
+                                    @await Html.PartialAsync("AddressForm.cshtml")
+                                </div>
+                                <br />
+                                <p><b>Your Favorite Service Providers</b></p>
+                                <div class="FavoriteProvider">
+                                    <p>You can choose your favorite service provider from the below list</p>
+                                    <div class="price_line_image">
+                                        <img src="~/assets/img/cap.png" class="center_img">
+                                    </div>
+                                    <p>Sandip Patel</p>
+                                </div>
+                                <button class="continue_btn mt-2" onclick="SaveAddress();">Continue</button>
                             </div>
                             <div id="tabContent4" style="display:none;">
                                 You are booking service request for zipcode <span id="confirmZipCode"></span>
                                 <br /><br />
-                                <input type="button" value="Complete Booking" onclick="CompleteBooking();" />
+                                <input type="button" class="check_btn float-right" value="Complete Booking" onclick="SaveBooking();" />
                             </div>
-                            <div id="successMessage" style="display:none; color: green;"></div>
-                            <br /><br />
                         </div>
                     </div>
-                    <!-- /col-md-8 -->
+                    <!-- /col-md-8 payment summery -->
                     <div class="col-md-4 col-12">
                         <div class="right_section">
                             <div class="payment_summery">
                                 <h4><b>Payment Summary</b></h4>
                             </div>
                             <div class="px-3">
-                                <p class="my-3">01/01/2018 4:00 pm <br>1 bed, 1 bath.</p>
-                                <p><b>Duration</b></p>
-                                <p><span style="float: left;">Basic</span><span style="float: right;">3 Hrs</span></p><br>
-                                <p><span style="float: left;">Inside cabinets (extra)</span><span style="float: right;">30 Mins</span></p><br>
-                                <p><span style="float:left;"><b>Total Service Time</b></span><span style="float:right;">3.5 Hrs</span></p><br><hr>
-                                <p><span style="float: left;">Per cleaning</span><b><span style="float: right;">$87</span></b></p><br>
-                                <p><span style="float: left;">Discount</span><b><span style="float: right;">- $27</span></b></p><br><hr>
-                                <h5><span style="float:left;">Total Payment</span></h5><h4><span style="float:right;">$63</span></h4><br>
-                                <p><span style="float: left;">Effective Price</span><span style="float:right;">$50.4</span></p><br>
-                                <p>*You will save 20% according to §35a EStG.</p>
+                                <span id="Duration">Duration</span>
+                                <p><span class="float-left">Basic</span><span class="float-right" id="Basic">0 Hrs</span></p><br>
+
+                                <div id="Extra">
+                                    <h6 class="font-weight-bold">Extras</h6>
+                                </div>
+                                <p><span class="float-left"><b>Total Service Time</b></span><span class="float-right font-weight-bold" id="TotalTime">3 Hrs</span></p><br><hr>
+                                <p><span class="float-left">Per cleaning</span><b><span class="float-right" id="PerCleaning">0,00$</span></b></p><br>
+                                <h5><span class="float-left text-primary py-2">Total Payment</span></h5><h3><span class="float-right text-primary py-1" id="TotalPayment">0,00$</span></h3><br>
+
                             </div>
                             <div class="last_line">
                                 <p>See what is always included</p>
@@ -241,6 +273,15 @@
 
 <script type="text/javascript">
     var globalVar = "Global to Booking page";
+    var count1 = 0;
+    var count2 = 0;
+    var count3 = 0;
+    var count4 = 0;
+    var count5 = 0;
+    var ExtraHours = 0;
+    var TotalTime = 3;
+    var HourlyRate = 50;
+    var TotalPayment = 0;
     function Tab1Click() {
         $("#tab1").addClass("active-tab");
         $("#tab2").removeClass("active-tab").addClass("tab");
@@ -251,8 +292,11 @@
         $("#tabContent3").hide();
         $("#tabContent4").hide();
         $("#tabContent1").show();
+        document.getElementById("Setup").src = "/assets/img/setup-service.png";
+        document.getElementById("Schedule").src = "/assets/img/schedule-white.png";
+        document.getElementById("Detail").src = "/assets/img/details-white.png";
+        document.getElementById("Payment").src = "/assets/img/payment-white.png";
     }
-
     function Tab2Click() {
         $("#tab2").addClass("active-tab");
         $("#tab1").removeClass("active-tab").addClass("tab");
@@ -263,8 +307,11 @@
         $("#tabContent3").hide();
         $("#tabContent4").hide();
         $("#tabContent2").show();
+        document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+        document.getElementById("Schedule").src = "/assets/img/schedule.png";
+        document.getElementById("Detail").src = "/assets/img/details-white.png";
+        document.getElementById("Payment").src = "/assets/img/payment-white.png";
     }
-
     function Tab3Click() {
         $("#tab3").addClass("active-tab");
         $("#tab1").removeClass("active-tab").addClass("tab");
@@ -275,6 +322,10 @@
         $("#tabContent2").hide();
         $("#tabContent4").hide();
         $("#tabContent3").show();
+        document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+        document.getElementById("Schedule").src = "/assets/img/schedule-white.png";
+        document.getElementById("Detail").src = "/assets/img/details.png";
+        document.getElementById("Payment").src = "/assets/img/payment-white.png";
         $("#divAddress").html("Loading Address view...")
             .load('@Url.Action("GetAddress", "BookService")');
     }
@@ -288,70 +339,318 @@
         $("#tabContent2").hide();
         $("#tabContent3").hide();
         $("#tabContent4").show();
+        document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+        document.getElementById("Schedule").src = "/assets/img/schedule-white.png";
+        document.getElementById("Detail").src = "/assets/img/details-white.png";
+        document.getElementById("Payment").src = "/assets/img/payment.png";
     }
-
 
     function SearchZipCode() {
         var Zip = $("#ZipCode").val();
-        $.get("/BookService/SerchZipcode", { ZipCode:Zip }, function (data) {
-            if (data == true) {
-                alert("Zipcode Matched Successfuly.");
-                $("#tab2").addClass("active-tab");
-                $("#tab1").removeClass("active-tab").addClass("tab");
-                $("#tabContent1").hide();
-                $("#tabContent2").show();
-            }
-            else {
-                alert("We are not providing service in this area.We'll notify you if any helper would start working near your area.");
-            }    
-        });
+        if (isNaN(Zip) || Zip == "") {
+            $("#ErrorMessage").html("Please enter valid Zipcode.");
+        }
+        else {
+            $.get("/BookService/SerchZipcode", { ZipCode: Zip }, function (data) {
+                if (data == "true") {
+                    alert("Zipcode Matched Successfuly.");
+                    $("#tab2").removeClass("disabled").addClass("active-tab");
+                    $("#tab1").removeClass("active-tab").addClass("tab");
+                    $("#tabContent1").hide();
+                    $("#tabContent2").show();
+                    document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+                    document.getElementById("Schedule").src = "/assets/img/schedule.png";
+                    document.getElementById("Detail").src = "/assets/img/details-white.png";
+                    document.getElementById("Payment").src = "/assets/img/payment-white.png";
+                }
+                else {
+                    $("#ErrorMessage").html("We are not providing service in this area.We'll notify you if any helper would start working near your area.").fadeOut(5000);
+                    if (data == "false") {
 
+                    }
+                    else {
+                        alert("You have to login before Book A Service");
+                        window.location.href = "@Url.Action("Login","Account")";
+                    }
+                }
+            });
+        }
+    }
+
+    function AddDuration() {
+        if ($("#StartDate").val() == "" || $("#StartTime").val() == "") {
+            $("#DateTime").html("Please select date and time.").fadeOut(5000);
+        }
+        else {
+            $("#Duration").html($("#StartDate").val() + " At " + $("#StartTime").val());
+            $("#PerCleaning").html(HourlyRate + "$");
+        }
+    }
+
+    function AddBasic() {
+        if (count1 > 0 || count2 > 0 || count3 > 0 || count4 > 0 || count5 > 0) {
+            count1 = count2 = count3 = count4 = count5 = 0;
+            $("#Extra").empty();
+            $("#Extra").html("<b>Extras<b>");
+            document.getElementById('Image1').src = "/assets/img/3.png";
+            document.getElementById("border1").style.border = "1px solid #B0C9CE";
+
+            document.getElementById('Image2').src = "/assets/img/5.png";
+            document.getElementById("border2").style.border = "1px solid #B0C9CE";
+
+            document.getElementById('Image3').src = "/assets/img/4.png";
+            document.getElementById("border3").style.border = "1px solid #B0C9CE";
+
+            document.getElementById('Image4').src = "/assets/img/2.png";
+            document.getElementById("border4").style.border = "1px solid #B0C9CE";
+
+            document.getElementById('Image5').src = "/assets/img/1.png";
+            document.getElementById("border5").style.border = "1px solid #B0C9CE";
+
+            $("#Basic").html($("#Hours").val() + " Hrs");
+            TotalTime = parseFloat($("#Hours").val());
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+        }
+        $("#Basic").html($("#Hours").val() + " Hrs");
+        TotalTime = parseFloat($("#Hours").val());
+        TotalPayment = TotalTime * HourlyRate;
+        $("#TotalTime").html(TotalTime + " Hrs");
+        $("#TotalPayment").html(TotalPayment + "$");
+    }
+    function Cabinets() {
+        if (count1 <= 0) {
+            ExtraHours += 0.5;
+            TotalTime = (TotalTime + 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image1').src = "/assets/img/3-green.png";
+            document.getElementById("border1").style.border = "3px solid #1D7A8C";
+            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside cabinets</span><span class='float-right'>30 Mins</span></p><br>";
+            count1++;
+        }
+    }
+    function Fridge() {
+        var image = document.getElementById('Image2');
+        if (count2 <= 0) {
+            ExtraHours += 0.5;
+            TotalTime = (TotalTime + 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            image.src = "/assets/img/5-green.png";
+            document.getElementById("border2").style.border = "3px solid #1D7A8C";
+            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p><br>";
+            count2++;
+        }
+    }
+
+    function Oven() {
+        var image = document.getElementById('Image3');
+        if (count3 <= 0) {
+            ExtraHours += 0.5;
+            TotalTime = (TotalTime + 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            image.src = "/assets/img/4-green.png";
+            document.getElementById("border3").style.border = "3px solid #1D7A8C";
+            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside oven</span><span class='float-right'>30 Mins</span></p><br>";
+            count3++;
+        }
+    }
+
+    function Laundry() {
+        var image = document.getElementById('Image4');
+        if (count4 <= 0) {
+            ExtraHours += 0.5;
+            TotalTime = (TotalTime + 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            image.src = "/assets/img/2-green.png";
+            document.getElementById("border4").style.border = "3px solid #1D7A8C";
+            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Laundry wash & dry</span><span class='float-right'>30 Mins</span></p><br>";
+            count4++;
+        }
+    }
+
+    function Windows() {
+        var image = document.getElementById('Image5');
+        if (count5 <= 0) {
+            ExtraHours += 0.5;
+            TotalTime = (TotalTime + 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            image.src = "/assets/img/1-green.png";
+            document.getElementById("border5").style.border = "3px solid #1D7A8C";
+            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Interior windows</span><span class='float-right'>30 Mins</span></p><br>";
+            count5++;
+        }
     }
 
     function SaveServiceDetail() {
-        $("#tab3").addClass("active-tab");
-        $("#tab2").removeClass("active-tab").addClass("tab");
-        $("#tabContent2").hide();
-        $("#tabContent4").hide();
-        $("#tabContent3").show();
+        if ($("#StartDate").val() == "" || $("#StartTime").val() == "" || $("#Hours").val() == "") {
+            alert("Date,Time and Hours are required Field.");
+        }
+        else {
+            $("#tab3").removeClass("disabled").addClass("active-tab");
+            $("#tab2").removeClass("active-tab").addClass("tab");
+            $("#tabContent2").hide();
+            $("#tabContent4").hide();
+            $("#tabContent3").show();
+            document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+            document.getElementById("Schedule").src = "/assets/img/schedule-white.png";
+            document.getElementById("Detail").src = "/assets/img/details.png";
+            document.getElementById("Payment").src = "/assets/img/payment-white.png";
 
-        $("#divAddress").html("Loading Address view...")
+            $("#Duration").html($("#StartDate").val() + " At " + $("#StartTime").val());
+            $("#Basic").html($("#Hours").val() + " Hrs");
+            $("#divAddress").html("Loading Address view...")
             .load('@Url.Action("GetAddress", "BookService")');
-    }
-    function SaveAddress() {
-        $("#tab4").addClass("active-tab");
-        $("#tab3").removeClass("active-tab").addClass("tab");
-        $("#tabContent3").hide();
-        $("#tabContent4").show();
-        $("#confirmZipCode").html($("#ZipCode").val());
+        }
     }
 
-    function CompleteBooking() {
-        debugger;
-        var booking = {};
-        booking.zipCode = $("#ZipCode").val();
-        booking.bookingStartTime = $("#StartDate").val() + " " + $("#StartTime").val();
-        booking.hours = $("#Hours").val();
-        booking.address1 = $("#Address1").val();
+    function AddForm() {
+        $("#HiddenForm").show();
+        $("#AddNewAddress").hide();
+        $("#Zip").val(($("#ZipCode").val()));
+    }
 
-        $.ajax({
-            url: '@Url.Action("SaveBooking", "BookService")',
-            type: 'post',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(booking),
-            success: function (resp) {
-                debugger;
-                $("#successMessage").show();
-                var html = "<br/><br/>Congratulations!<br/> Your Booking hass been confirmed for <br/><b>Service Date</b>: " + resp.Result.bookingStartTime + "<br/>" +
-                    "<b>Service Hours</b>: " + resp.Result.hours + "<br/>" +
-                    "<b>Zip Code</b>: " + resp.Result.zipCode + "<br/>";
-                $("#successMessage").html(html).fadeOut(7000);
-            },
-            error: function (err) {
-                debugger;
-                alert(err.responseText);
-            }
+    function RemoveForm() {
+        $("#HiddenForm").hide();
+        $("#AddNewAddress").show();
+    }
+
+    function ValidateForm() {
+        $("#AddressForm").submit(function (e) {
+            e.preventDefault();
+            var actionurl = '@Url.Action("AddAddress", "BookService")';
+
+            var formData = new FormData();
+            formData.append("UserId", $("#UserId").val());
+            formData.append("AddressLine1", $("#AddressLine1").val());
+            formData.append("AddressLine2", $("#AddressLine2").val());
+            formData.append("PostalCode", $("#Zip").val());
+            formData.append("City", $("#City").val());
+            formData.append("Mobile", $("#Mobile").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response) {
+                    $("#divAddress").html("Loading Address view...")
+            .load('@Url.Action("GetAddress", "BookService")');
+                    alert("Address Added Successfully.");
+                }
+                else {
+                    alert("All field are reaquired.");
+                }
+            });
         });
     }
+
+    function SaveAddress() {
+        if ($("input[type='radio'][name='Address']:checked").val() != null) {
+            $("#tab4").removeClass("disabled").addClass("active-tab");
+            $("#tab3").removeClass("active-tab").addClass("tab");
+            $("#tabContent3").hide();
+            $("#tabContent4").show();
+            document.getElementById("Setup").src = "/assets/img/setup-service-white.png";
+            document.getElementById("Schedule").src = "/assets/img/schedule-white.png";
+            document.getElementById("Detail").src = "/assets/img/details-white.png";
+            document.getElementById("Payment").src = "/assets/img/payment.png";
+            $("#confirmZipCode").html($("#ZipCode").val());
+        }
+        else {
+            alert("please Select Address From Address list.")
+        }
+    }
+
+    function SaveBooking() {
+
+        var actionurl = '@Url.Action("AddRequest", "BookService")';
+
+        var booking = {};
+
+        booking.ZipCode = $("#ZipCode").val();
+        booking.bookingStartTime = $("#StartDate").val() + " " + $("#StartTime").val();
+        booking.hours = parseFloat($("#Hours").val());
+        booking.UserId = $("#UserId").val();
+        booking.ServiceHourlyRate = HourlyRate;
+        booking.ExtraHours = ExtraHours;
+        booking.SubTotal = TotalTime;
+        booking.TotalCost = TotalPayment;
+        booking.Comments = $("#Comment").val();
+        booking.HasPets = $("#HavePets").val();
+
+        
+        $.ajax({
+            type: 'post',
+            url: actionurl,
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=Utf-8',
+            data: booking
+            }).done(function (response) {
+                if (response == "false") {
+                    alert("Error.");
+                }
+                else {
+                    if (count1 == 1) {
+
+                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("1") }, function (data) {
+
+                        });
+                    }
+                    else if (count2 == 1) {
+                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("2") }, function (data) {
+
+                        });
+                    }
+                    else if (count3 == 1) {
+                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("3") }, function (data) {
+
+                        });
+                    }
+                    else if (count4 == 1) {
+                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("4") }, function (data) {
+
+                        });
+                    }
+                    else if (count5 == 1) {
+                        $.post("/BookService/AddExtra", { ServiceId: parseInt(response.id), ExtraId: parseInt("5") }, function (data) {
+
+                        });
+                    }
+                    $.post("/BookService/AddServiceAddress", { ServiceId: parseInt(response.id), AddressId: parseInt($("input[type='radio'][name='Address']:checked").val()) }, function (data) {
+
+                    });
+                    alert("Success." + response.id);
+                }
+            });
+        //var booking = new Booking();
+        //var StartTime = $("#StartDate").val() + " " + $("#StartTime").val();
+        //booking.append("UserId", $("#UserId").val());
+        ////booking.append("ServiceStartDate", StartTime);
+        //booking.append("ZipCode", $("#ZipCode").val());
+        ////booking.append("ServiceHourlyRate", HourlyRate);
+        //booking.append("ServiceHours", $("#Basic").val());
+        //booking.append("SubTotal", $("#TotalTime").val());
+        //booking.append("TotalCost", $("#TotalPayment").val());
+        //booking.append("Comments", $("#Comment").val());
+        //booking.append("HasPets", $("#HavePets").val());
+
+        //$.post("/BookService/AddRequest", { RequestData: booking }, function (data) {
+        //    alert(data);
+        //});
+    }
+
+
 </script>

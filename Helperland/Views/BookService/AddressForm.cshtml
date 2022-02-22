@@ -1,0 +1,54 @@
+﻿@model Helperland.Models.UserAddress
+@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Http;
+<div>
+    <form id="AddressForm" method="post" asp-action="AddAddress" asp-controller="BookService">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="UserId" class="form-control" id="UserId" value="@Context.Session.GetInt32("userid")" hidden />
+
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <label asp-for="AddressLine1">Street name*</label>
+                <input asp-for="AddressLine1" class="form-control" id="AddressLine1" placeholder="Street name" />
+                <span asp-validation-for="AddressLine1" class="text-danger"></span>
+
+            </div>
+            <div class="col-md-6 col-12">
+                <label asp-for="AddressLine2">House number*</label>
+                <input asp-for="AddressLine2" class="form-control" id="AddressLine2" placeholder="House number" />
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row  mt-3">
+            <div class="col-md-6 col-12">
+                <label asp-for="PostalCode">Postal Code*</label>
+                <input asp-for="PostalCode" name="PostalCode" class="form-control" id="Zip" readonly />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 col-12">
+                <label asp-for="City">City*</label>
+                <input asp-for="City" class="form-control" id="City" placeholder="Surat">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 col-12">
+                <label asp-for="Mobile">Phone number*</label>
+                <div class="input-group">
+                    <span class="input-group-text">+49</span>
+                    <input asp-for="Mobile" class="form-control" id="Mobile" placeholder="Phone No">
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="float-left mt-3 ml-1">
+            <button class="btn btn-success rounded-pill px-4" onclick="ValidateForm();">Save</button>
+        </div>
+    </form>
+    <div class="float-left mt-3">
+        <button class="btn btn-outline-danger rounded-pill ml-2 px-4" onclick="RemoveForm();">Cancel</button>
+    </div>
+</div>
+

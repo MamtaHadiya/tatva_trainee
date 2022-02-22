@@ -36,7 +36,7 @@ namespace Helperland.Models
         public DateTime ModifiedDate { get; set; }
         public int? ModifiedBy { get; set; }
         public decimal? RefundedAmount { get; set; }
-        public decimal Distance { get; set; }
+        public decimal? Distance { get; set; }
         public bool? HasIssue { get; set; }
         public bool? PaymentDone { get; set; }
         public Guid? RecordVersion { get; set; }

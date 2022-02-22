@@ -16,7 +16,7 @@
                 <form asp-controller="Account" asp-action="UpdatePass" method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <span class="text-danger">@ViewBag.error</span>
-                    <input asp-for="Email" class="form-control mt-3" value="@ViewBag.Email" name="Email" />
+                    <input asp-for="Email" class="form-control mt-3" value="@ViewBag.Email" name="Email" readonly/>
 
                     <input asp-for="Password" class="form-control mt-3" placeholder="New password">
                     <span asp-validation-for="Password" class="text-danger"></span>
