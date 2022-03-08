@@ -125,7 +125,8 @@ namespace Helperland.Controllers
                                    userlist.UserId,
                                    userlist.FirstName,
                                    userlist.Email,
-                                   userlist.Password
+                                   userlist.Password,
+                                   userlist.UserTypeId
 
                                }).ToList();
                 if (details.FirstOrDefault() != null)
@@ -134,7 +135,15 @@ namespace Helperland.Controllers
                     HttpContext.Session.SetString("username", objUser.Username);
                     HttpContext.Session.SetInt32("userid", details.Select(x => x.UserId).FirstOrDefault());
                     ModelState.Clear();
-                    return View("Success");
+                    if(details.Select(x => x.UserTypeId).FirstOrDefault() == 1)
+                    {
+                        ViewBag.Firstname = details.Select(x => x.FirstName).FirstOrDefault();
+                        return RedirectToAction("Index", "Customer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Helperland");
+                    }
                 }
                 else
                 {

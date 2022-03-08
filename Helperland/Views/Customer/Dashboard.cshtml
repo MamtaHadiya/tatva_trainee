@@ -1,0 +1,158 @@
+﻿@model IEnumerable<Helperland.Models.ServiceRequest>
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+
+            searching: false,
+            info: true,
+            dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+
+            "sPaginationType": "full_numbers",
+            language: {
+                paginate: {
+                    first: '<img src="assets/img/first-page.png">',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
+                }
+            }
+        });
+
+    });
+
+
+</script>
+
+<h4 class="float-left">Current Service Requests</h4>
+<button class="btn rounded-pill px-3 round_btn mb-2 float-right" asp-controller="BookService" asp-action="Index">Add New Service Request</button>
+<table id="example" class="table">
+    <thead class="table_head">
+        <tr>
+            <th>Service Id </th>
+            <th>Service Date </th>
+            <th>Service Provider</th>
+            <th>Payment </th>
+            <th>Actions </th>
+        </tr>
+    </thead>
+    <tbody class="table_body">
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td onclick="GetServiceData(@request.ServiceRequestId);">@request.ServiceRequestId</td>
+                <td onclick="GetServiceData(@request.ServiceRequestId);">
+                    <img src="~/assets/img/calendar2.png"> @request.ServiceStartDate.ToShortDateString()
+                    <br /><img src="~/assets/img/layer-14.png"> @request.ServiceStartDate.ToShortTimeString()
+                </td>
+                <td onclick="GetServiceData(@request.ServiceRequestId);">@request.ServiceProviderId</td>
+                <td onclick="GetServiceData(@request.ServiceRequestId);">@request.TotalCost</td>
+                <td><button class="btn rounded-pill px-3 round_btn" onclick="RescheduleService(@request.ServiceRequestId);">Reschedule</button>  <button class="cancel_btn" onclick="CancelService(@request.ServiceRequestId);">Cancel</button></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="ServiceDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                Service details
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            <div class="modal-body py-0 border-0">
+                <div id="ServiceData" class="font-weight-bold"></div>
+                <hr />
+                <p>Service Id: <span id="ServiceId"></span></p>
+
+                <p>Extra: <span id="Extra"></span></p>
+                <p>Net Amount: <span id="TotalCost"></span></p>
+                <hr />
+                <p>Service Address: <span id="ServiceAddress"></span></p>
+                <p>Billing Address: Same as Service Address</p>
+                <p>Phone: <span id="Phone"></span></p>
+                <p>Email: <span id="Email"></span></p>
+                <hr />
+                <p>Comments: <span id="Comments"></span></p>
+                <hr />
+            </div>
+            <div class="pl-2 pb-2">
+                <button class="btn rounded-pill px-3 round_btn" id="Reshedule_btn" value="" onclick="RescheduleService(this.value);">Reshedule</button>  <button class="cancel_btn" id="cancel_btn" onclick="CancelService(ServiceId);">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RescheduleModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-sm">
+            <div class="modal-header border-0">
+                <h5><b>Reschedule Service Request</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Select New Date And Time</p>
+                <form>
+                    <div class="row">
+                        <div class="col-md-7 col-12">
+                            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" required />
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <select class="form-control" id="StartTime" name="StartTime" onblur="AddDuration();" required>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <script language="javascript">
+                        var today = new Date();
+                        var dd = String(today.getDate() + 1).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0');
+                        var yyyy = today.getFullYear();
+
+                        today = yyyy + '-' + mm + '-' + dd;
+                        $('#StartDate').attr('min', today);
+                    </script>
+                    <span class="text-danger" id="DateTime"></span>
+                </form>
+            </div>
+            <div class="px-2 pb-2">
+                <button value="" class="form-control rounded_btn mt-3" id="Update_btn" onclick="UpdateService(this.value);">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="CancelModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-sm">
+            <div class="modal-header border-0">
+                <h5><b>Cancel Service Request</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Why you want to cancel Service Request?</p>
+                <form>
+                    <textarea class="form-control" rows="3" id="CancelReason"></textarea>
+                </form>
+            </div>
+            <div class="px-2 pb-2">
+                <button value="" id="Cancel_btn" class="form-control rounded_btn mt-3" onclick="CancelClick(this.value);">Cancel Now</button>
+            </div>
+        </div>
+    </div>
+</div>

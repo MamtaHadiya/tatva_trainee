@@ -1,0 +1,262 @@
+﻿@{
+    ViewData["Title"] = "Customer Page";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    .left_border {
+        border-left: 2px solid #ffffff;
+    }
+
+    .welcome_name {
+        margin-top: 70px;
+        width: 1560px;
+        height: 119px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+    }
+
+    .menu_content {
+        width: 1560px;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .sidebar {
+        margin: 0;
+        padding: 0;
+        width: 262px;
+        height: 700px;
+        margin: 0px 32px 30px 210px;
+        background: #1D7A8C 0% 0% no-repeat padding-box;
+        position: absolute;
+        overflow: hidden;
+    }
+
+     .sidebar a {
+            cursor: pointer;
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid #ffffff;
+            padding: 15px;
+            text-align: left;
+        }
+
+    .sidebar a.active-link {
+                background-color: #204060;
+                color: #ffffff;
+            }
+
+    .sidebar a:hover:not(.active-link) {
+                background-color: #204060;
+                color: #ffffff;
+            }
+
+    .content {
+        width: 845px;
+        height: 700px;
+        margin-top: 31px;
+        margin-left: 503px;
+    }
+
+    .table_head {
+        width: 845px;
+        height: 49px;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+    }
+
+    .table_body tr {
+        height: 70px;
+    }
+
+    tr:hover {
+        cursor: pointer;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+    }
+
+    .cancel_btn {
+        width: 80px;
+        height: 34px;
+        background: #FF6B6B 0% 0% no-repeat padding-box;
+        border-radius: 17px;
+    }
+
+    .rate_sp_btn {
+        width: 70px;
+        height: 34px;
+        background: #6DA9B5 0% 0% no-repeat padding-box;
+        border-radius: 17px;
+    }
+
+    .round_btn {
+        background: #1D7A8C 0% 0% no-repeat padding-box;
+        color: #fff;
+        border-radius: 17px;
+    }
+
+    .round_btn:hover {
+            background-color: #204060;
+            color: #ffffff;
+        }
+
+    .rounded_btn {
+        height: 40px;
+        background: #29626D 0% 0% no-repeat padding-box;
+        border: 1px solid #FFFFFF;
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+    }
+
+    #TotalCost {
+        font-size: 22px;
+        color: #1D7A8C;
+        margin-left: 40px;
+    }
+</style>
+<div class="welcome_name">
+    <center><h2>Welcome,<b> @ViewBag.Firstname </b></h2></center>
+</div>
+<section>
+    <div class="menu_content">
+        <div class="sidebar">
+            <a id="Dashboard" class="link active-link" onclick="DashboardClick()"> Dashboard</a>
+            <a id="History" class="link" onclick="HistoryClick()"> Service History</a>
+            <a> Service Schedule</a>
+            <a> Favourite Pros</a>
+            <a> Invoices</a>
+            <a> Notifications</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="content">
+            <div id="DashboardContent">
+
+            </div>
+            <div id="HistoryContent" style="display:none">
+
+            </div>
+            <div id="MySetting" style="display:none">
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    $(document).ready(function () {
+        $("#DashboardContent").html("Loading Dashboard view...").load('@Url.Action("Dashboard", "Customer")');
+    });
+        function DashboardClick() {
+        $("#Dashboard").addClass("active-link");
+        $("#History").removeClass("active-link").addClass("link");
+
+        $("#HistoryContent").hide();
+        $("#MySetting").hide();
+        $("#DashboardContent").show().load('@Url.Action("Dashboard", "Customer")');
+        }
+        function HistoryClick() {
+        $("#History").addClass("active-link");
+        $("#Dashboard").removeClass("active-link").addClass("link");
+
+        $("#DashboardContent").hide();
+        $("#MySetting").hide();
+        $("#HistoryContent").show().load('@Url.Action("ServiceHistory", "Customer")');
+        }
+        function MySettingClick() {
+        $("#History").removeClass("active-link").addClass("link");
+        $("#Dashboard").removeClass("active-link").addClass("link");
+
+        $("#DashboardContent").hide();
+        $("#HistoryContent").hide();
+        $("#MySetting").show().load('@Url.Action("MySetting", "Customer")');
+        }
+
+        function RescheduleService(id) {
+        $("#ServiceDetails").modal('hide');
+        $("#Update_btn").prop('value', id);
+        $("#RescheduleModel").modal('show');
+        }
+        function CancelService(id) {
+        $("#ServiceDetails").modal('hide');
+        $("#Cancel_btn").prop('value', id);
+        $("#CancelModel").modal('show');
+        }
+
+        function GetServiceData(id) {
+        $.post("/Customer/Service", { Id: parseInt(id) }, function (data) {
+        $("#ServiceData").html(data.servicedate + "<br>Duration: " + parseFloat(data.duration) + " hrs.");
+        $("#ServiceId").html(data.serviceid);
+        $("#Extra").html(data.extra);
+        $("#TotalCost").html(parseFloat(data.total) + "$");
+        $("#ServiceAddress").html(data.addresses);
+        $("#Phone").html(data.phone);
+        $("#Email").html(data.email);
+        $("#Comments").html(data.cmnt);
+        $("#Reshedule_btn").prop('value', data.serviceid);
+        $("#Cancel_btn").prop('value', data.serviceid);
+        $("#ServiceDetails").modal('show');
+        });
+        }
+
+        function UpdateService(val) {
+        if ($("#StartDate").val() == "" || $("#StartTime").val() == "") {
+        alert("Please Select Date and Time Value.");
+        }
+        else {
+        var ServiceStart = $("#StartDate").val() + " " + $("#StartTime").val();
+        $.post("/Customer/ServiceUpdate", { Id: parseInt(val), StartDateTime: ServiceStart }, function (data) {
+        if (data) {
+        $("#RescheduleModel").modal('hide');
+        DashboardClick();
+        }
+        });
+        }
+        }
+
+        function CancelClick(val) {
+        $.post("/Customer/ServiceCancel", { Id: parseInt(val) }, function (data) {
+            if (data) {
+                alert("Service Cancelled successfully.");
+                $("#CancelModel").modal('hide');
+                window.location.href = '/Customer/Index';
+            }
+        });
+    }
+
+    function GetHistoryeData(id) {
+        $.post("/Customer/Service", { Id: parseInt(id) }, function (data) {
+            $("#HServiceData").html(data.servicedate + "<br>Duration: " + parseFloat(data.duration) + " hrs.");
+            $("#HServiceId").html(data.serviceid);
+            $("#HExtra").html(data.extra);
+            $("#HTotalCost").html(parseFloat(data.total) + "$");
+            $("#HServiceAddress").html(data.addresses);
+            $("#HPhone").html(data.phone);
+            $("#HEmail").html(data.email);
+            $("#HComments").html(data.cmnt);
+            $("#ServiceHistoryModel").modal('show');
+        });
+    }
+
+    function RateSpclicked(id) {
+        $("#RateSPModel").modal('show');
+    }
+    
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

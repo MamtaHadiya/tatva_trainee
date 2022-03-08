@@ -16,6 +16,7 @@ namespace Helperland.Controllers
     public class BookServiceController : Controller
     {
         private readonly Data.ApplicationDbContext _db;
+        private string zipcode;
 
         public BookServiceController(ApplicationDbContext db)
         {
@@ -34,6 +35,7 @@ namespace Helperland.Controllers
             {
                 if (ZipCode != null)
                 {
+                    zipcode = ZipCode;
                     var data = _db.Zipcodes.Where(x => x.ZipcodeValue.Equals(ZipCode)).FirstOrDefault();
                     var data2 = _db.Users.Where(x => x.ZipCode.Equals(ZipCode) && x.UserTypeId.Equals(2)).FirstOrDefault();
                     if (data != null && data2 != null)
@@ -54,7 +56,7 @@ namespace Helperland.Controllers
         public IActionResult GetAddress()
         {
             System.Threading.Thread.Sleep(2000);
-            return View(_db.UserAddresses.ToList());
+            return View(_db.UserAddresses.Where(x => x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
             //Address address = new Address();
             //address.Address1 = "Hedge End";
             //return View(address);
@@ -83,6 +85,7 @@ namespace Helperland.Controllers
                     ServiceStartDate = booking.ServiceStartDate,
                     ZipCode = booking.ZipCode,
                     ServiceHourlyRate = booking.ServiceHourlyRate,
+                    ServiceHours = booking.Hours,
                     ExtraHours = booking.ExtraHours,
                     SubTotal = booking.SubTotal,
                     TotalCost = booking.TotalCost,

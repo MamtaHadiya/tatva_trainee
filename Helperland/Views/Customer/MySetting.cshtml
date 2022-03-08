@@ -1,0 +1,245 @@
+﻿@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Http;
+<style>
+    .active-tab {
+        color: #1D7A8C !important;
+        border-bottom: 2px solid #1D7A8C !important;
+        font-weight: bold;
+    }
+
+    .tab {
+        border-bottom: 2px solid lightgray;
+        cursor: pointer;
+        width: 180px;
+        height: 67px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+    .HiddenForm {
+        display: none;
+        border: 2px solid lightgray;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+        padding: 15px;
+        padding-bottom: 70px;
+    }
+
+</style>
+<table class="tabs">
+    <tr>
+        <td>
+            <div id="tab1" class="tab active-tab" onclick="Tab1Click()">My Details</div>
+        </td>
+        <td>
+            <div id="tab2" class="tab disabled" onclick="Tab2Click()">My Address</div>
+        </td>
+        <td>
+            <div id="tab3" class="tab disabled" onclick="Tab3Click()">Change Password</div>
+        </td>
+    </tr>
+</table>
+
+<div id="tabContent">
+    <br /><br />
+    <div id="tabContent1">
+
+    </div>
+    <div id="tabContent2" style="display:none;">
+    </div>
+
+    <div id="tabContent3" style="display:none;">
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#tabContent1").show().load('@Url.Action("MyDetails", "Customer")');
+    });
+    function Tab1Click() {
+        $("#tab1").addClass("active-tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent1").show().load('@Url.Action("MyDetails", "Customer")');
+    }
+    function Tab2Click() {
+        $("#tab2").addClass("active-tab");
+        $("#tab1").removeClass("active-tab").addClass("tab");
+        $("#tab3").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent1").hide();
+        $("#tabContent3").hide();
+        $("#tabContent2").show().load('@Url.Action("GetAddress", "Customer")');
+    }
+    function Tab3Click() {
+        $("#tab3").addClass("active-tab");
+        $("#tab1").removeClass("active-tab").addClass("tab");
+        $("#tab2").removeClass("active-tab").addClass("tab");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").show().load('@Url.Action("ChangePassword", "Customer")');
+    }
+
+
+    function EditBtnClick(id) {
+        $.post("/Customer/EditAddress", { Id: parseInt(id) }, function (data) {
+            $("#id").val(data.addressId);
+            $("#UserId").val(data.userId);
+            $("#AddressLine1").val(data.addressLine1);
+            $("#AddressLine2").val(data.addressLine2);
+            $("#Zip").val(data.postalCode);
+            $("#City").val(data.city);
+            $("#PhoneNo").val(data.mobile);
+            $("#ErrorMsgFromAddress").empty();
+            $("#EditAddressModel").modal('show');
+        });
+
+    }
+
+    function SubmitEditedAddress() {
+        $("#EditAddressForm").submit(function (e) {
+            e.preventDefault();
+            var actionurl = '@Url.Action("ChangeAddressData", "Customer")';
+
+            var formDatas = new FormData();
+            formDatas.append("AddressId", $("#id").val());
+            formDatas.append("UserId", $("#UserId").val());
+            formDatas.append("AddressLine1", $("#AddressLine1").val());
+            formDatas.append("AddressLine2", $("#AddressLine2").val());
+            formDatas.append("City", $("#City").val());
+            formDatas.append("PostalCode", $("#Zip").val());
+            formDatas.append("Mobile", $("#PhoneNo").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formDatas,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response == true) {
+                    alert("Address Changed Successfully.");
+                    $("#EditAddressModel").modal('hide');
+                    Tab3Click();
+                }
+                else if (response == false) {
+                    $("#ErrorMsg").html("Something is wrong in Address");
+                }
+                else {
+                    $("#ErrorMsgFromAddress").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorMsgFromAddress").append("<li>" + response[i] + "</li>");
+                    }
+
+                }
+            });
+        });
+
+    }
+
+    function AddForm() {
+        $("#HiddenForm").show();
+        $("#AddNewAddress").hide();
+    }
+
+    function RemoveForm() {
+        $("#HiddenForm").hide();
+        $("#AddNewAddress").show();
+    }
+
+function ValidateForm() {
+        $("#AddressForm").submit(function (e) {
+            e.preventDefault();
+            var actionurl = '@Url.Action("AddAddress", "Customer")';
+
+            var formData = new FormData();
+            formData.append("UserId", $("#FUserId").val());
+            formData.append("AddressLine1", $("#FAddressLine1").val());
+            formData.append("AddressLine2", $("#FAddressLine2").val());
+            formData.append("PostalCode", $("#FZip").val());
+            formData.append("City", $("#FCity").val());
+            formData.append("Mobile", $("#FMobile").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response == true) {
+                    alert("Address Added Successfully.");
+                    $("#HiddenForm").hide();
+                    $("#AddNewAddress").show();
+                    Tab2Click();
+                }
+                else {
+                    $("#ErrorFromAddress").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorFromAddress").append("<li>" + response[i] + "</li>");
+                    }
+                }
+            });
+        });
+    }
+
+
+    function DeleteBtnClick(id) {
+        var result = confirm("Want to delete?");
+        if (result) {
+            $.post("/Customer/DeleteAddress", { Id: parseInt(id) }, function (data) {
+                if (data) {
+                    alert("Address Deleted Successfully.");
+                    Tab3Click();
+                }
+            });
+        }
+    }
+
+    function PasswordChangeClick() {
+
+        $("#ChangePassForm").submit(function (e) {
+            e.preventDefault();
+            var actionurl = '@Url.Action("ChangePassword", "Customer")';
+
+            var formData = new FormData();
+            formData.append("OldPassword", $("#OldPassword").val());
+            formData.append("Password", $("#Pass").val());
+            formData.append("Confirmpwd", $("#Cpass").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response == true) {
+                    alert("successfully password Changed.");
+                    Tab1Click();
+                }
+                else if (response == false) {
+                    $("#ErrorMsg").html("OldPassword Doesn't Match.Please Enter Again");
+                }
+                else {
+                    $("#ErrorMsg").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorMsg").append("<li>" + response[i] + "</li>");
+                    }
+
+                }
+            });
+        });
+    }
+
+</script>

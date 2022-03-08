@@ -166,3 +166,16 @@ C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\Index.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\GetAddress.cshtml.g.cs
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\BookService\AddressForm.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Index.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Dashboard.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ServiceHistory.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\GetServiceDetails.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\MySetting.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\GetAddress.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ChangePassword.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\MyDetails.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\AddressForm.cshtml.g.cs

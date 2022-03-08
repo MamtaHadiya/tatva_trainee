@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Http;
+<div>
+    <form id="AddressForm" method="post">
+        <ul class="pl-4">
+            <span id="ErrorFromAddress" class="text-danger"></span>
+        </ul>
+        <input class="form-control" id="FUserId" value="@Context.Session.GetInt32("userid")" hidden />
+
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <label>Street name*</label>
+                <input class="form-control" id="FAddressLine1" placeholder="Street name" />
+
+            </div>
+            <div class="col-md-6 col-12">
+                <label>House number*</label>
+                <input class="form-control" id="FAddressLine2" placeholder="House number" />
+            </div>
+        </div>
+        <div class="row  mt-3">
+            <div class="col-md-6 col-12">
+                <label>Postal Code*</label>
+                <input name="PostalCode" class="form-control" id="FZip" placeholder="Postal Code" />
+            </div>
+            <div class="col-md-6 col-12">
+                <label>City*</label>
+                <input class="form-control" id="FCity" placeholder="Surat">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 col-12">
+                <label>Phone number*</label>
+                <div class="input-group">
+                    <span class="input-group-text">+49</span>
+                    <input class="form-control" id="FMobile" placeholder="Phone No">
+                </div>
+            </div>
+        </div>
+        <div class="float-left mt-3 ml-1">
+            <button class="btn btn-success rounded-pill px-4" onclick="ValidateForm();">Save</button>
+        </div>
+    </form>
+    <div class="float-left mt-3">
+        <button class="btn btn-outline-danger rounded-pill ml-2 px-4" onclick="RemoveForm();">Cancel</button>
+    </div>
+</div>
+

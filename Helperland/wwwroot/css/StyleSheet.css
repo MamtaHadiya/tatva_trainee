@@ -377,20 +377,19 @@ ul.link_page li {
 
 .menu_content {
     width: 1560px;
-    height: auto;
+    height: 380px;
 }
 
 .sidebar {
     margin: 0;
     padding: 0;
     width: 262px;
-    height: 712px;
+    height: 350px;
     margin: 0px 32px 0px 210px;
     background: #1D7A8C 0% 0% no-repeat padding-box;
     position: absolute;
     overflow: auto;
 }
-
     .sidebar a {
         display: block;
         color: #ffffff;

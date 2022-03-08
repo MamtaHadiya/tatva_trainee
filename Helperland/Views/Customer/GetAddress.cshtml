@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Helperland.Models.UserAddress>
+@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Http;
+
+<table class="table">
+    <thead class="table_head">
+        <tr>
+            <th>Addresses</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+    <tbody class="table_body">
+        @foreach (var item in Model)
+        {
+            <tr class="pl-3">
+                <td>
+                    <b>Address: </b>@Html.DisplayFor(modelItem => item.AddressLine1)
+                    @Html.DisplayFor(modelItem => item.AddressLine2),@Html.DisplayFor(modelItem => item.City) @Html.DisplayFor(modelItem => item.PostalCode)<br />
+                    <b>Phone number: </b>@Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="EditBtnClick(@item.AddressId);"><span class="glyphicon glyphicon-edit"></span>Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="DeleteBtnClick(@item.AddressId);"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn rounded-pill px-3 round_btn" id="AddNewAddress" onclick="AddForm();"> Add New Address</button>
+<div id="HiddenForm" class="HiddenForm">
+    @await Html.PartialAsync("AddressForm.cshtml")
+</div>
+
+<div class="modal fade" id="EditAddressModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h2 class="font-weight-bold">Edit Address</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            <form id="EditAddressForm" method="post">
+                <ul class="pl-4">
+                    <span id="ErrorMsgFromAddress" class="text-danger"></span>
+                </ul>
+                <div class="modal-body py-0 border-0">
+                    <div class="row">
+                        <input type="hidden" id="id" />
+                        <input type="hidden" id="UserId" value="@Context.Session.GetInt32("userid")" />
+                        <div class="col-md-6 col-12">
+                            <label>Street name*</label>
+                            <input class="form-control" id="AddressLine1" />
+
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label>House number*</label>
+                            <input class="form-control" id="AddressLine2" />
+                        </div>
+                    </div>
+                    <div class="row  mt-3">
+                        <div class="col-md-6 col-12">
+                            <label>Postal Code*</label>
+                            <input type="number" name="PostalCode" class="form-control" id="Zip" />
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label>City*</label>
+                            <input class="form-control" id="City">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-12">
+                            <label>Phone number*</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+49</span>
+                                <input type="number" class="form-control" id="PhoneNo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-2 pb-2">
+                    <button value="Edit" class="form-control rounded_btn mt-3" onclick="SubmitEditedAddress();">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

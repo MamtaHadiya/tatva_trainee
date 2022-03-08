@@ -545,6 +545,8 @@
                     $("#divAddress").html("Loading Address view...")
             .load('@Url.Action("GetAddress", "BookService")');
                     alert("Address Added Successfully.");
+                    $("#HiddenForm").hide();
+                    $("#AddNewAddress").show();
                 }
                 else {
                     alert("All field are reaquired.");
@@ -587,7 +589,7 @@
         booking.Comments = $("#Comment").val();
         booking.HasPets = $("#HavePets").val();
 
-        
+
         $.ajax({
             type: 'post',
             url: actionurl,
@@ -609,7 +611,7 @@
                             $("#ServiceId").html(response.id);
                             $("#SuccessModel").modal('show');
                         }
-                    }); 
+                    });
                 }
             });
     }

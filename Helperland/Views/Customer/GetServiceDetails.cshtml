@@ -1,0 +1,42 @@
+﻿@model dynamic
+@{
+    Layout = null;
+}
+
+
+<div class="modal fade" id="ServiceDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                Service details
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            <div class="modal-body my-2 border-0">
+                <p><b>Service Id: <span id="ServiceId"></span></b></p>
+
+                <p>
+                    <b>Extra:</b>
+                    @foreach (ServiceRequestExtra requestExtra in Model.ServiceRequests)
+                    {
+                        <span>@requestExtra.ServiceRequestExtraId ,</span>
+                    }
+                </p>
+            <p><b>Net Amount: <span id="TotalCost"></span></b></p>
+                <hr />
+                <p><b>Service Address: </b></p>
+                <p><b>Billing Address: </b></p>
+                <p><b>Phone: </b></p>
+                <p><b>Email: </b></p>
+                <hr />
+                <p><b>Comments: </b></p>
+                <hr />
+            </div>
+            <div class="modal-footer border-0">
+                <button class="btn rounded-pill px-3 round_btn">Reshedule</button>  <button class="cancel_btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model Helperland.Models.User
+@{
+    Layout = null;
+}
+
+<form method="post" action="@Url.Action("MyDetails")">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="UserId" />
+        <div class="col-md-4 col-12">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 col-12">
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 col-12">
+            <label asp-for="Email">Email Address</label>
+            <input asp-for="Email" class="form-control" readonly/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 col-12">
+            <label asp-for="Mobile">Mobile Number</label>
+            <div class="input-group">
+                <span class="input-group-text">+49</span>
+                <input asp-for="Mobile" type="number" class="form-control" name="mobile" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4 col-12">
+            <label asp-for="DateOfBirth">Date of Birth</label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="Password" />
+        <input type="hidden" asp-for="Confirmpwd" />
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 col-12">
+            <label asp-for="LanguageId">My Prefered Langauge</label>
+            <select asp-for="LanguageId" class="form-control">
+                <option value="1">English</option>
+                <option value="2">Hindi</option>
+                <option value="3">Gujarati</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="rounded_btn px-3 mt-3" />
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
