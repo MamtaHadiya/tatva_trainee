@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MyRatings').DataTable({
+
+            pageLength: 0,
+            lengthMenu: [6, 10, 20, 50],
+            searching: false,
+            info: true,
+            dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+
+            "sPaginationType": "full_numbers",
+            language: {
+                paginate: {
+                    first: '<img src="assets/img/first-page.png">',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
+                }
+            }
+        });
+
+    });
+
+
+</script>
+
+<p class="float-left">Ratings</p>
+<button class="btn rounded-pill px-3 round_btn mb-2 float-right">Sorting</button>
+<table id="MyRatings" class="table">
+    <thead class="table_head">
+        <tr>
+            <th>Customer data </th>
+            <th>Service Date </th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody class="table_body">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td onclick="Hrowclicked(@item.serviceRequest.ServiceRequestId);">@item.rating.RatingId <br /><b>@item.user.FirstName @item.user.LastName</b></td>
+                <td onclick="Hrowclicked(@item.serviceRequest.ServiceRequestId);">
+                    <img src="~/assets/img/calendar2.png"><b> @item.serviceRequest.ServiceStartDate.ToShortDateString()</b>
+                    <br /><img src="~/assets/img/layer-14.png"> @item.serviceRequest.ServiceStartDate.ToShortTimeString() - @item.serviceRequest.ServiceStartDate.AddHours(Convert.ToDouble(item.serviceRequest.SubTotal)).ToShortTimeString()
+                </td>
+                <td onclick="Hrowclicked(@item.serviceRequest.ServiceRequestId);">
+                    <b>Ratings </b><br />
+                    <span class="stars" data-rating="@item.rating.Ratings" data-num-stars="5"></span>
+                    @item.rating.Ratings
+                    <script>
+                        $(function () {
+                            $('.stars').stars();
+                        });
+
+                        $.fn.stars = function () {
+                            return $(this).each(function () {
+                                var rating = $(this).data("rating");
+                                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                $(this).html(fullStar + halfStar + noStar);
+                            });
+                        }
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>Comment: </b><br />
+                    @item.rating.Comments
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="HServiceDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                Service details
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            <div class="modal-body py-0 border-0">
+                <div id="HServiceData" class="font-weight-bold"></div>
+                <hr />
+                <p>Service Id: <span id="HServiceId"></span></p>
+
+                <p>Extra: <span id="HExtra"></span></p>
+                <p>Net Amount: <span id="HTotalCost"></span></p>
+                <hr />
+                <p>Customer Name: <span id="HCustomerName"></span></p>
+                <p>Service Address: <span id="HServiceAddress"></span></p>
+                <p>Distance: <span id="HDistance"></span></p>
+                <hr />
+                <p>Comments: <span id="HComments"></span></p>
+                <hr />
+            </div>
+            <div class="pl-2 pb-2">
+                <button class="btn rounded-pill px-3 round_btn" id="Accept_btn" value="" onclick="RescheduleService(this.value);">Reshedule</button>
+            </div>
+        </div>
+    </div>
+</div>

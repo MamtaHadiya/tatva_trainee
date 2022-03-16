@@ -22,6 +22,11 @@
         });
 
     });
+    $(function () {
+        $('.Ontime').rating();
+        $('.Friendaly').rating();
+        $('.Quality').rating();
+    });
     function GetStatus(id) {
         if (id == 1) {
             $("#Status_btn").html("Completed");
@@ -30,17 +35,17 @@
             $("#Status_btn").html("Canceled");
         }
     }
-
 </script>
 
-<h4>Service History</h4>
+<h4 class="float-left">Service History</h4>
+<a class="btn rounded-pill px-3 round_btn mb-2 float-right text-light">Export</a>
 <table id="HistoryTable" class="table">
     <thead class="table_head">
         <tr>
             <th>Service Id</th>
             <th>Service date</th>
             <th>Service Provider</th>
-            <th>Payment</th>
+            <th>Payment <img src="~/assets/img/sort.png" /></th>
             <th>Status</th>
             <th>Rate SP</th>
         </tr>
@@ -53,37 +58,78 @@
                 <td onclick="GetHistoryeData(@item.ServiceRequestId);">@Html.DisplayFor(modelItem => item.ServiceRequestId)</td>
                 <td onclick="GetHistoryeData(@item.ServiceRequestId);">
                     <img src="~/assets/img/calendar2.png"> @item.ServiceStartDate.ToShortDateString()
-                    <br /><img src="~/assets/img/layer-14.png"> @item.ServiceStartDate.ToShortTimeString()
+                    <br /><img src="~/assets/img/layer-14.png"> @item.ServiceStartDate.ToShortTimeString() - @item.ServiceStartDate.AddHours(Convert.ToDouble(item.SubTotal)).ToShortTimeString()
                 </td>
-
+                
                 <td onclick="GetHistoryeData(@item.ServiceRequestId);">
-                    <script>
-                        $.get("/Customer/ServiceProviderName", { Id: parseInt(@item.ServiceProviderId) }, function (data) {
-                            console.log(data);
-                        });
-                    </script>
-                    @item.ServiceProviderId
-                </td>
-                <td onclick="GetHistoryeData(@item.ServiceRequestId);">@Html.DisplayFor(modelItem => item.TotalCost) $</td>
-                <td>
                     @{
-                        if (item.Status == 1)
+                        if (item.ServiceProviderId != null)
                         {
-                            <button class="btn btn-success">Comleted</button>
-                        }
-                        else if (item.Status == 2)
-                        {
-                            <button class="btn btn-danger">Canceled</button>
+                            <div class="row">
+                                <div class="col-md-3 col-12">
+                                    <div class="avtar_image">
+                                        <img src="~/assets/img/@item.ServiceProvider.UserProfilePicture" class="center_img">
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-12">
+                                    <p class="float-left">
+                                        @item.ServiceProvider.FirstName @item.ServiceProvider.LastName<br />
+                                        <span id="@item.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>3.3
+                                    </p>
+                                    <script>
+                                        $(function () {
+                                            $("#"+@item.ServiceRequestId).stars(3.3);
+                                        });
+
+                                        $.fn.stars = function (rating) {
+                                            return $(this).each(function () {
+                                                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                                $(this).html(fullStar + halfStar + noStar);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+
+                            </div>
                         }
                         else
                         {
-                            <button class="btn btn-danger">Undefined</button>
+                            <p></p>
                         }
                     }
                 </td>
-                <td><button class="rate_sp_btn" onclick="RateSpclicked(@item.ServiceRequestId);">Rate Sp</button></td>
-            </tr>
-        }
+            <td onclick="GetHistoryeData(@item.ServiceRequestId);">@Html.DisplayFor(modelItem => item.TotalCost) $</td>
+            <td>
+                @{
+                    if (item.Status == 1)
+                    {
+                        <button class="btn btn-success">Completed</button>
+                    }
+                    else if (item.Status == 2)
+                    {
+                        <button class="btn btn-danger">Canceled</button>
+                    }
+                    else if (item.Status == 3)
+                    {
+                        <button class="btn btn-primary">Accepted</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-warning">Booked</button>
+                    }
+                }
+            </td>
+            <td>
+                @if (item.ServiceProviderId != null &&  item.Status == 1)
+                {
+                    <button class="rate_sp_btn" onclick="RateSpclicked(@item.ServiceRequestId);">Rate Sp</button>
+
+                }
+            </td>        
+        </tr>
+    }
     </tbody>
 </table>
 
@@ -121,22 +167,81 @@
 
 <div class="modal fade" id="RateSPModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modal-sm">
+        <div class="modal-content">
             <div class="modal-header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2 col-12">
+                        <div class="avtar_image">
+                            <img src="" class="center_img" id="spPhoto">
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-12">
+                        <p class="float-left">
+                            <span id="spname"></span><br />
+                            <span id="staars" data-rating="3.3" data-num-stars="5"></span>
+                            <span id="Starrating"></span>
+                        </p>
+                    </div>
+
+                </div>
                 <h5>Rate your service provider</h5>
                 <hr />
                 <form>
+                    <ul id="ErrorFromRateSp" style="display:none;">
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>On time Arrival</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Ontime">
+                                <input type="radio" name="RateOnTime" class="rating" value="1" />
+                                <input type="radio" name="RateOnTime" class="rating" value="2" />
+                                <input type="radio" name="RateOnTime" class="rating" value="3" />
+                                <input type="radio" name="RateOnTime" class="rating" value="4" />
+                                <input type="radio" name="RateOnTime" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>Friendaly</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Friendaly">
+                                <input type="radio" name="RateFriendaly" class="rating" value="1" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="2" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="3" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="4" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>Quality of Service</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Quality">
+                                <input type="radio" name="RateQuality" class="rating" value="1" />
+                                <input type="radio" name="RateQuality" class="rating" value="2" />
+                                <input type="radio" name="RateQuality" class="rating" value="3" />
+                                <input type="radio" name="RateQuality" class="rating" value="4" />
+                                <input type="radio" name="RateQuality" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
                     <label>Feedback on service provider</label>
-                    <textarea class="form-control" rows="3" id="CancelReason"></textarea>
+                    <textarea class="form-control" rows="3" id="RateComment"></textarea>
                 </form>
             </div>
             <div class="px-2 pb-2">
-                <button value="" id="Cancel_btn" class="rounded_btn px-3" onclick="">Submit</button>
+                <button value="" id="RateSpSubmit_btn" class="rounded_btn px-3" onclick="RateSpSubmit(this.value);">Submit</button>
             </div>
         </div>
     </div>

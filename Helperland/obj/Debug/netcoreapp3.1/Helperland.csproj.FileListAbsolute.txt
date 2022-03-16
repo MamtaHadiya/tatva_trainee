@@ -179,3 +179,12 @@ C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Microsoft.DotNet.Pl
 C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\xampp\htdocs\tatvasoft\Helperland\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Customer\AddressForm.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Index.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout3.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Tab2Content.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Tab3Content.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Tab5Content.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\MySetting.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\MyDetails.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Tab7Content.cshtml.g.cs
+C:\xampp\htdocs\tatvasoft\Helperland\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\Tab6Content.cshtml.g.cs

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+<table class="tabs">
+    <tr>
+        <td>
+            <div id="Tab1" class="tab active-tab" onclick="Tab1Clicked()">My Details</div>
+        </td>
+        <td>
+            <div id="Tab2" class="tab" onclick="Tab2Clicked()">Change Password</div>
+        </td>
+    </tr>
+</table>
+
+<div id="tabContent">
+    <br /><br />
+    <div id="TabContent1">
+
+    </div>
+    <div id="TabContent2" style="display:none;">
+    </div>
+
+</div>
+
+<script>
+    var selctedAvtar;
+    $(document).ready(function () {
+        $("#TabContent1").show().load('@Url.Action("MyDetails", "ServiceProvider")');
+    });
+    function Tab1Clicked() {
+        $("#Tab1").addClass("active-tab");
+        $("#Tab2").removeClass("active-tab").addClass("tab");
+
+        $("#TabContent2").hide();
+        $("#TabContent1").show().load('@Url.Action("MyDetails", "ServiceProvider")');
+    }
+    function Tab2Clicked() {
+        $("#Tab2").addClass("active-tab");
+        $("#Tab1").removeClass("active-tab").addClass("tab");
+
+        $("#TabContent1").hide();
+        $("#TabContent2").show().load('@Url.Action("ChangePassword", "Customer")');
+    }
+    function AvtarClicked(val) {
+        const ex = document.getElementsByClassName("avtar_image");
+        for (let i = 0; i < ex.length; i++) {
+            ex[i].style.border = "1px solid #B0C9CE";
+        }
+        document.getElementById(val.id).style.border = "3px solid #1D7A8C";
+        var img_id = "#Avtar" + val.id;
+        var partsArr = $(img_id).attr("src").split('/');
+        var imgName = partsArr[partsArr.length - 1];
+        selctedAvtar = imgName;
+    }
+    function SubmitDetailForm() {
+        $("#DetailForm").submit(function (e) {
+            e.preventDefault();
+            var formvalues = $(this).serializeArray();
+            formvalues.push({ name: "UserProfilePicture", value: selctedAvtar });
+            $.post("/ServiceProvider/MyDetails", formvalues , function (data) {
+                if (data == true) {
+                    alert("Details Updated Successfully.");
+                    Tab2Clicked();
+                }
+                else {
+                    $("#ErrorFromAddress").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorFromAddress").append("<li>" + data[i] + "</li>");
+                    }
+                }
+            });
+        } );
+    }
+
+    function PasswordChangeClick() {
+
+        $("#ChangePassForm").submit(function (e) {
+            e.preventDefault();
+            var actionurl = '@Url.Action("ChangePassword", "Customer")';
+
+            var formData = new FormData();
+            formData.append("OldPassword", $("#OldPassword").val());
+            formData.append("Password", $("#Pass").val());
+            formData.append("Confirmpwd", $("#Cpass").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response == true) {
+                    alert("successfully password Changed.");
+                    Tab1Clicked();
+                }
+                else if (response == false) {
+                    $("#ErrorMsg").html("OldPassword Doesn't Match.Please Enter Again");
+                }
+                else {
+                    $("#ErrorMsg").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorMsg").append("<li>" + response[i] + "</li>");
+                    }
+
+                }
+            });
+        });
+    }
+
+</script>

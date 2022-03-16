@@ -1,137 +1,101 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>example</title>
-
-  <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="assets/css/datatables.min.css">
-  <!-- roboto fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-      <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/faq_style.css">
-    <!-- jQuery -->
+    <meta charset="utf-8">
+    <title>rating test</title>
     <script src="assets/js/jquery.min.js"></script>
     
-    <!-- Bootstrap Core JS -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    
-    <!-- Slick JS -->
-    <script src="assets/js/slick.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
-
-    <script src="assets/js/datatables.min.js"></script>
-
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+     -->
+    <script src="assets/js/rating.js"></script>
+<link href="assets/css/rating.css" rel="stylesheet" />
     <script type="text/javascript">
-      $(document).ready(function() {
-    $('#example').DataTable({
-
-      searching: false,
-      info:true,
-      dom: '<"float-left"B><"float-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
-      //"dom":'<"top"i>rt<"bottom"flp><"clear">',
-      
-      "sPaginationType":"full_numbers",
-      language: {
-        paginate: {
-          first:'<img src="assets/img/first-page.png">',
-          next: '<i class="fas fa-angle-right"></i>',
-          previous: '<i class="fas fa-angle-left"></i>',
-          last:'<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
-        }
-      }
-    });
-
-} );
+        $(function(){
+            $('.container').rating();
+        });
     </script>
 </head>
+
 <body>
-
-
-<table id="example" class="table">
-          <thead class="table_head">
-            <tr>
-              <th>Service ID <img src="assets/img/sort.png"></th>
-              <th>Service date <img src="assets/img/sort.png"></th>
-              <th>Customer details <img src="assets/img/sort.png"></th>
-              <th>Distance <img src="assets/img/sort.png"></th>
-              <th>Actions <img src="assets/img/sort.png"></th>
-            </tr>
-          </thead>
-          <tbody class="table_body">
-            <tr>
-              <td>323436</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323437</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323438</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323439</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323436</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323437</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323438</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-            <tr>
-              <td>323439</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-
-            <tr>
-              <td>323438</td>
-              <td><img src="assets/img/calendar2.png">09/04/2018<br><img src="assets/img/layer-14.png">12:00-18:00</td>
-              <td>David Bough<br><img src="assets/img/layer-15.png">musterstrab 5,12345Bonn</td>
-              <td>15km</td>
-              <td><button class="cancel_btn">cancel</button></td>
-            </tr>
-          </tbody>
-        </table>
+<h1>jQuery Star Rating Plugin</a></h1>
+    
+    <section class="container">
+        <input type="radio" name="example" class="rating" value="1" />
+        <input type="radio" name="example" class="rating" value="2" />
+        <input type="radio" name="example" class="rating" value="3" />
+        <input type="radio" name="example" class="rating" value="4" />
+        <input type="radio" name="example" class="rating" value="5" />
+    </section>
+    
 </body>
 </html>
+
+<!-- <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Star Rating</title>
+        <!-- <link rel="stylesheet" type="text/css" href="assets/plugins/fontawesome/css/all.min.css">
+         --><!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+         -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+          $(function () {
+        $('.Ontime').rating();
+        $('.Friendaly').rating();
+        $('.Quality').rating();
+    });
+        </script>
+    </body>
+
+    </head>
+    <body>
+        <!-- <span class="stars" data-rating="2.7" data-num-stars="5" ></span>
+         --><div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>On time Arrival</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Ontime">
+                                <input type="radio" name="RateOnTime" class="rating" value="1" />
+                                <input type="radio" name="RateOnTime" class="rating" value="2" />
+                                <input type="radio" name="RateOnTime" class="rating" value="3" />
+                                <input type="radio" name="RateOnTime" class="rating" value="4" />
+                                <input type="radio" name="RateOnTime" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>Friendaly</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Friendaly">
+                                <input type="radio" name="RateFriendaly" class="rating" value="1" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="2" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="3" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="4" />
+                                <input type="radio" name="RateFriendaly" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <label>Quality of Service</label>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <section class="Quality">
+                                <input type="radio" name="RateQuality" class="rating" value="1" />
+                                <input type="radio" name="RateQuality" class="rating" value="2" />
+                                <input type="radio" name="RateQuality" class="rating" value="3" />
+                                <input type="radio" name="RateQuality" class="rating" value="4" />
+                                <input type="radio" name="RateQuality" class="rating" value="5" />
+                            </section>
+                        </div>
+                    </div>
+                            
+    </html> -->

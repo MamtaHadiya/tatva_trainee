@@ -37,43 +37,64 @@ namespace Helperland.Controllers
                 ViewBag.Firstname = user.FirstName;
                 return View();
             }
+            //return View();
             return RedirectToAction("Login", "Account");
         }
+        
         public IActionResult Dashboard()
         {
             System.Threading.Thread.Sleep(300);
-            return View(_db.ServiceRequests.Where(x => x.ServiceStartDate >= DateTime.Now && x.Status == null && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
+            List<ServiceRequest> record = _db.ServiceRequests.Where(x => x.ServiceStartDate >= DateTime.Now && x.Status != 1 && x.Status != 2 && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList();
+            foreach (var item in record)
+            {
+                _db.Entry(item).Reference(s => s.ServiceProvider).Load();
+            }
+            return View(record);
         }
+        
         public IActionResult ServiceHistory()
         {
             System.Threading.Thread.Sleep(300);
-            //var serviceList = from a in _db.ServiceRequests
-            //              join b in _db.Users
-            //              on a.ServiceProviderId equals b.UserId
-            //              into userlist
-            //              from b in userlist.DefaultIfEmpty()
+            List<ServiceRequest> record = _db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList();
+            foreach(var item in record)
+            {
+                _db.Entry(item).Reference(s => s.ServiceProvider).Load();
+            }
+            return View(record);
 
-            //              select new ServiceRequest
-            //              {
-            //                  ServiceRequestId = a.ServiceRequestId,
-            //                  ServiceStartDate = a.ServiceStartDate,
-            //                  TotalCost = a.TotalCost,
-            //                  Status = a.Status,
-            //                  ServiceProviderId = a.ServiceProviderId,
-            //              };
-            return View(_db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
+            //return View(_db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
         }
 
-        public string ServiceProviderName(int Id)
+        public JsonResult getSpName(int Id)
         {
-            var Provider = _db.Users.Where(x => x.UserId.Equals(Id)).FirstOrDefault();
-            if(Provider != null)
+            var Service = _db.ServiceRequests.Where(x => x.ServiceRequestId.Equals(Id)).FirstOrDefault();
+            var Provider = _db.Users.Where(x => x.UserId.Equals(Service.ServiceProviderId)).FirstOrDefault();
+            if (Provider != null)
             {
-                return Provider.FirstName;
+                var sprating = _db.Ratings.Where(x => x.RatingTo.Equals(Provider.UserId)).FirstOrDefault();
+                var fullname = Provider.FirstName + " " + Provider.LastName;
+                var profile = Provider.UserProfilePicture;
+                if(sprating != null)
+                {
+                    var rate = sprating.Ratings;
+                    return Json(new
+                    {
+                        full = fullname,
+                        photo = profile,
+                        ratings = rate
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        full = fullname,
+                        photo = profile
+                    });
+                }
             }
             return null;
         }
-
 
         public IActionResult MySetting()
         {
@@ -100,9 +121,16 @@ namespace Helperland.Controllers
         {
             DateTime ServiceDate = DateTime.Parse(StartDateTime);
             var ServiceRequest = _db.ServiceRequests.Where(x => x.ServiceRequestId.Equals(Id)).FirstOrDefault();
+            var provider = _db.Users.Where(x => x.UserId.Equals(ServiceRequest.ServiceProviderId)).FirstOrDefault();
             ServiceRequest.ServiceStartDate = ServiceDate;
             _db.ServiceRequests.Update(ServiceRequest);
             _db.SaveChanges();
+            
+            var subject = "Service Request reschedule by Customer";
+            var body = "Hi " + provider.FirstName + "Service Request " + ServiceRequest.ServiceRequestId +
+                " has been reschedule by customer.<br>" +
+                "Thankyou";
+            SendEmail(provider.Email, body, subject);
             return Json(true);
         }
 
@@ -176,7 +204,7 @@ namespace Helperland.Controllers
 
         public IActionResult GetAddress()
         {
-            return View(_db.UserAddresses.Where(x => x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
+            return View(_db.UserAddresses.Where(x => x.UserId.Equals(HttpContext.Session.GetInt32("userid")) && x.IsDeleted.Equals(false)).ToList());
         }
 
         public IActionResult EditAddress(int Id)
@@ -228,9 +256,33 @@ namespace Helperland.Controllers
                 return Json(false);
             }
             var Address = _db.UserAddresses.Where(x => x.AddressId.Equals(Id)).FirstOrDefault();
-            _db.UserAddresses.Remove(Address);
+            Address.IsDeleted = true;
+            _db.UserAddresses.Update(Address);
             _db.SaveChanges();
             return Json(true);
+        }
+
+        [HttpPost]
+        public IActionResult RateSp(Rating rating)
+        {
+            var requests = _db.ServiceRequests.Where(x => x.ServiceRequestId.Equals(rating.ServiceRequestId)).FirstOrDefault();
+            var customerdata = _db.Users.Where(x => x.UserId.Equals(requests.UserId)).FirstOrDefault();
+            var spdata = _db.Users.Where(x => x.UserId.Equals(requests.ServiceProviderId)).FirstOrDefault();
+            if(requests != null && customerdata != null && spdata != null)
+            {
+                rating.RatingFrom = customerdata.UserId;
+                rating.RatingTo = spdata.UserId;
+                if (ModelState.IsValid)
+                {
+                    rating.Ratings = (rating.OnTimeArrival + rating.Friendly + rating.QualityOfService)/ 3;
+                    rating.RatingDate = DateTime.Now;
+                    _db.Ratings.Add(rating);
+                    _db.SaveChanges();
+                    return Json(true);
+                }
+                return Json(ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
+            }
+            return Json(false);
         }
         private string GetExtraName(int serviceExtraId)
         {
@@ -255,7 +307,6 @@ namespace Helperland.Controllers
                 return " Interior Windows,";
             }
         }
-
 
         private void SendEmail(string emailAddress, string body, string subject)
         {

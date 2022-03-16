@@ -1,0 +1,316 @@
+﻿@{
+    ViewData["Title"] = "Service Provider Page";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<link href="~/css/Service.css" rel="stylesheet" />
+
+<div class="welcome_name">
+    <center><h2>Welcome,<b> @ViewBag.Firstname </b></h2></center>
+</div>
+<section>
+    <div class="menu_content" style="height:820px;">
+        <div class="sidebar">
+            <a id="tab1" class="link active-link" onclick="Tab1Click()"> Dashboard</a>
+            <a id="tab2" class="link" onclick="Tab2Click()"> New Service Requests</a>
+            <a id="tab3" class="link" onclick="Tab3Click()"> Upcoming Services</a>
+            <a id="tab4" class="link" onclick="Tab4Click()"> Service Schedule</a>
+            <a id="tab5" class="link" onclick="Tab5Click()"> Service History</a>
+            <a id="tab6" class="link" onclick="Tab6Click()"> My Ratings</a>
+            <a id="tab7" class="link" onclick="Tab7Click()"> Block Customer</a>
+            <a> Invoices</a>
+            <a> Notifications</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="content">
+            <div id="tabContent1">
+                <p>No data Avalable</p>
+            </div>
+            <div id="tabContent2" style="display:none">
+
+            </div>
+            <div id="tabContent3" style="display:none">
+
+            </div>
+            <div id="tabContent4" style="display:none">
+                <p>No data Avalable</p>
+            </div>
+            <div id="tabContent5" style="display:none">
+
+            </div>
+            <div id="tabContent6" style="display:none">
+
+            </div>
+            <div id="tabContent7" style="display:none">
+
+            </div>
+            <div id="MySetting" style="display:none">
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    function Tab1Click() {
+        var x = "#" + "tabContent1";
+        $("#tab1").addClass("active-link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent1").show();
+    }
+    function Tab2Click() {
+        $("#tab2").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent2").show().load('@Url.Action("Tab2Content", "ServiceProvider")');
+    }
+    function Tab3Click() {
+        $("#tab3").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent3").show().load('@Url.Action("Tab3Content", "ServiceProvider")');
+    }
+    function Tab4Click() {
+        $("#tab4").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent4").show();
+    }
+    function Tab5Click() {
+        $("#tab5").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent5").show().load('@Url.Action("Tab5Content", "ServiceProvider")');
+    }
+    function Tab6Click() {
+        $("#tab6").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").hide();
+        $("#tabContent6").show().load('@Url.Action("Tab6Content", "ServiceProvider")');
+    }
+    function Tab7Click() {
+        $("#tab7").addClass("active-link");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#MySetting").hide();
+        $("#tabContent7").show().load('@Url.Action("Tab7Content", "ServiceProvider")');
+    }
+    function MySettingClick() {
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
+
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").show().load('@Url.Action("MySetting", "ServiceProvider")');
+        }
+
+    function rowclicked(id) {
+        $.post("/ServiceProvider/Service", { Id: parseInt(id) }, function (data) {
+            $("#ServiceData").html(data.servicedate + "<br>Duration: " + parseFloat(data.duration) + " hrs.");
+            $("#ServiceId").html(data.serviceid);
+            $("#Extra").html(data.extra);
+            $("#TotalCost").html(parseFloat(data.total) + "$");
+            $("#CustomerName").html(data.cname);
+            $("#ServiceAddress").html(data.addresses);
+            $("#Distance").html(data.distance);
+            $("#Comments").html(data.cmnt);
+            $("#Accept_btn").prop('value', data.serviceid);
+            $("#ServiceDetails").modal('show');
+        });
+    }
+    function Urowclicked(id) {
+        $.post("/ServiceProvider/Service", { Id: parseInt(id) }, function (data) {
+            var d = new Date(data.servicedate);
+            var d2 = new Date();
+            var chours = d2.getTime();
+            var addhours = (data.subtotal * 60) * 60 * 1000;
+            var newd = new Date(chours + addhours);
+            if (d <= newd) {
+                $("#Complete_btn").removeClass("d-none").addClass("d-block");
+            }
+            else {
+                $("#Complete_btn").removeClass("d-block").addClass("d-none");
+            }
+            $("#UServiceData").html(data.servicedate + "<br>Duration: " + parseFloat(data.duration) + " hrs.");
+            $("#UServiceId").html(data.serviceid);
+            $("#UExtra").html(data.extra);
+            $("#UTotalCost").html(parseFloat(data.total) + "$");
+            $("#UCustomerName").html(data.cname);
+            $("#UServiceAddress").html(data.addresses);
+            $("#UDistance").html(data.distance);
+            $("#UComments").html(data.cmnt);
+            $("#Cancel_btn").prop('value', data.serviceid);
+            $("#Complete_btn").prop('value', data.serviceid);
+            $("#UServiceDetails").modal('show');
+        });
+    }
+    function Hrowclicked(id) {
+        $.post("/ServiceProvider/Service", { Id: parseInt(id) }, function (data) {
+            $("#HServiceData").html(data.servicedate + "<br>Duration: " + parseFloat(data.duration) + " hrs.");
+            $("#HServiceId").html(data.serviceid);
+            $("#HExtra").html(data.extra);
+            $("#HTotalCost").html(parseFloat(data.total) + "$");
+            $("#HCustomerName").html(data.cname);
+            $("#HServiceAddress").html(data.addresses);
+            $("#HDistance").html(data.distance);
+            $("#HComments").html(data.cmnt);
+            $("#HServiceDetails").modal('show');
+        });
+    }
+    function Acccept_btnClicked(id) {
+        $.post("/ServiceProvider/ServiceAccept", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Service Acccepted successfully.");
+                $("#ServiceDetails").modal('hide');
+                Tab2Click();
+            }
+            else if (data == false) {
+                alert("You already Accepted Service at same time.");
+                Tab2Click();
+            }
+            else {
+                alert(JSON.stringify(data));
+                Tab7Click();
+            }
+        });
+    }
+    function Cancel_btnClicked(id) {
+        $.post("/ServiceProvider/ServiceCancel", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Service Cancelled successfully.");
+                $("#UServiceDetails").modal('hide');
+                Tab3Click();
+            }
+            Tab3Click();
+        });
+        Tab3Click();
+    }
+    function Complete_btnClicked(id) {
+        $.post("/ServiceProvider/ServiceComplete", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Service Completed successfully.");
+                $("#UServiceDetails").modal('hide');
+                Tab3Click();
+            }
+
+        });
+        Tab3Click();
+    }
+    function BlockbtnClick(id) {
+        $.post("/ServiceProvider/BlockCustomer", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Customer Blocked successfully.");
+                Tab7Click();
+            }
+            else if (data == false) {
+                alert("Customer UnBlocked Successfully.");
+                Tab7Click();
+            }
+            else {
+                alert("error");
+            }
+        });
+        Tab7Click();
+    }
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

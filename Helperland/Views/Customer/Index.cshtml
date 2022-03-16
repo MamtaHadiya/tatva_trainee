@@ -121,6 +121,32 @@
         color: #1D7A8C;
         margin-left: 40px;
     }
+    .avtar_image {
+        width: 55px;
+        height: 55px;
+        border: 1px solid #B0C9CE;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+        text-align: center;
+        border-radius: 50%;
+        align-items: center;
+        display: inline-block;
+        vertical-align: central;
+        position: relative;
+    }
+
+        .avtar_image:hover {
+            border: 3px solid #1D7A8C;
+        }
+
+    .center_img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
 </style>
 <div class="welcome_name">
     <center><h2>Welcome,<b> @ViewBag.Firstname </b></h2></center>
@@ -250,9 +276,57 @@
     }
 
     function RateSpclicked(id) {
-        $("#RateSPModel").modal('show');
+        
+        $.post("/Customer/getSpName", { Id: parseInt(id) }, function (data) {
+            if (data != null) {
+                var isrc = "assets/img/" + data.photo;
+                document.getElementById("spPhoto").src = isrc;
+                $("#spname").html(data.full);
+                $("#Starrating").html(data.ratings);
+                $('#staars').stars(data.ratings);
+                $("#RateSpSubmit_btn").val(id);
+                $("#RateSPModel").modal('show');
+
+            }
+        });
+        
     }
+
     
+
+    function RateSpSubmit(id) {
+        var actionurl = '@Url.Action("RateSp", "Customer")';
+
+        var formData = new FormData();
+        formData.append("ServiceRequestId", id);
+        formData.append("OnTimeArrival", $("input[type=radio][name=RateOnTime]:checked").val());
+        formData.append("Friendly", $("input[type=radio][name=RateFriendaly]:checked").val());
+        formData.append("QualityOfService", $("input[type=radio][name=RateQuality]:checked").val());
+        formData.append("Comments", $("#RateComment").val());
+
+            $.ajax({
+                type: 'post',
+                url: actionurl,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (response) {
+                if (response == true) {
+                    alert("Feedback given Successfully.");
+                    $("#RateSPModel").hide();
+                    DashboardClick();
+                }
+                else if (response == false) {
+                    alert("Error");
+                }
+                else {
+                    $("#ErrorFromRateSp").empty();
+                    for (var i = 0; i < Object.keys(response).length; i++) {
+                        $("#ErrorFromAddress").append("<li>" + response[i] + "</li>");
+                    }
+                }
+            });
+    }
 
 </script>
 

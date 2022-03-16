@@ -140,6 +140,11 @@ namespace Helperland.Controllers
                         ViewBag.Firstname = details.Select(x => x.FirstName).FirstOrDefault();
                         return RedirectToAction("Index", "Customer");
                     }
+                    else if(details.Select(x => x.UserTypeId).FirstOrDefault() == 2)
+                    {
+                        ViewBag.Firstname = details.Select(x => x.FirstName).FirstOrDefault();
+                        return RedirectToAction("Index", "ServiceProvider");
+                    }
                     else
                     {
                         return RedirectToAction("Index", "Helperland");

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    Layout = null;
+}
+<link href="~/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+@foreach (var item in Model)
+{
+    <div class="col-md-4 float-left p-2">
+        <div class="card text-center pt-3">
+            <div class="avtar_image m-auto">
+                <img src="~/assets/img/cap.png" class="center_img">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.user.FirstName @item.user.LastName</h5>
+                <button id="@item.user.UserId" class="cancel_btn" onclick="BlockbtnClick(@item.user.UserId);">Block</button>
+                <script>
+                    $.post("/ServiceProvider/CheckBlock", { Id: parseInt(@item.user.UserId) }, function (data) {
+                        if (data == true) {
+                            var x = "#" + @item.user.UserId;
+                            $(x).html("UnBlock");
+                        }
+                        else {
+                            var x = "#" + @item.user.UserId;
+                            $(x).html("Block");
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+}
+
+@*<table id="CustomerTable" class="table">
+        <thead>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="card text-center pt-3">
+                        <div class="avtar_image m-auto">
+                            <img src="~/assets/img/cap.png" class="center_img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Abc Pqr</h5>
+                            <button class="bg-danger">Block</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card text-center pt-3">
+                        <div class="avtar_image m-auto">
+                            <img src="~/assets/img/cap.png" class="center_img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Abc Pqr</h5>
+                            <button class="bg-danger">Block</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card text-center pt-3">
+                        <div class="avtar_image m-auto">
+                            <img src="~/assets/img/cap.png" class="center_img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Abc Pqr</h5>
+                            <button class="bg-danger">Block</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card text-center pt-3">
+                        <div class="avtar_image m-auto">
+                            <img src="~/assets/img/cap.png" class="center_img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Abc Pqr</h5>
+                            <button class="bg-danger">Block</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>*@

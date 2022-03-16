@@ -661,7 +661,7 @@ color: #FFFFFF;
     height: auto;
     margin: auto;
   }
-  ..before_img{
+  .before_img{
     width: auto;
     text-align: center;
     margin: auto;

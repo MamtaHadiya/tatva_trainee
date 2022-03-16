@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Helperland</title><!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
-    <link href="~/assets/css/rating.css" rel="stylesheet" />
 
+    <link href="~/assets/css/rating.css" rel="stylesheet" />
     <link href="~/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/assets/css/datatables.min.css">
     <script src="~/assets/js/jquery.min.js"></script>
@@ -17,17 +17,28 @@
     <script src="~/assets/js/datatables.min.js"></script>
     <script src="~/assets/js/rating.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="~/css/StyleSheet.css" rel="stylesheet" />
 
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
     <script>
         function MySettingClick() {
-        $("#History").removeClass("active-link").addClass("tab");
-        $("#Dashboard").removeClass("active-link").addClass("tab");
+        $("#tab1").removeClass("active-link").addClass("link");
+        $("#tab2").removeClass("active-link").addClass("link");
+        $("#tab3").removeClass("active-link").addClass("link");
+        $("#tab4").removeClass("active-link").addClass("link");
+        $("#tab5").removeClass("active-link").addClass("link");
+        $("#tab6").removeClass("active-link").addClass("link");
+        $("#tab7").removeClass("active-link").addClass("link");
 
-        $("#DashboardContent").hide();
-        $("#HistoryContent").hide();
-        $("#MySetting").show().load('@Url.Action("MySetting", "Customer")');
-    }
+        $("#tabContent1").hide();
+        $("#tabContent2").hide();
+        $("#tabContent3").hide();
+        $("#tabContent4").hide();
+        $("#tabContent5").hide();
+        $("#tabContent6").hide();
+        $("#tabContent7").hide();
+        $("#MySetting").show().load('@Url.Action("MySetting", "ServiceProvider")');
+        }
+
     </script>
 </head>
 <body>
@@ -42,10 +53,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="BookService" asp-action="Index"><button class="book_now_btn">Book Now</button></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button class="ps_btn">Prices & services</button></a>
+                        <a class="nav-link text-light" href="#"> Prices and Service</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#"> Warranty</a>
@@ -62,8 +70,8 @@
                     <li class="dropdown nav-item left_border">
                         <a class="dropdown-toggle nav-link pr-3" data-toggle="dropdown" href="#"><img src="~/assets/img/admin-user.png"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="border-bottom py-2 px-1"><a class="text-dark text-decoration-none" >Welcome <br /><span id="Username"></span></a></li>
-                            <li class="border-bottom py-2 px-1 cursor-pointer"><a class="text-dark text-decoration-none" asp-controller="Customer" asp-action="Index">My Dashboard</a></li>
+                            <li class="border-bottom py-2 px-1"><a class="text-dark text-decoration-none">Welcome <br />@ViewBag.Firstname</a></li>
+                            <li class="border-bottom py-2 px-1 cursor-pointer"><a class="text-dark text-decoration-none" asp-controller="ServiceProvider" asp-action="Index">My Dashboard</a></li>
                             <li class="border-bottom py-2 px-1" onclick="MySettingClick();" role="button"><a class="text-dark text-decoration-none">My setting</a></li>
                             <li class="border-bottom py-2 px-1"><a class="text-dark text-decoration-none  cursor-pointer" asp-controller="Account" asp-action="Logout">Logout</a></li>
                         </ul>

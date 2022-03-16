@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ServiceTable').DataTable({
+            pageLength: 0,
+            lengthMenu: [6,10,20,50],
+            searching: false,
+            info: true,
+            dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+
+            "sPaginationType": "full_numbers",
+            language: {
+                paginate: {
+                    first: '<img src="assets/img/first-page.png">',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
+                }
+            }
+        });
+
+    });
+
+
+</script>
+
+<h4 class="float-left">Current Service Requests</h4>
+<button class="btn rounded-pill px-3 round_btn mb-2 float-right" asp-controller="BookService" asp-action="Index">Add New Service Request</button>
+<table id="ServiceTable" class="table">
+    <thead class="table_head">
+        <tr>
+            <th>Service Id </th>
+            <th>Service Date </th>
+            <th>Customer Details</th>
+            <th>Payment </th>
+            <th>Time Conflict</th>
+            <th>Actions </th>
+        </tr>
+    </thead>
+    <tbody class="table_body">
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.ServiceRequestId</td>
+            <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">
+                <img src="~/assets/img/calendar2.png"> @item.serviceRequest.ServiceStartDate.ToShortDateString()
+                <br /><img src="~/assets/img/layer-14.png"> @item.serviceRequest.ServiceStartDate.ToShortTimeString() - @item.serviceRequest.ServiceStartDate.AddHours(Convert.ToDouble(item.serviceRequest.SubTotal)).ToShortTimeString()
+            </td>
+            <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">
+                &emsp;&ensp;@item.user.FirstName @item.user.LastName <br />
+                <img src="~/assets/img/layer-15.png" />@item.requestAddress.AddressLine1 @item.requestAddress.AddressLine2 <br />
+                &emsp;&ensp;@item.requestAddress.PostalCode @item.requestAddress.City
+            </td>
+            <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.TotalCost $</td>
+            <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);"></td>
+            <td><button class="btn rounded-pill px-3 round_btn" onclick="Acccept_btnClicked(@item.serviceRequest.ServiceRequestId);">Accept</button></td>
+        </tr>
+        
+    }
+    </tbody>
+</table>
+
+<div class="modal fade" id="ServiceDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                Service details
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            <div class="modal-body py-0 border-0">
+                <div id="ServiceData" class="font-weight-bold"></div>
+                <hr />
+                <p>Service Id: <span id="ServiceId"></span></p>
+
+                <p>Extra: <span id="Extra"></span></p>
+                <p>Net Amount: <span id="TotalCost"></span></p>
+                <hr />
+                <p>Customer Name: <span id="CustomerName"></span></p>
+                <p>Service Address: <span id="ServiceAddress"></span></p>
+                <p>Distance: <span id="Distance"></span></p>
+                <hr />
+                <p>Comments: <span id="Comments"></span></p>
+                <hr />
+            </div>
+            <div class="pl-2 pb-2">
+                <button class="btn rounded-pill px-3 round_btn" id="Accept_btn" value="" onclick="Acccept_btnClicked(this.value);"><img src="~/assets/img/ic-check.png" /> Accept</button>
+            </div>
+        </div>
+    </div>
+</div>

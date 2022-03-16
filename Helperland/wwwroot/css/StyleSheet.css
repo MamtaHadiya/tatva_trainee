@@ -377,7 +377,8 @@ ul.link_page li {
 
 .menu_content {
     width: 1560px;
-    height: 380px;
+    height: auto;
+    position:relative;
 }
 
 .sidebar {
@@ -387,7 +388,7 @@ ul.link_page li {
     height: 350px;
     margin: 0px 32px 0px 210px;
     background: #1D7A8C 0% 0% no-repeat padding-box;
-    position: absolute;
+    position: relative;
     overflow: auto;
 }
     .sidebar a {
@@ -414,6 +415,7 @@ ul.link_page li {
     width: 845px;
     margin-top: 31px;
     margin-left: 503px;
+    height:auto;
 }
 
 .table_head {

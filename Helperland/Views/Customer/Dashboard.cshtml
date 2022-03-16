@@ -27,14 +27,14 @@
 </script>
 
 <h4 class="float-left">Current Service Requests</h4>
-<button class="btn rounded-pill px-3 round_btn mb-2 float-right" asp-controller="BookService" asp-action="Index">Add New Service Request</button>
+<a class="btn rounded-pill px-3 round_btn mb-2 float-right" asp-controller="BookService" asp-action="Index">Add New Service Request</a>
 <table id="example" class="table">
     <thead class="table_head">
         <tr>
             <th>Service Id </th>
             <th>Service Date </th>
             <th>Service Provider</th>
-            <th>Payment </th>
+            <th>Payment <img src="~/assets/img/sort.png" /></th>
             <th>Actions </th>
         </tr>
     </thead>
@@ -45,9 +45,47 @@
                 <td onclick="GetServiceData(@request.ServiceRequestId);">@request.ServiceRequestId</td>
                 <td onclick="GetServiceData(@request.ServiceRequestId);">
                     <img src="~/assets/img/calendar2.png"> @request.ServiceStartDate.ToShortDateString()
-                    <br /><img src="~/assets/img/layer-14.png"> @request.ServiceStartDate.ToShortTimeString()
+                    <br /><img src="~/assets/img/layer-14.png"> @request.ServiceStartDate.ToShortTimeString() - @request.ServiceStartDate.AddHours(Convert.ToDouble(request.SubTotal)).ToShortTimeString()
                 </td>
-                <td onclick="GetServiceData(@request.ServiceRequestId);">@request.ServiceProviderId</td>
+                <td onclick="GetServiceData(@request.ServiceRequestId);">
+                    @{
+                        if (request.ServiceProviderId != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-3 col-12">
+                                    <div class="avtar_image">
+                                        <img src="~/assets/img/@request.ServiceProvider.UserProfilePicture" class="center_img">
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-12">
+                                    <p class="float-left">
+                                        @request.ServiceProvider.FirstName @request.ServiceProvider.LastName<br />
+                                        <span id="@request.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>3.3
+                                    </p>
+                                    <script>
+                                        $(function () {
+                                            $("#"+@request.ServiceRequestId).stars(3.3);
+                                        });
+
+                                        $.fn.stars = function (rating) {
+                                            return $(this).each(function () {
+                                                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                                $(this).html(fullStar + halfStar + noStar);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <p></p>
+                        }
+                    }
+                </td>
                 <td onclick="GetServiceData(@request.ServiceRequestId);">@request.TotalCost</td>
                 <td><button class="btn rounded-pill px-3 round_btn" onclick="RescheduleService(@request.ServiceRequestId);">Reschedule</button>  <button class="cancel_btn" onclick="CancelService(@request.ServiceRequestId);">Cancel</button></td>
 
