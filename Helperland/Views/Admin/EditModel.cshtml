@@ -1,0 +1,97 @@
+﻿@model Helperland.Models.ServiceRequestAddress
+
+@Html.AntiForgeryToken()
+@{
+    Layout = null;
+}
+
+<form id="EditDataForm" method="post">
+    <ul id="ErrorMsgFromAddress" class="pl-4">
+    </ul>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <label>Date</label>
+            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" required />
+        </div>
+        <div class="col-md-6 col-12">
+            <label>Time</label>
+            <select class="form-control" id="StartTime" name="StartTime" required>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+                <option value="6:00 PM">6:00 PM</option>
+            </select>
+        </div>
+    </div>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate() + 1).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#StartDate').attr('min', today);
+    </script>
+    <p><b>Service Address</b></p>
+    <div class="row mt-0">
+        <div class="col-md-6 col-12">
+            <label>Street name</label>
+            <input asp-for="AddressLine1" class="form-control" id="AddressLine1" />
+
+        </div>
+        <div class="col-md-6 col-12">
+            <label>House number*</label>
+            <input asp-for="AddressLine2" class="form-control" id="AddressLine2" />
+        </div>
+    </div>
+    <div class="row  mt-1">
+        <div class="col-md-6 col-12">
+            <label>Postal Code*</label>
+            <input asp-for="PostalCode" type="number" name="PostalCode" class="form-control" id="Zip" />
+        </div>
+        <div class="col-md-6 col-12">
+            <label>City*</label>
+            <input asp-for="City" class="form-control" id="City">
+        </div>
+    </div>
+    <p><b>Invoice Address</b></p>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <label>Street name*</label>
+            <input asp-for="AddressLine1" class="form-control" id="AddressLine1" />
+
+        </div>
+        <div class="col-md-6 col-12">
+            <label>House number*</label>
+            <input asp-for="AddressLine2" class="form-control" id="AddressLine2" />
+        </div>
+    </div>
+    <div class="row  mt-1">
+        <div class="col-md-6 col-12">
+            <label>Postal Code*</label>
+            <input asp-for="PostalCode" type="number" name="PostalCode" class="form-control" id="Zip" />
+        </div>
+        <div class="col-md-6 col-12">
+            <label>City*</label>
+            <input asp-for="City" class="form-control" id="City">
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-md-12 col-12">
+            <label>Why you want to reschedual Service Request?</label>
+            <textarea class="form-control" rows="3" id="Reason"></textarea>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-md-12 col-12">
+            <label>Callcenter IMP notes</label>
+            <textarea class="form-control" rows="2" id=""></textarea>
+        </div>
+    </div>
+
+    <div class="px-2 pb-2 mt-2">
+        <button value="update" class="form-control btn btn-primary mt-1" onclick="SubmitEditedAddress();">Update</button>
+    </div>
+</form>

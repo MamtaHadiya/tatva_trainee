@@ -282,8 +282,7 @@
                 var isrc = "assets/img/" + data.photo;
                 document.getElementById("spPhoto").src = isrc;
                 $("#spname").html(data.full);
-                $("#Starrating").html(data.ratings);
-                $('#staars').stars(data.ratings);
+                $("#Starrating").stars(data.ratings);
                 $("#RateSpSubmit_btn").val(id);
                 $("#RateSPModel").modal('show');
 

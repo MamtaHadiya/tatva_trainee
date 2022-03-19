@@ -4,8 +4,7 @@
 @using Microsoft.AspNetCore.Http;
 <div>
     <form id="AddressForm" method="post">
-        <ul class="pl-4">
-            <span id="ErrorFromAddress" class="text-danger"></span>
+        <ul id="ErrorFromAddress" class="pl-4">
         </ul>
         <input class="form-control" id="FUserId" value="@Context.Session.GetInt32("userid")" hidden />
 

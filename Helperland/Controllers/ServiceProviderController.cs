@@ -3,12 +3,17 @@ using Helperland.Data;
 using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Web;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace Helperland.Controllers
 {
@@ -90,6 +95,48 @@ namespace Helperland.Controllers
                              user = c
                          };
             return View(record);
+        }
+
+        public FileResult DownloadExcel()
+        {
+            List<User> users = _db.Users.ToList();
+            List<ServiceRequest> requests = _db.ServiceRequests.ToList();
+            List<ServiceRequestAddress> addresses = _db.ServiceRequestAddresses.ToList();
+            var record = from a in requests
+                         join b in addresses on a.ServiceRequestId equals b.ServiceRequestId into table1
+                         from b in table1.ToList()
+                         join c in users on a.UserId equals c.UserId into table2
+                         from c in table2.Where(x => a.ServiceProviderId.Equals(HttpContext.Session.GetInt32("userid")) && a.ServiceStartDate < DateTime.Now.AddHours(Convert.ToDouble(a.SubTotal))).ToList()
+                         select new ViewModel
+                         {
+                             serviceRequest = a,
+                             requestAddress = b,
+                             user = c
+                         };
+
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");
+            Sheet.Cells["A1"].Value = "Service Id";
+            Sheet.Cells["B1"].Value = "Service Date";
+            Sheet.Cells["C1"].Value = "Customer Details";
+            int row = 2;
+            foreach(var item in record)
+            {
+                Sheet.Cells[String.Format("A{0}", row)].Value = item.serviceRequest.ServiceRequestId;
+                Sheet.Cells[String.Format("B{0}", row)].Value = item.serviceRequest.ServiceStartDate.ToShortDateString() + "\n" + item.serviceRequest.ServiceStartDate.ToShortTimeString() +" - " + item.serviceRequest.ServiceStartDate.AddHours(Convert.ToDouble(item.serviceRequest.SubTotal)).ToShortTimeString();
+                Sheet.Cells[String.Format("C{0}", row)].Value = item.user.FirstName + " " + item.user.LastName + "\n"
+                    + item.requestAddress.AddressLine1 +" "+ item.requestAddress.AddressLine2 + "\n" + item.requestAddress.PostalCode +" "+ item.requestAddress.City;
+                row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                Ep.SaveAs(stream);
+                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ServiceHistory.xlsx");
+            }
+            
+            
         }
 
         public IActionResult Tab6Content()

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Helperland.Models.User>
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#AdminTable2').DataTable({
+            pageLength: 0,
+            lengthMenu: [6, 10, 20, 50],
+            searching: false,
+            info: true,
+            dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+
+            "sPaginationType": "full_numbers",
+            language: {
+                paginate: {
+                    first: '<img src="assets/img/first-page.png">',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
+                }
+            }
+        });
+
+    });
+
+
+</script>
+
+<h2><b>Service Requests</b></h2>
+<div class="top_form">
+    <form class="form-inline">
+        <select class="form-control m-1">
+            <option>User name</option>
+            <option>...</option>
+        </select>
+        <select class="form-control m-1">
+            <option>User Type id</option>
+            <option>...</option>
+        </select>
+        <div class="input-group m-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text">+49</div>
+            </div>
+            <input type="text" name="phone" class="form-control" placeholder="Phone No">
+        </div>
+        <input type="text" name="phone" class="form-control m-1" placeholder="Postal code">
+        <input type="text" name="phone" class="form-control m-1" placeholder="Email">
+        
+        <input type="date" name="from_date" class="form-control m-1 cal_img" placeholder="From Date">
+        <input type="date" name="to_date" class="form-control m-1 cal_img" placeholder="To Date">
+        <button class="serch_btn m-1">Serch</button>
+        <button class="clear_btn m-1">Clear</button>
+
+    </form>
+</div>
+<div class="table_section">
+    <table id="AdminTable2" class="table">
+        <thead class="table_head">
+            <tr>
+                <th>User Name <img src="assets/img/sort.png"></th>
+                <th>Role</th>
+                <th>Date of registration</th>
+                <th>User Type</th>
+                <th>Postal code <img src="assets/img/sort.png"></th>
+                <th>Phone</th>
+                <th>Status <img src="assets/img/sort.png"></th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="table_body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FirstName @item.LastName</td>
+                    <td></td>
+                    <td><img src="~/assets/img/calendar2.png"> @item.CreatedDate.ToShortDateString()</td>
+                    <td>@{
+                        if(item.UserTypeId == 1)
+                {
+                    <p>Customer</p>
+                }
+                else
+                {
+                    <p>Service Provider</p>
+                }
+                        }
+                        </td>
+                    <td>@item.ZipCode</td>
+                    <td>@item.Mobile</td>
+                    <td><button class="bg-success">Active</button></td>
+                    <td>
+                        <div class="dropdown">
+                            <img src="assets/img/group-38.png" class="dropbtn">
+                            <div class="dropdown_menu" style="height:150px; opacity:1;">
+                                <a class="dropdown-item" href="#">Inquiry</a>
+                                <a class="dropdown-item" href="#">History Log</a>
+                                <a class="dropdown-item" href="#">Download Invoice</a>
+                                <a class="dropdown-item">Other Transaction</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

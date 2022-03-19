@@ -15,6 +15,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Mail;
 using System.Net;
+using OfficeOpenXml;
+using System.IO;
 
 namespace Helperland.Controllers
 {
@@ -65,23 +67,83 @@ namespace Helperland.Controllers
             //return View(_db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
         }
 
+        public FileResult DownloadExcel()
+        {
+            List<ServiceRequest> record = _db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList();
+            foreach (var item in record)
+            {
+                _db.Entry(item).Reference(s => s.ServiceProvider).Load();
+            }
+
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");
+            Sheet.Cells["A1"].Value = "Service Id";
+            Sheet.Cells["B1"].Value = "Service Date";
+            Sheet.Cells["C1"].Value = "Service Provider";
+            Sheet.Cells["D1"].Value = "Payment";
+            Sheet.Cells["E1"].Value = "Status";
+            int row = 2;
+            foreach (var item in record)
+            {
+                Sheet.Cells[String.Format("A{0}", row)].Value = item.ServiceRequestId;
+                Sheet.Cells[String.Format("B{0}", row)].Value = item.ServiceStartDate.ToShortDateString() + "\n" + item.ServiceStartDate.ToShortTimeString() + " - " + item.ServiceStartDate.AddHours(Convert.ToDouble(item.SubTotal)).ToShortTimeString();
+                if(item.ServiceProviderId != null)
+                {
+                    Sheet.Cells[String.Format("C{0}", row)].Value = item.ServiceProvider.FirstName + " " + item.ServiceProvider.LastName;
+
+                }
+                else
+                {
+                    Sheet.Cells[String.Format("C{0}", row)].Value = " ";
+
+                }
+                Sheet.Cells[String.Format("D{0}", row)].Value = item.TotalCost + " $";
+                if(item.Status == 1)
+                {
+                    Sheet.Cells[String.Format("E{0}", row)].Value = "Completed";
+                }
+                else if (item.Status == 2)
+                {
+                    Sheet.Cells[String.Format("E{0}", row)].Value = "Cancelled";
+                }
+                else if(item.Status == 1)
+                {
+                    Sheet.Cells[String.Format("E{0}", row)].Value = "Accepted";
+                }
+                else
+                {
+                    Sheet.Cells[String.Format("E{0}", row)].Value = "Booked";
+                }
+                row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                Ep.SaveAs(stream);
+                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "UserServiceHistory.xlsx");
+            }
+
+
+        }
+
         public JsonResult getSpName(int Id)
         {
             var Service = _db.ServiceRequests.Where(x => x.ServiceRequestId.Equals(Id)).FirstOrDefault();
             var Provider = _db.Users.Where(x => x.UserId.Equals(Service.ServiceProviderId)).FirstOrDefault();
             if (Provider != null)
             {
-                var sprating = _db.Ratings.Where(x => x.RatingTo.Equals(Provider.UserId)).FirstOrDefault();
+                var sprating = _db.Ratings.Where(x => x.RatingTo.Equals(Provider.UserId)).ToList();
                 var fullname = Provider.FirstName + " " + Provider.LastName;
                 var profile = Provider.UserProfilePicture;
                 if(sprating != null)
                 {
-                    var rate = sprating.Ratings;
+                    var avg = sprating.Average(i => i.Ratings);
                     return Json(new
                     {
                         full = fullname,
                         photo = profile,
-                        ratings = rate
+                        ratings = avg
                     });
                 }
                 else

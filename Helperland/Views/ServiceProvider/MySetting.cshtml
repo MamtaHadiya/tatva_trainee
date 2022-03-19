@@ -63,9 +63,9 @@
                     Tab2Clicked();
                 }
                 else {
-                    $("#ErrorFromAddress").empty();
-                    for (var i = 0; i < Object.keys(response).length; i++) {
-                        $("#ErrorFromAddress").append("<li>" + data[i] + "</li>");
+                    $("#ErrorFromDetails").empty();
+                    for (var i = 0; i < Object.keys(data).length; i++) {
+                        $("#ErrorFromDetails").append("<li>" + data[i] + "</li>");
                     }
                 }
             });

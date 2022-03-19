@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+<style>
+
+    .top_form {
+        width: 1053px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #E1E1E1;
+        padding: 15px;
+    }
+
+    .serch_btn {
+        width: 84px;
+        height: 30px;
+        background: #1FB6FF 0% 0% no-repeat padding-box;
+    }
+
+    .clear_btn {
+        width: 84px;
+        height: 30px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #DEDDDD;
+    }
+    .avtar_image {
+        width: 55px;
+        height: 55px;
+        border: 1px solid #B0C9CE;
+        background: #F9F9F9 0% 0% no-repeat padding-box;
+        text-align: center;
+        border-radius: 50%;
+        align-items: center;
+        display: inline-block;
+        vertical-align: central;
+        position: relative;
+    }
+
+        .avtar_image:hover {
+            border: 3px solid #1D7A8C;
+        }
+
+    .center_img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+<div class="main_content">
+    <div class="user_management" id="tab1Content">
+    </div>
+    <div class="user_management" id="tab2Content" style="display:none;">
+       
+    </div>
+    <p style="margin-left: 300px;">©2018 Helperland. All rights reserved.</p>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Tab1Click();
+    });
+    function Tab1Click() {
+        $("#tab1").addClass("active");
+        $("#tab2").removeClass("active");
+
+        $("#tab2Content").hide();
+        $("#tab1Content").show().load('@Url.Action("Tab1Content", "Admin")');
+    }
+    function Tab2Click() {
+        $("#tab2").addClass("active");
+        $("#tab1").removeClass("active");
+
+        $("#tab1Content").hide();
+        $("#tab2Content").show().load('@Url.Action("Tab2Content", "Admin")');
+    }
+    function EditRescheduleClicked(id) {
+        //$.post("/Admin/", { Id: parseInt(id) }, function (data) {
+        //    if (data != null) {
+        //        var isrc = "assets/img/" + data.photo;
+        //        document.getElementById("spPhoto").src = isrc;
+        //        $("#spname").html(data.full);
+        //        $("#Starrating").html(data.ratings);
+        //        $('#staars').stars(data.ratings);
+        //        $("#RateSpSubmit_btn").val(id);
+        //        $("#RateSPModel").modal('show');
+
+        //    }
+        //});
+        $("#loadModelForm").show().load('@Url.Action("EditModel", "Admin")', { Id: id });
+        $("#EditDetailsModel").modal('show');
+    }
+</script>

@@ -1,0 +1,198 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Http;
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#AdminDataTable').DataTable({
+            pageLength: 0,
+            lengthMenu: [6, 10, 20, 50],
+            searching: false,
+            info: true,
+            dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
+
+            "sPaginationType": "full_numbers",
+            language: {
+                paginate: {
+                    first: '<img src="assets/img/first-page.png">',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
+                }
+            }
+        });
+
+    });
+
+    
+</script>
+
+<h2><b>Service Requests</b></h2>
+<div class="top_form">
+    <form class="form-inline">
+        <input type="text" name="service_id" class="form-control m-1" placeholder="Service ID">
+        <select class="form-control m-1">
+            <option>Customer</option>
+            <option>...</option>
+        </select>
+        <select class="form-control m-1">
+            <option>Service Provider</option>
+            <option>...</option>
+        </select>
+        <select class="form-control m-1">
+            <option>Status</option>
+            <option>...</option>
+        </select>
+        <input type="date" name="from_date" class="form-control m-1 cal_img" placeholder="From Date">
+        <input type="date" name="to_date" class="form-control m-1 cal_img" placeholder="To Date">
+        <button class="serch_btn m-1">Serch</button>
+        <button class="clear_btn m-1">Clear</button>
+
+    </form>
+</div>
+<div class="table_section">
+    <table id="AdminDataTable" class="table">
+        <thead class="table_head">
+            <tr>
+                <th>Service ID <img src="assets/img/sort.png"></th>
+                <th>Service date <img src="assets/img/sort.png"></th>
+                <th>Customer details <img src="assets/img/sort.png"></th>
+                <th>Service Provider <img src="assets/img/sort.png"></th>
+                <th>Payment <img src="assets/img/sort.png"></th>
+                <th>Status <img src="assets/img/sort.png"></th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table_body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.ServiceRequestId</td>
+                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">
+                        <img src="~/assets/img/calendar2.png"> @item.serviceRequest.ServiceStartDate.ToShortDateString()
+                        <br /><img src="~/assets/img/layer-14.png"> @item.serviceRequest.ServiceStartDate.ToShortTimeString() - @item.serviceRequest.ServiceStartDate.AddHours(Convert.ToDouble(item.serviceRequest.SubTotal)).ToShortTimeString()
+                    </td>
+                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">
+                        &emsp;&ensp;@item.user.FirstName @item.user.LastName <br />
+                        <img src="~/assets/img/layer-15.png" />@item.requestAddress.AddressLine1 @item.requestAddress.AddressLine2 <br />
+                        &emsp;&ensp;@item.requestAddress.PostalCode @item.requestAddress.City
+                    </td>
+                    <td>
+                        @{
+                            if (item.serviceRequest.ServiceProviderId != null)
+                            {
+                                <div class="row">
+                                    <div class="col-md-3 col-12">
+                                        <div class="avtar_image">
+                                            <img src="~/assets/img/@item.serviceRequest.ServiceProvider.UserProfilePicture" class="center_img">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-12">
+                                        <div class="float-left ml-1">
+                                            @item.serviceRequest.ServiceProvider.FirstName @item.serviceRequest.ServiceProvider.LastName<br />
+                                            <span id="@item.serviceRequest.ServiceRequestId"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $.post("/Admin/getRating", { Id: @item.serviceRequest.ServiceProvider.UserId }, function (data) {
+                                        if (data != null) {
+                                            $("#" +@item.serviceRequest.ServiceRequestId).stars(data);
+                                                }
+                                            });
+                                    $.fn.stars = function (rating) {
+                                        return $(this).each(function () {
+                                            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                            var noStar = new Array(Math.floor(6 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                            $(this).html(fullStar + halfStar + noStar + rating);
+                                        });
+                                    }
+                                </script>
+
+                            }
+                            else
+                            {
+                                <p></p>
+                            }
+                        }
+                    </td>
+                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.TotalCost $</td>
+                    <td>
+                        @{
+                            if (item.serviceRequest.Status == 1)
+                            {
+                                <button class="btn btn-success">Completed</button>
+                            }
+                            else if (item.serviceRequest.Status == 2)
+                            {
+                                <button class="btn btn-danger">Canceled</button>
+                            }
+                            else if (item.serviceRequest.Status == 3)
+                            {
+                                <button class="btn btn-primary">Accepted</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-warning">new</button>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (item.serviceRequest.Status == 1 || item.serviceRequest.Status == 2)
+                            {
+                                <div class="dropdown">
+                                    <img src="assets/img/group-38.png" class="dropbtn">
+                                    <div class="dropdown_menu" style="height:150px; opacity:1;">
+                                        <a class="dropdown-item" href="#">Inquiry</a>
+                                        <a class="dropdown-item" href="#">History Log</a>
+                                        <a class="dropdown-item" href="#">Download Invoice</a>
+                                        <a class="dropdown-item">Other Transaction</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="dropdown">
+                                    <img src="assets/img/group-38.png" class="dropbtn">
+                                    <div class="dropdown_menu" style="height:190px; opacity:1;">
+
+                                        <a class="dropdown-item" onclick="EditRescheduleClicked(@item.serviceRequest.ServiceRequestId)">Edit & Reschedule</a>
+                                        <a class="dropdown-item" href="#">Cancel SR by Cust</a>
+                                        <a class="dropdown-item" href="#">Inquiry</a>
+                                        <a class="dropdown-item" href="#">History Log</a>
+                                        <a class="dropdown-item" href="#">Download Invoice</a>
+                                        <a class="dropdown-item">Other Transaction</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="EditDetailsModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h2 class="font-weight-bold">Edit Service Request</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <hr />
+            </div>
+            
+            <div class="modal-body py-0 border-0" id="loadModelForm">
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Helperland</title><!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+    <link href="~/assets/css/rating.css" rel="stylesheet" />
+    <link href="~/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/datatables.min.css">
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+    <script src="~/assets/js/datatables.min.js"></script>
+    <script src="~/assets/js/rating.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/css/user_style.css" rel="stylesheet" />
+</head>
+<body>
+    <!--Main Navigation-->
+    <header>
+
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Navbar -->
+            <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Brand -->
+                <a class="navbar-brand" href="#">
+                    <h1 style="color: white;">helperhand</h1>
+                </a>
+
+                <!-- Right links -->
+                <ul class="navbar-nav ml-auto d-flex flex-row">
+
+                    <!-- Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link me-3 me-lg-0" href="#">
+                            <img src="assets/img/user.png">
+                        </a>
+                    </li>
+                    <!-- Icon -->
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link text-light" href="#">James Smith</a>
+                    </li>
+                    <!-- Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link me-3 me-lg-0" href="#">
+                            <img src="assets/img/logout.png">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Navbar -->
+        </div>
+        <!-- Container wrapper -->
+        <!-- Sidebar -->
+        <div class="leftmenu">
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse nav-light">
+                <div class="position-sticky">
+                    <div class="list-group list-group-flush mx-3 mt-4">
+                        <a id="tab1" class="list-group-item list-group-item-action py-2 ripple active" onclick="Tab1Click()">Service Requests</a>
+                        <a id="tab2" class="list-group-item list-group-item-action py-2 ripple" onclick="Tab2Click()">User Management</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar -->
+    </header>
+    <!--Main Navigation-->
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

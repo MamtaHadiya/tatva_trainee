@@ -5,7 +5,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#HistoryTable').DataTable({
-
+            pageLength: 0,
+            lengthMenu: [6, 10, 20, 50],
             searching: false,
             info: true,
             dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
@@ -38,7 +39,7 @@
 </script>
 
 <h4 class="float-left">Service History</h4>
-<a class="btn rounded-pill px-3 round_btn mb-2 float-right text-light">Export</a>
+<a class="btn rounded-pill px-3 round_btn mb-2 float-right text-light" asp-action="DownloadExcel">Export</a>
 <table id="HistoryTable" class="table">
     <thead class="table_head">
         <tr>
@@ -74,21 +75,22 @@
                                 <div class="col-md-7 col-12">
                                     <p class="float-left">
                                         @item.ServiceProvider.FirstName @item.ServiceProvider.LastName<br />
-                                        <span id="@item.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>3.3
+                                        <span id="@item.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>
                                     </p>
                                     <script>
-                                        $(function () {
-                                            $("#"+@item.ServiceRequestId).stars(3.3);
-                                        });
-
-                                        $.fn.stars = function (rating) {
-                                            return $(this).each(function () {
-                                                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
-                                                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
-                                                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
-                                                $(this).html(fullStar + halfStar + noStar);
+                                    $.post("/Admin/getRating", { Id: @item.ServiceProvider.UserId }, function (data) {
+                                        if (data != null) {
+                                            $("#" +@item.ServiceRequestId).stars(data);
+                                                }
                                             });
-                                        }
+                                    $.fn.stars = function (rating) {
+                                        return $(this).each(function () {
+                                            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                            var noStar = new Array(Math.floor(6 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                            $(this).html(fullStar + halfStar + noStar + rating);
+                                        });
+                                    }
                                     </script>
                                 </div>
 
@@ -183,7 +185,6 @@
                     <div class="col-sm-10 col-12">
                         <p class="float-left">
                             <span id="spname"></span><br />
-                            <span id="staars" data-rating="3.3" data-num-stars="5"></span>
                             <span id="Starrating"></span>
                         </p>
                     </div>

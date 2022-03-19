@@ -16,7 +16,7 @@
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 2px 0px 6px #0000001A;
   border-top-right-radius: 10px;
-  border-bottem-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   position: absolute;
 }
 .sidebar .active {
@@ -125,14 +125,11 @@
   background: #1FB6FF 0% 0% no-repeat padding-box;
   border-radius: 4px;
 }
-.single_line_form{
-  width: 1053px;
-  height: 86px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  border: 1px solid #E1E1E1;
-  padding-top: 20px;
-  display: flex;
-  justify-content: center;
+.top_form {
+    width: 1053px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #E1E1E1;
+    padding: 15px;
 }
 
 input.cal_img{
@@ -143,12 +140,12 @@ input.cal_img{
 }
 .serch_btn{
   width: 84px;
-  height: 46px;
+  height: 30px;
   background: #1FB6FF 0% 0% no-repeat padding-box;
 }
 .clear_btn{
   width: 84px;
-  height: 46px;
+  height: 30px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 1px solid #DEDDDD;
 }
@@ -243,11 +240,3 @@ input.cal_img{
   }
 }
 
-
-/*.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: 0.5rem;
-  overflow-y: auto; *//* Scrollable contents if viewport is shorter than content. */
-}*/
