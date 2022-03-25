@@ -184,7 +184,6 @@ function ValidateForm() {
                     Tab2Click();
                 }
                 else {
-                    $('#AddressForm').reset();
                     $("#ErrorFromAddress").empty();
                     for (var i = 0; i < Object.keys(response).length; i++) {
                         $("#ErrorFromAddress").append("<li>" + response[i] + "</li>");

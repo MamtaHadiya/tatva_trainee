@@ -61,21 +61,22 @@
                                 <div class="col-md-7 col-12">
                                     <p class="float-left">
                                         @request.ServiceProvider.FirstName @request.ServiceProvider.LastName<br />
-                                        <span id="@request.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>3.3
+                                        <span id="@request.ServiceRequestId" data-rating="2.5" data-num-stars="5"></span>
                                     </p>
                                     <script>
-                                        $(function () {
-                                            $("#"+@request.ServiceRequestId).stars(3.3);
-                                        });
-
-                                        $.fn.stars = function (rating) {
-                                            return $(this).each(function () {
-                                                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
-                                                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
-                                                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
-                                                $(this).html(fullStar + halfStar + noStar);
+                                    $.post("/Admin/getRating", { Id: @request.ServiceProvider.UserId }, function (data) {
+                                        if (data != null) {
+                                            $("#" +@request.ServiceRequestId).stars(data);
+                                                }
                                             });
-                                        }
+                                    $.fn.stars = function (rating) {
+                                        return $(this).each(function () {
+                                            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+                                            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+                                            var noStar = new Array(Math.floor(6 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+                                            $(this).html(fullStar + halfStar + noStar + rating);
+                                        });
+                                    }
                                     </script>
                                 </div>
 

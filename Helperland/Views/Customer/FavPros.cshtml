@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Helperland.Models.ViewModel>
+@{
+    Layout = null;
+}
+<link href="~/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+<script>
+    $.fn.stars = function (rating) {
+        return $(this).each(function () {
+            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star" style="color: gold"></i>');
+            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt" style="color: gold"></i>' : '';
+            var noStar = new Array(Math.floor(6 - rating)).join('<i class="far fa-star" style="color: gold"></i>');
+            $(this).html(fullStar + halfStar + noStar + rating);
+        });
+    }
+    function FavoritebtnClick(id) {
+        $.post("/Customer/FavProvider", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Service Provider Favorited successfully.");
+                FavClick();
+            }
+            else if (data == false) {
+                alert("Service Provider UnFavorited Successfully.");
+                FavClick();
+            }
+            else {
+                alert("error");
+            }
+        });
+        FavClick();
+    }
+    function BlockbtnClick(id) {
+        $.post("/Customer/BlockProvider", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("Service Provider Blocked successfully.");
+                FavClick();
+            }
+            else if (data == false) {
+                alert("Service Provider UnBlocked Successfully.");
+                FavClick();
+            }
+            else {
+                alert("error");
+            }
+        });
+        FavClick();
+    }
+</script>
+@foreach (var item in Model)
+{
+    <div class="col-md-4 float-left p-2">
+        <div class="card text-center pt-3">
+            <div class="avtar_image m-auto">
+                <img src="~/assets/img/@item.user.UserProfilePicture" class="center_img">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.user.FirstName @item.user.LastName</h5>
+                <p>
+                    @foreach (var r in item.serviceRequest.Ratings)
+                    {
+                    <span id="abc @item.user.UserId"></span>
+                <script>
+                    $("[id='abc @item.user.UserId']").stars(@r.Ratings);
+
+                </script>
+                    }
+                </p>
+                
+                <button id="@item.user.UserId Fav" class="cancel_btn bg-primary" onclick="FavoritebtnClick(@item.user.UserId);">Favorite</button>
+                <button id="@item.user.UserId" class="cancel_btn" onclick="BlockbtnClick(@item.user.UserId);">Block</button>
+                <script>
+                    $.post("/Customer/CheckBlock", { Id: parseInt(@item.user.UserId) }, function (data) {
+                        if (data == true) {
+                            var x = "#" + @item.user.UserId;
+                            $(x).html("UnBlock");
+                        }
+                        else {
+                            var x = "#" + @item.user.UserId;
+                            $(x).html("Block");
+                        }
+                    });
+                    $.post("/Customer/CheckFav", { Id: parseInt(@item.user.UserId) }, function (data) {
+                        if (data == true) {
+                            $("[id='@item.user.UserId Fav']").html("UnFavorite");
+                        }
+                        else {
+                            $("[id='@item.user.UserId Fav']").html("Favorite");
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+}
+

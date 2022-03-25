@@ -69,7 +69,7 @@ namespace Helperland.Controllers
                 user.ModifiedDate = DateTime.Now;
                 user.ModifiedBy = 1;
                 user.IsApproved = true;
-                user.IsActive = true;
+                user.IsActive = false;
                 user.IsDeleted = true;
                 _db.Add(user);
                 _db.SaveChanges();
@@ -118,32 +118,37 @@ namespace Helperland.Controllers
         {
             if (ModelState.IsValid)
             {
-                var details = (from userlist in _db.Users
-                               where userlist.Email == objUser.Username && userlist.Password == objUser.Password
-                               select new
-                               {
-                                   userlist.UserId,
-                                   userlist.FirstName,
-                                   userlist.Email,
-                                   userlist.Password,
-                                   userlist.UserTypeId
-
-                               }).ToList();
-                if (details.FirstOrDefault() != null)
+                var userdata = _db.Users.Where(x => x.Email.Equals(objUser.Username) && x.Password.Equals(objUser.Password)).FirstOrDefault();
+                
+                if (userdata != null)
                 {
                     //Session["username"] = objUser.Username.ToString();
-                    HttpContext.Session.SetString("username", objUser.Username);
-                    HttpContext.Session.SetInt32("userid", details.Select(x => x.UserId).FirstOrDefault());
+                    HttpContext.Session.SetString("username", userdata.Email);
+                    HttpContext.Session.SetInt32("userid", userdata.UserId);
                     ModelState.Clear();
-                    if(details.Select(x => x.UserTypeId).FirstOrDefault() == 1)
+                    if(userdata.UserTypeId == 1)
                     {
-                        ViewBag.Firstname = details.Select(x => x.FirstName).FirstOrDefault();
+                        userdata.IsActive = true;
+                        _db.Users.Update(userdata);
+                        _db.SaveChanges();
+                        ViewBag.Firstname = userdata.FirstName;
                         return RedirectToAction("Index", "Customer");
                     }
-                    else if(details.Select(x => x.UserTypeId).FirstOrDefault() == 2)
+                    else if(userdata.UserTypeId == 2)
                     {
-                        ViewBag.Firstname = details.Select(x => x.FirstName).FirstOrDefault();
+                        userdata.IsActive = true;
+                        _db.Users.Update(userdata);
+                        _db.SaveChanges();
+                        ViewBag.Firstname = userdata.FirstName;
                         return RedirectToAction("Index", "ServiceProvider");
+                    }
+                    else if (userdata.UserTypeId == 3)
+                    {
+                        userdata.IsActive = true;
+                        _db.Users.Update(userdata);
+                        _db.SaveChanges();
+                        ViewBag.Firstname = userdata.FirstName + " " + userdata.LastName;
+                        return RedirectToAction("Index", "Admin");
                     }
                     else
                     {
@@ -163,6 +168,10 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
+            var userdata = _db.Users.Where(x => x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).FirstOrDefault();
+            userdata.IsActive = false;
+            _db.Users.Update(userdata);
+            _db.SaveChanges();
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("userid");
             return RedirectToAction("Login");

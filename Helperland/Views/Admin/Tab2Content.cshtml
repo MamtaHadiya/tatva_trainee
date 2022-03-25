@@ -3,11 +3,12 @@
     Layout = null;
 }
 <script type="text/javascript">
+
     $(document).ready(function () {
-        $('#AdminTable2').DataTable({
+        var table = $('#AdminTable2').DataTable({
             pageLength: 0,
-            lengthMenu: [6, 10, 20, 50],
-            searching: false,
+            lengthMenu: [10, 20, 50],
+            searching: true,
             info: true,
             dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
 
@@ -21,38 +22,63 @@
                 }
             }
         });
-
+        $("#searchBtn").click(function (e) {
+            e.preventDefault();
+            table.column(0).search([
+                $("#UserName").val(),
+            ]);
+            if ($('#UserType option:selected').val() != 0) {
+                table.column(3).search([
+                    $('#UserType option:selected').text(),
+                ]);
+            }
+            table.column(4).search([
+                $("#Postalcode").val(),
+            ]);
+            table.column(5).search([
+                $("#phone").val(),
+            ]);
+            //var x = table.column(2).data();
+            //for (var i = 0; i < x.length; i++) {
+            //    var y = new Date(x[i]);
+            //}
+            table.draw();
+        });
     });
-
-
+    $("#clearBtn").click(function () {
+        Tab2Click();
+    });
+    
 </script>
 
 <h2><b>Service Requests</b></h2>
 <div class="top_form">
-    <form class="form-inline">
-        <select class="form-control m-1">
-            <option>User name</option>
-            <option>...</option>
-        </select>
-        <select class="form-control m-1">
-            <option>User Type id</option>
-            <option>...</option>
+    <form class="form-inline" id="Tab2SearchForm">
+        <input type="text" class="form-control" placeholder="User name" id="UserName" />
+        <select class="form-control m-1" id="UserType">
+            <option value="0" selected disabled>User Type </option>
+            <option value="1">Customer</option>
+            <option value="2">Service Provider</option>
         </select>
         <div class="input-group m-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">+49</div>
             </div>
-            <input type="text" name="phone" class="form-control" placeholder="Phone No">
+            <input type="number" id="phone" class="form-control" placeholder="Phone No">
         </div>
-        <input type="text" name="phone" class="form-control m-1" placeholder="Postal code">
-        <input type="text" name="phone" class="form-control m-1" placeholder="Email">
-        
-        <input type="date" name="from_date" class="form-control m-1 cal_img" placeholder="From Date">
-        <input type="date" name="to_date" class="form-control m-1 cal_img" placeholder="To Date">
-        <button class="serch_btn m-1">Serch</button>
-        <button class="clear_btn m-1">Clear</button>
+        <input type="number" id="Postalcode" class="form-control m-1" placeholder="Postal code">
+        <input type="email" id="Email" class="form-control m-1" placeholder="Email">
+
+        <input type="text" id="from_date" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input type="text" id="to_date" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <button class="serch_btn m-1" id="searchBtn">Search</button>
+        <button class="clear_btn m-1" type="reset" id="clearBtn">Clear</button>
 
     </form>
+    
+</div>
+<div style="text-align:right">
+    <a class="btn rounded-pill px-3 round_btn mt-2 text-light" asp-action="DownloadExcel">Export</a>
 </div>
 <div class="table_section">
     <table id="AdminTable2" class="table">
@@ -71,37 +97,107 @@
         <tbody class="table_body">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.FirstName @item.LastName</td>
-                    <td></td>
-                    <td><img src="~/assets/img/calendar2.png"> @item.CreatedDate.ToShortDateString()</td>
-                    <td>@{
-                        if(item.UserTypeId == 1)
-                {
-                    <p>Customer</p>
-                }
-                else
-                {
-                    <p>Service Provider</p>
-                }
+            <tr>
+                <td>@item.FirstName @item.LastName</td>
+                <td></td>
+                <td><img src="~/assets/img/calendar2.png"> @item.CreatedDate.ToShortDateString()</td>
+                <td>
+                    @{
+                        if (item.UserTypeId == 1)
+                        {
+                            <p>Customer</p>
                         }
-                        </td>
-                    <td>@item.ZipCode</td>
-                    <td>@item.Mobile</td>
-                    <td><button class="bg-success">Active</button></td>
-                    <td>
-                        <div class="dropdown">
-                            <img src="assets/img/group-38.png" class="dropbtn">
-                            <div class="dropdown_menu" style="height:150px; opacity:1;">
-                                <a class="dropdown-item" href="#">Inquiry</a>
-                                <a class="dropdown-item" href="#">History Log</a>
-                                <a class="dropdown-item" href="#">Download Invoice</a>
-                                <a class="dropdown-item">Other Transaction</a>
+                        else
+                        {
+                            <p>Service Provider</p>
+                        }
+                    }
+                </td>
+                <td>@item.ZipCode</td>
+                <td>@item.Mobile</td>
+                <td>
+                    @{
+
+                        if (item.IsActive == true)
+                        {
+                            if (item.UserTypeId == 2 && item.IsApproved == true)
+                            {
+                                <button class="rounded-pill px-2 bg-success">Active/Approved</button>
+                            }
+                            else if (item.UserTypeId == 2 && item.IsApproved == false)
+                            {
+                                <button class="rounded-pill px-2 bg-primary">Active/Non-Approved</button>
+                            }
+                            else
+                            {
+                                <button class="rounded-pill px-2 bg-success">Active</button>
+                            }
+                        }
+                        else
+                        {
+                            if (item.UserTypeId == 2 && item.IsApproved == true)
+                            {
+                                <button class="rounded-pill px-2 bg-danger">Not-Active/Approved</button>
+                            }
+                            else if (item.UserTypeId == 2 && item.IsApproved == false)
+                            {
+                                <button class="rounded-pill px-2 bg-danger">Not-Active/Non-Approved</button>
+                            }
+                            else
+                            {
+                                <button class="rounded-pill px-2 bg-danger">Not-Active</button>
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.UserTypeId == 2)
+                        {
+                            if (item.IsApproved == true)
+                            {
+                                <div class="dropdown">
+                                    <img src="assets/img/group-38.png" class="dropbtn px-2">
+                                    <div class="dropdown_menu" style="height:150px; opacity:1;">
+                                        <a class="dropdown-item" onclick="ActivateClicked(@item.UserId);">Activate/Deactivate</a>
+                                        <a class="dropdown-item" href="#">History Log</a>
+                                        <a class="dropdown-item" href="#">Download <br /> Invoice</a>
+                                        <a class="dropdown-item">Other Transaction</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="dropdown">
+                                    <img src="assets/img/group-38.png" class="dropbtn px-2">
+                                    <div class="dropdown_menu" style="height:150px; opacity:1;">
+                                        <a class="dropdown-item" onclick="ActivateClicked(@item.UserId);">Activate/Deactivate</a>
+                                        <a class="dropdown-item" onclick="ApprooveClicked(@item.UserId);">Approove User</a>
+                                        <a class="dropdown-item" href="#">History Log</a>
+                                        <a class="dropdown-item" href="#">Download <br /> Invoice</a>
+                                        <a class="dropdown-item">Other Transaction</a>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <div class="dropdown">
+                                <img src="assets/img/group-38.png" class="dropbtn px-2">
+                                <div class="dropdown_menu" style="height:150px; opacity:1;">
+                                    <a class="dropdown-item" onclick="ActivateClicked(@item.UserId);">Activate/Deactivate</a>
+                                    <a class="dropdown-item" href="#">History Log</a>
+                                    <a class="dropdown-item" href="#">Download <br /> Invoice</a>
+                                    <a class="dropdown-item">Other Transaction</a>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        }
+                    }
+
+                </td>
                 </tr>
-            }
+        }
         </tbody>
     </table>
 </div>

@@ -157,7 +157,7 @@
             <a id="Dashboard" class="link active-link" onclick="DashboardClick()"> Dashboard</a>
             <a id="History" class="link" onclick="HistoryClick()"> Service History</a>
             <a> Service Schedule</a>
-            <a> Favourite Pros</a>
+            <a id="Fav" class="link" onclick="FavClick()"> Favourite Pros</a>
             <a> Invoices</a>
             <a> Notifications</a>
         </div>
@@ -168,6 +168,9 @@
 
             </div>
             <div id="HistoryContent" style="display:none">
+
+            </div>
+            <div id="FavContent" style="display:none">
 
             </div>
             <div id="MySetting" style="display:none">
@@ -186,26 +189,42 @@
     });
         function DashboardClick() {
         $("#Dashboard").addClass("active-link");
-        $("#History").removeClass("active-link").addClass("link");
+            $("#History").removeClass("active-link").addClass("link");
+            $("#Fav").removeClass("active-link").addClass("link");
 
         $("#HistoryContent").hide();
-        $("#MySetting").hide();
+            $("#MySetting").hide();
+            $("#FavContent").hide();
         $("#DashboardContent").show().load('@Url.Action("Dashboard", "Customer")');
         }
         function HistoryClick() {
         $("#History").addClass("active-link");
-        $("#Dashboard").removeClass("active-link").addClass("link");
+            $("#Dashboard").removeClass("active-link").addClass("link");
+            $("#Fav").removeClass("active-link").addClass("link");
 
         $("#DashboardContent").hide();
-        $("#MySetting").hide();
+            $("#MySetting").hide();
+            $("#FavContent").hide();
         $("#HistoryContent").show().load('@Url.Action("ServiceHistory", "Customer")');
         }
-        function MySettingClick() {
+    function FavClick() {
+        $("#Fav").addClass("active-link");
         $("#History").removeClass("active-link").addClass("link");
         $("#Dashboard").removeClass("active-link").addClass("link");
 
         $("#DashboardContent").hide();
         $("#HistoryContent").hide();
+        $("#MySetting").hide();
+        $("#FavContent").show().load('@Url.Action("FavPros", "Customer")');
+        }
+        function MySettingClick() {
+        $("#History").removeClass("active-link").addClass("link");
+            $("#Dashboard").removeClass("active-link").addClass("link");
+            $("#Fav").removeClass("active-link").addClass("link");
+
+        $("#DashboardContent").hide();
+            $("#HistoryContent").hide();
+            $("#FavContent").hide();
         $("#MySetting").show().load('@Url.Action("MySetting", "Customer")');
         }
 
@@ -276,7 +295,7 @@
     }
 
     function RateSpclicked(id) {
-        
+
         $.post("/Customer/getSpName", { Id: parseInt(id) }, function (data) {
             if (data != null) {
                 var isrc = "assets/img/" + data.photo;
@@ -288,10 +307,10 @@
 
             }
         });
-        
+
     }
 
-    
+
 
     function RateSpSubmit(id) {
         var actionurl = '@Url.Action("RateSp", "Customer")';

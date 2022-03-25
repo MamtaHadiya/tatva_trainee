@@ -6,10 +6,11 @@
 @using Microsoft.AspNetCore.Http;
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#AdminDataTable').DataTable({
+        
+        var table1 = $('#AdminDataTable').DataTable({
             pageLength: 0,
             lengthMenu: [6, 10, 20, 50],
-            searching: false,
+            searching: true,
             info: true,
             dom: '<"float-left"B><"float-right"f>rt<"row mt-2"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
 
@@ -24,31 +25,57 @@
             }
         });
 
+        $("#Searchbtn").click(function (e) {
+            e.preventDefault();
+            table1.column(0).search([
+                $("#serviceId").val(),
+            ]);
+            table1.column(2).search([
+                $("#customerName").val(),
+            ]);
+            table1.column(2).search([
+                $("#postalCode").val(),
+            ]);
+            table1.column(3).search([
+                $("#spName").val(),
+            ]);
+            table1.column(4).search([
+                $("#serviceId").val(),
+            ]);
+            if ($('#status option:selected').val() != 0) {
+                table1.column(5).search([
+                    $('#status option:selected').text(),
+                ]);
+            }
+            table1.draw();
+        });
+    });
+    $("#Clearbtn").click(function () {
+        Tab1Click();
     });
 
-    
 </script>
 
 <h2><b>Service Requests</b></h2>
 <div class="top_form">
     <form class="form-inline">
-        <input type="text" name="service_id" class="form-control m-1" placeholder="Service ID">
-        <select class="form-control m-1">
-            <option>Customer</option>
-            <option>...</option>
+        <input type="text" id="serviceId" name="service_id" class="form-control m-1" placeholder="Service ID">
+        <input type="text" class="form-control m-1" id="postalCode" placeholder="Postal code" />
+        <input type="text" class="form-control m-1" id="email" placeholder="Email" />
+        <input type="text" class="form-control m-1" id="customerName" placeholder="Customer Name" />
+        <input type="text" class="form-control m-1" id="spName" placeholder="Service Provider Name" />
+        <select class="form-control m-1" name="status" id="status">
+            <option value="0" selected disabled>Status</option>
+            <option value="1">Completed</option>
+            <option value="2">Canceled</option>
+            <option value="3">Accepted</option>
+            <option value="4">New</option>
+            <option value="5">Pending</option>
         </select>
-        <select class="form-control m-1">
-            <option>Service Provider</option>
-            <option>...</option>
-        </select>
-        <select class="form-control m-1">
-            <option>Status</option>
-            <option>...</option>
-        </select>
-        <input type="date" name="from_date" class="form-control m-1 cal_img" placeholder="From Date">
-        <input type="date" name="to_date" class="form-control m-1 cal_img" placeholder="To Date">
-        <button class="serch_btn m-1">Serch</button>
-        <button class="clear_btn m-1">Clear</button>
+        <input type="text" id="fromDate" name="from_date" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input type="text" id="toDate" name="to_date" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <button class="serch_btn m-1" id="Searchbtn">Search</button>
+        <button class="clear_btn m-1" id="Clearbtn" type="reset">Clear</button>
 
     </form>
 </div>
@@ -64,8 +91,7 @@
                 <th>Status <img src="assets/img/sort.png"></th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody class="table_body">
+        </thead><tbody class="table_body">
             @foreach (var item in Model)
             {
                 <tr>
@@ -145,7 +171,7 @@
                             if (item.serviceRequest.Status == 1 || item.serviceRequest.Status == 2)
                             {
                                 <div class="dropdown">
-                                    <img src="assets/img/group-38.png" class="dropbtn">
+                                    <img src="assets/img/group-38.png" class="dropbtn px-2">
                                     <div class="dropdown_menu" style="height:150px; opacity:1;">
                                         <a class="dropdown-item" href="#">Inquiry</a>
                                         <a class="dropdown-item" href="#">History Log</a>
@@ -157,11 +183,11 @@
                             else
                             {
                                 <div class="dropdown">
-                                    <img src="assets/img/group-38.png" class="dropbtn">
+                                    <img src="assets/img/group-38.png" class="dropbtn px-2">
                                     <div class="dropdown_menu" style="height:190px; opacity:1;">
 
                                         <a class="dropdown-item" onclick="EditRescheduleClicked(@item.serviceRequest.ServiceRequestId)">Edit & Reschedule</a>
-                                        <a class="dropdown-item" href="#">Cancel SR by Cust</a>
+                                        <a class="dropdown-item" onclick="CancelClicked(@item.serviceRequest.ServiceRequestId)" href="#">Cancel SR by Cust</a>
                                         <a class="dropdown-item" href="#">Inquiry</a>
                                         <a class="dropdown-item" href="#">History Log</a>
                                         <a class="dropdown-item" href="#">Download Invoice</a>

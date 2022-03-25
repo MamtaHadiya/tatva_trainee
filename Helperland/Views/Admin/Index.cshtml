@@ -4,6 +4,20 @@
     Layout = "~/Views/Shared/_Layout4.cshtml";
 }
 <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    .round_btn {
+        background: #1D7A8C 0% 0% no-repeat padding-box;
+        color: #fff;
+        border-radius: 17px;
+    }
+
+        .round_btn:hover {
+            background-color: #204060;
+            color: #ffffff;
+        }
 
     .top_form {
         width: 1053px;
@@ -79,19 +93,92 @@
         $("#tab2Content").show().load('@Url.Action("Tab2Content", "Admin")');
     }
     function EditRescheduleClicked(id) {
-        //$.post("/Admin/", { Id: parseInt(id) }, function (data) {
-        //    if (data != null) {
-        //        var isrc = "assets/img/" + data.photo;
-        //        document.getElementById("spPhoto").src = isrc;
-        //        $("#spname").html(data.full);
-        //        $("#Starrating").html(data.ratings);
-        //        $('#staars').stars(data.ratings);
-        //        $("#RateSpSubmit_btn").val(id);
-        //        $("#RateSPModel").modal('show');
-
-        //    }
-        //});
         $("#loadModelForm").show().load('@Url.Action("EditModel", "Admin")', { Id: id });
         $("#EditDetailsModel").modal('show');
     }
+    function SubmitEditedAddress() {
+        $("#EditDataForm").submit(function (e) {
+            e.preventDefault();
+            var formvalues = $(this).serializeArray();
+            if ($("#StartDate").val() != "") {
+                var x = $("#StartDate").val() + " " + $("#StartTime").val();
+                formvalues.push({ name: "BookingStartTime", value: x });
+            }
+            else {
+                formvalues.push({ name: "BookingStartTime", value: "" });
+            }
+            alert(JSON.stringify(formvalues));
+            $.post("/Admin/EditDetails", formvalues, function (data) {
+               if (data == true) {
+                    alert("Details Updated Successfully.");
+                    $("#EditDetailsModel").modal('hide');
+                    Tab2Click();
+                }
+                else {
+                    //$("#EditDataForm").trigger("reset");
+                    $("#ErrorMsgFromAddress").empty();
+                    for (var i = 0; i < Object.keys(data).length; i++) {
+                        $("#ErrorMsgFromAddress").append("<li>" + data[i] + "</li>");
+                    }
+                }
+            });
+        });
+
+    }
+
+    function CancelClicked(id) {
+        var result = confirm("Are you sure you want to delete Service: " + id + " ?");
+        if (result) {
+            $.post("/Admin/CancelService", { Id: parseInt(id) }, function (data) {
+                if (data == true) {
+                    alert("Service Cancelled successfully.");
+                    Tab1Click();
+                }
+                else {
+                    alert("Error.");
+                    Tab2Click();
+                }
+            });
+        }
+    }
+
+    function ActivateClicked(id) {
+        $.post("/Admin/ActivateUser", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("User Activated successfully.");
+                Tab2Click();
+            }
+            else if (data == false) {
+                alert("User Deactivated successfully.");
+                Tab2Click();
+            }
+            else {
+                alert("Error.");
+                Tab2Click();
+            }
+        });
+    }
+
+    function ApprooveClicked(id) {
+        $.post("/Admin/ApprooveUser", { Id: parseInt(id) }, function (data) {
+            if (data == true) {
+                alert("User Approoved successfully.");
+                Tab2Click();
+            }
+            else {
+                alert("Error.");
+                Tab2Click();
+            }
+        });
+    }
+
+    //function Tab2Search() {
+    //    $("#Tab2SearchForm").submit(function (e) {
+    //        e.preventDefault();
+    //        var formvalues = $(this).serializeArray();
+    //        $.post("Admin/UserSearch", formvalues, function (data) {
+    //            alert(data);
+    //        })
+    //    })
+    //}
 </script>

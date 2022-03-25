@@ -67,6 +67,123 @@ namespace Helperland.Controllers
             //return View(_db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList());
         }
 
+        public IActionResult FavPros()
+        {
+            List<User> users = _db.Users.ToList();
+            List<ServiceRequest> requests = _db.ServiceRequests.ToList();
+           foreach(var item in requests)
+            {
+                _db.Entry(item).Collection(s => s.Ratings).Load();
+            }
+            var record = from a in requests
+                         join b in users on a.ServiceProviderId equals b.UserId into table2
+                         from b in table2.Where(x => a.UserId.Equals(HttpContext.Session.GetInt32("userid")) && a.Status.Equals(1)).ToList()
+                         select new ViewModel
+                         {
+                             serviceRequest = a,
+                             user = b
+                         };
+            return View(record);
+        }
+
+        public IActionResult BlockProvider(int Id)
+        {
+            var id = HttpContext.Session.GetInt32("userid");
+            var FBdata = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId.Equals(Id) && x.UserId.Equals(id)).FirstOrDefault();
+            FavoriteAndBlocked favoriteAndBlocked = new FavoriteAndBlocked();
+
+            if (FBdata != null && FBdata.IsBlocked == true)
+            {
+                FBdata.IsBlocked = false;
+
+                _db.FavoriteAndBlockeds.Update(FBdata);
+                _db.SaveChanges();
+                return Json(false);
+            }
+            else if (FBdata != null && FBdata.IsBlocked == false)
+            {
+                FBdata.IsBlocked = true;
+
+                _db.FavoriteAndBlockeds.Update(FBdata);
+                _db.SaveChanges();
+                return Json(true);
+            }
+            else
+            {
+                favoriteAndBlocked.UserId = (int)id;
+                favoriteAndBlocked.TargetUserId = Id;
+                favoriteAndBlocked.IsFavorite = false;
+                favoriteAndBlocked.IsBlocked = true;
+
+                _db.FavoriteAndBlockeds.Add(favoriteAndBlocked);
+                _db.SaveChanges();
+                return Json(true);
+            }
+
+        }
+
+        public IActionResult FavProvider(int Id)
+        {
+            var id = HttpContext.Session.GetInt32("userid");
+            var FBdata = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId.Equals(Id) && x.UserId.Equals(id)).FirstOrDefault();
+            FavoriteAndBlocked favoriteAndBlocked = new FavoriteAndBlocked();
+
+            if (FBdata != null && FBdata.IsFavorite == true)
+            {
+                FBdata.IsFavorite = false;
+
+                _db.FavoriteAndBlockeds.Update(FBdata);
+                _db.SaveChanges();
+                return Json(false);
+            }
+            else if (FBdata != null && FBdata.IsFavorite == false)
+            {
+                FBdata.IsFavorite = true;
+
+                _db.FavoriteAndBlockeds.Update(FBdata);
+                _db.SaveChanges();
+                return Json(true);
+            }
+            else
+            {
+                favoriteAndBlocked.UserId = (int)id;
+                favoriteAndBlocked.TargetUserId = Id;
+                favoriteAndBlocked.IsFavorite = true;
+                favoriteAndBlocked.IsBlocked = false;
+
+                _db.FavoriteAndBlockeds.Add(favoriteAndBlocked);
+                _db.SaveChanges();
+                return Json(true);
+            }
+
+        }
+
+        public IActionResult CheckBlock(int Id)
+        {
+            var buser = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId.Equals(Id)).FirstOrDefault();
+            if (buser != null && buser.IsBlocked == true)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
+        }
+
+        public IActionResult CheckFav(int Id)
+        {
+            var buser = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId.Equals(Id)).FirstOrDefault();
+            if (buser != null && buser.IsFavorite == true)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
+        }
+
         public FileResult DownloadExcel()
         {
             List<ServiceRequest> record = _db.ServiceRequests.Where(x => x.ServiceStartDate < DateTime.Now && x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).ToList();

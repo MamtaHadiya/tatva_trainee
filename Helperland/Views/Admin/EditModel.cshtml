@@ -1,21 +1,21 @@
-﻿@model Helperland.Models.ServiceRequestAddress
+﻿@model Helperland.Models.AdminEditClass
 
 @Html.AntiForgeryToken()
 @{
     Layout = null;
 }
-
 <form id="EditDataForm" method="post">
-    <ul id="ErrorMsgFromAddress" class="pl-4">
+    <ul id="ErrorMsgFromAddress" class="text-danger pl-4">
     </ul>
     <div class="row">
         <div class="col-md-6 col-12">
             <label>Date</label>
-            <input type="date" id="StartDate" name="StartDate" value="12/02/2022" class="form-control mx-2" required />
+            <input type="date" id="StartDate" name="StartDate" class="form-control mx-2" />
+            <p id="abc"></p>
         </div>
         <div class="col-md-6 col-12">
             <label>Time</label>
-            <select class="form-control" id="StartTime" name="StartTime" required>
+            <select class="form-control" id="StartTime" name="StartTime" >
                 <option value="1:00 PM">1:00 PM</option>
                 <option value="2:00 PM">2:00 PM</option>
                 <option value="3:00 PM">3:00 PM</option>
@@ -37,6 +37,8 @@
     <p><b>Service Address</b></p>
     <div class="row mt-0">
         <div class="col-md-6 col-12">
+            <input asp-for="ServiceRequestId" type="hidden" />
+
             <label>Street name</label>
             <input asp-for="AddressLine1" class="form-control" id="AddressLine1" />
 
@@ -56,7 +58,7 @@
             <input asp-for="City" class="form-control" id="City">
         </div>
     </div>
-    <p><b>Invoice Address</b></p>
+    @*<p><b>Invoice Address</b></p>
     <div class="row">
         <div class="col-md-6 col-12">
             <label>Street name*</label>
@@ -77,7 +79,7 @@
             <label>City*</label>
             <input asp-for="City" class="form-control" id="City">
         </div>
-    </div>
+    </div>*@
     <div class="row mt-1">
         <div class="col-md-12 col-12">
             <label>Why you want to reschedual Service Request?</label>
@@ -92,6 +94,6 @@
     </div>
 
     <div class="px-2 pb-2 mt-2">
-        <button value="update" class="form-control btn btn-primary mt-1" onclick="SubmitEditedAddress();">Update</button>
+        <button value="update" class="form-control btn btn-primary mt-1" onclick="SubmitEditedAddress()">Update</button>
     </div>
 </form>
