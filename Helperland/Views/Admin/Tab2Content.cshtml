@@ -14,12 +14,21 @@
 
             "sPaginationType": "full_numbers",
             language: {
+                "search": " ",
+                "searchPlaceholder": "Search",
                 paginate: {
                     first: '<img src="assets/img/first-page.png">',
                     next: '<i class="fas fa-angle-right"></i>',
                     previous: '<i class="fas fa-angle-left"></i>',
                     last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
                 }
+            },
+            "search": {
+                "addClass": 'form-control input-lg col-xs-12'
+            },
+            "fnDrawCallback": function () {
+                $("input[type='search']").attr("id", "SearchBox");
+                $('#SearchBox').css("display", "none");
             }
         });
         $("#searchBtn").click(function (e) {
@@ -42,6 +51,9 @@
             ]);
             table.column(2).search([
                 $("#from_date").val(),
+            ]);
+            table.column(2).search([
+                $("#to_date").val(),
             ]);
             table.draw();
         });
@@ -69,9 +81,11 @@
         </div>
         <input type="number" id="Postalcode" class="form-control m-1" placeholder="Postal code">
         <input type="email" id="Email" class="form-control m-1" placeholder="Email">
+        <input type="text" id="from_date" class="form-control m-1 cal_img" placeholder="  From Date">
+        <input type="text" id="to_date" class="form-control m-1 cal_img" placeholder="  To Date">
 
-        <input type="text" id="from_date" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-        <input type="text" id="to_date" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        @*<input type="text" id="from_date" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input type="text" id="to_date" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">*@
         <button class="serch_btn m-1" id="searchBtn">Search</button>
         <button class="clear_btn m-1" type="reset" id="clearBtn">Clear</button>
 

@@ -16,12 +16,21 @@
 
             "sPaginationType": "full_numbers",
             language: {
+                "search": " ",
+                "searchPlaceholder": "Search",
                 paginate: {
                     first: '<img src="assets/img/first-page.png">',
                     next: '<i class="fas fa-angle-right"></i>',
                     previous: '<i class="fas fa-angle-left"></i>',
                     last: '<img src="assets/img/first-page.png" style="transform:rotate(180deg);">',
                 }
+            },
+            "search": {
+                "addClass": 'form-control input-lg col-xs-12'
+            },
+            "fnDrawCallback": function () {
+                $("input[type='search']").attr("id", "searchBox");
+                $('#searchBox').css("display", "none");
             }
         });
 
@@ -41,6 +50,12 @@
             ]);
             table1.column(4).search([
                 $("#serviceId").val(),
+            ]);
+            table1.column(1).search([
+                $("#fromdate").val(),
+            ]);
+            table1.column(1).search([
+                $("#todate").val(),
             ]);
             if ($('#status option:selected').val() != 0) {
                 table1.column(5).search([
@@ -72,8 +87,8 @@
             <option value="4">New</option>
             <option value="5">Pending</option>
         </select>
-        <input type="text" id="fromDate" name="from_date" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
-        <input type="text" id="toDate" name="to_date" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input type="text" id="fromDate" name="fromdate" class="form-control m-1 cal_img" placeholder="  From Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input type="text" id="toDate" name="todate" class="form-control m-1 cal_img" placeholder="  To Date" onfocus="(this.type='date')" onblur="(this.type='text')">
         <button class="serch_btn m-1" id="Searchbtn">Search</button>
         <button class="clear_btn m-1" id="Clearbtn" type="reset">Clear</button>
 
