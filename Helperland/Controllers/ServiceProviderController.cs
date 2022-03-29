@@ -214,62 +214,69 @@ namespace Helperland.Controllers
             var Providers = _db.Users.Where(x => x.ZipCode.Equals(ServiceRequest.ZipCode) && x.UserTypeId.Equals(2) && x.UserId != (ServiceRequest.ServiceProviderId)).ToList();
             var Blocked = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId.Equals(ServiceRequest.UserId) && x.IsBlocked.Equals(true)).FirstOrDefault();
 
-            if(Blocked != null)
+            if(ServiceRequest.Status != 3)
             {
-                return Json("You Have Blocked this User. if you want to Accept this service then unblock this user.");
+                if (Blocked != null)
+                {
+                    return Json("You Have Blocked this User. if you want to Accept this service then unblock this user.");
+                }
+                else
+                {
+                    if (userServices != null)
+                    {
+                        foreach (var item in userServices)
+                        {
+                            if (item.ServiceStartDate.ToLongDateString() == ServiceRequest.ServiceStartDate.ToLongDateString())
+                            {
+                                int result = DateTime.Compare(item.ServiceStartDate.AddHours(Convert.ToDouble(item.SubTotal + 1)), ServiceRequest.ServiceStartDate);
+                                if (result > 0)
+                                {
+                                    return Json(false);
+                                }
+                                else
+                                {
+                                    ServiceRequest.Status = 3;
+                                    ServiceRequest.ServiceProviderId = HttpContext.Session.GetInt32("userid");
+                                    _db.ServiceRequests.Update(ServiceRequest);
+                                    _db.SaveChanges();
+
+
+                                    foreach (var provider in Providers)
+                                    {
+                                        var subject = "Service Accepted by Another Service Provider";
+                                        var body = "Hi " + provider.FirstName + "<br>Service Id = " + ServiceRequest.ServiceRequestId +
+                                            " This service request is no more available. It has been assigned to another provider." +
+                                            "Thankyou";
+                                        SendEmail(provider.Email, body, subject);
+                                    }
+
+                                    return Json(true);
+                                }
+                            }
+                        }
+
+                    }
+                    ServiceRequest.Status = 3;
+                    ServiceRequest.ServiceProviderId = HttpContext.Session.GetInt32("userid");
+                    _db.ServiceRequests.Update(ServiceRequest);
+                    _db.SaveChanges();
+
+
+                    foreach (var provider in Providers)
+                    {
+                        var subject = "Service Accepted by Another Service Provider";
+                        var body = "Hi " + provider.FirstName + "<br>Service Id = " + ServiceRequest.ServiceRequestId +
+                            " This service request is no more available. It has been assigned to another provider." +
+                            "Thankyou";
+                        SendEmail(provider.Email, body, subject);
+                    }
+
+                    return Json(true);
+                }
             }
             else
             {
-                if (userServices != null)
-                {
-                    foreach (var item in userServices)
-                    {
-                        if (item.ServiceStartDate.ToLongDateString() == ServiceRequest.ServiceStartDate.ToLongDateString())
-                        {
-                            int result = DateTime.Compare(item.ServiceStartDate.AddHours(Convert.ToDouble(item.SubTotal + 1)), ServiceRequest.ServiceStartDate);
-                            if (result > 0)
-                            {
-                                return Json(false);
-                            }
-                            else
-                            {
-                                ServiceRequest.Status = 3;
-                                ServiceRequest.ServiceProviderId = HttpContext.Session.GetInt32("userid");
-                                _db.ServiceRequests.Update(ServiceRequest);
-                                _db.SaveChanges();
-
-
-                                foreach (var provider in Providers)
-                                {
-                                    var subject = "Service Accepted by Another Service Provider";
-                                    var body = "Hi " + provider.FirstName + "<br>Service Id = " + ServiceRequest.ServiceRequestId +
-                                        " This service request is no more available. It has been assigned to another provider." +
-                                        "Thankyou";
-                                    SendEmail(provider.Email, body, subject);
-                                }
-
-                                return Json(true);
-                            }
-                        }
-                    }
-
-                }
-                ServiceRequest.Status = 3;
-                ServiceRequest.ServiceProviderId = HttpContext.Session.GetInt32("userid");
-                _db.ServiceRequests.Update(ServiceRequest);
-                _db.SaveChanges();
-
-
-                foreach (var provider in Providers)
-                {
-                    var subject = "Service Accepted by Another Service Provider";
-                    var body = "Hi " + provider.FirstName + "<br>Service Id = " + ServiceRequest.ServiceRequestId +
-                        " This service request is no more available. It has been assigned to another provider." +
-                        "Thankyou";
-                    SendEmail(provider.Email, body, subject);
-                }
-
-                return Json(true);
+                return Json("This service accepted by another ServiceProvider.");
             }
             
         }

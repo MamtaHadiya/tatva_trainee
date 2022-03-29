@@ -31,7 +31,9 @@ namespace Helperland.Controllers
         [HttpGet]
         public string SerchZipcode(string ZipCode)
         {
-            if (HttpContext.Session.GetInt32("userid") != null)
+
+            var userData = _db.Users.Where(x => x.UserId.Equals(HttpContext.Session.GetInt32("userid"))).FirstOrDefault();
+            if (userData != null && userData.UserTypeId.Equals(1))
             {
                 if (ZipCode != null)
                 {

@@ -24,6 +24,8 @@
         });
         $("#searchBtn").click(function (e) {
             e.preventDefault();
+            var x = $("#from_date").val();
+            //alert(x.toString());
             table.column(0).search([
                 $("#UserName").val(),
             ]);
@@ -38,10 +40,9 @@
             table.column(5).search([
                 $("#phone").val(),
             ]);
-            //var x = table.column(2).data();
-            //for (var i = 0; i < x.length; i++) {
-            //    var y = new Date(x[i]);
-            //}
+            table.column(2).search([
+                $("#from_date").val(),
+            ]);
             table.draw();
         });
     });

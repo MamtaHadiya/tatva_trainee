@@ -148,7 +148,7 @@
                                     <form>
                                         <textarea class="form-control" rows="3" id="Comment"></textarea>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" id="HavePets" name="HavePets"> I have pets at home</label>
+                                            <label><input type="checkbox" value="true" id="HavePets" name="HavePets"> I have pets at home</label>
                                         </div>
                                     </form>
                                     <hr>
@@ -189,9 +189,35 @@
                             <div class="px-3">
                                 <span id="Duration">Duration</span>
                                 <p><span class="float-left">Basic</span><span class="float-right" id="Basic">0 Hrs</span></p><br>
-
-                                <div id="Extra">
+                                <div id="Extra" class="">
                                     <h6 class="font-weight-bold">Extras</h6>
+                                    <table style="border:none" width="100%">
+                                        <tr id="InCabinet" class="d-none">
+                                            <td>Inside cabinets</td>
+                                            <td align="right">30 min</td>
+                                        </tr>
+                                        <tr id="InFridge" class="d-none">
+                                            <td>Inside fridge</td>
+                                            <td align="right">30 min</td>
+                                        </tr>
+                                        <tr id="InOven" class="d-none">
+                                            <td>Inside Oven</td>
+                                            <td align="right">30 min</td>
+                                        </tr>
+                                        <tr id="InLaundry" class="d-none">
+                                            <td>Laundry wash & dry</td>
+                                            <td align="right">30 min</td>
+                                        </tr>
+                                        <tr id="InWindows" class="d-none">
+                                            <td>Interior windows</td>
+                                            <td align="right">30 min</td>
+                                        </tr>
+                                    </table>
+                                    @*<p id="InCabinet" class="d-none"><span class='float-left'>Inside cabinets</span><span class='float-right'>30 Mins</span></p>
+            <p id="InFridge" class="d-none"><span class='float-left'>Inside fridge</span><span class='float-right'>30 Mins</span></p>
+            <p id="InOven" class="d-none"><span class='float-left'>Inside Oven</span><span class='float-right'>30 Mins</span></p>
+            <p id="InLaundry" class="d-none"><span class='float-left'>Laundry wash & dry</span><span class='float-right'>30 Mins</span></p>
+            <p id="InWindows" class="d-none"><span class='float-left'>Interior windows</span><span class='float-right'>30 Mins</span></p>*@
                                 </div>
                                 <p><span class="float-left"><b>Total Service Time</b></span><span class="float-right font-weight-bold" id="TotalTime">3 Hrs</span></p><br><hr>
                                 <p><span class="float-left">Per cleaning</span><b><span class="float-right" id="PerCleaning">0,00$</span></b></p><br>
@@ -366,7 +392,7 @@
 
                     }
                     else {
-                        alert("You have to login before Book A Service");
+                        alert("you are not logged in or you logged in as service provider.");
                         window.location.href = "@Url.Action("Login","Account")";
                     }
                 }
@@ -387,8 +413,13 @@
     function AddBasic() {
         if (count[1] > 0 || count[2] > 0 || count[3] > 0 || count[4] > 0 || count[5] > 0) {
             count[1] = count[2] = count[3] = count[4] = count[5] = 0;
-            $("#Extra").empty();
-            $("#Extra").html("<b>Extras<b>");
+            //$("#Extra").empty();
+            //$("#Extra").html("<b>Extras<b>");
+            $("#InCabinet").addClass("d-none");
+            $("#InFridge").addClass("d-none");
+            $("#InOven").addClass("d-none");
+            $("#InLaundry").addClass("d-none");
+            $("#InWindows").addClass("d-none");
             document.getElementById('Image1').src = "/assets/img/3.png";
             document.getElementById("border1").style.border = "1px solid #B0C9CE";
 
@@ -425,8 +456,21 @@
             $("#TotalPayment").html(TotalPayment + "$");
             document.getElementById('Image1').src = "/assets/img/3-green.png";
             document.getElementById("border1").style.border = "3px solid #1D7A8C";
-            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside cabinets</span><span class='float-right'>30 Mins</span></p><br>";
+            $("#InCabinet").removeClass("d-none");
+            //document.getElementById("InCabinet").innerHTML += "<br />";
             count[1]++;
+        }
+        else {
+            ExtraHours -= 0.5;
+            TotalTime = (TotalTime - 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image1').src = "/assets/img/3.png";
+            document.getElementById("border1").style.border = "1px solid #B0C9CE";
+            $("#InCabinet").addClass("d-none");
+            //$("#InCabinet").html("<p id='InCabinet' class='d-none'><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p>");
+            count[1] = 0;
         }
     }
     function Fridge() {
@@ -439,8 +483,22 @@
             $("#TotalPayment").html(TotalPayment + "$");
             image.src = "/assets/img/5-green.png";
             document.getElementById("border2").style.border = "3px solid #1D7A8C";
-            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p><br>";
+            $("#InFridge").removeClass("d-none");
+            //document.getElementById("InFridge").innerHTML += "<br />";
+            //document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p><br>";
             count[2]++;
+        }
+        else {
+            ExtraHours -= 0.5;
+            TotalTime = (TotalTime - 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image2').src = "/assets/img/5.png";
+            document.getElementById("border2").style.border = "1px solid #B0C9CE";
+            $("#InFridge").addClass("d-none");
+            //$("#InFridge").html("<p id='InFridge' class='d-none'><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p>");
+            count[2] = 0;
         }
     }
 
@@ -454,8 +512,22 @@
             $("#TotalPayment").html(TotalPayment + "$");
             image.src = "/assets/img/4-green.png";
             document.getElementById("border3").style.border = "3px solid #1D7A8C";
-            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside oven</span><span class='float-right'>30 Mins</span></p><br>";
+            $("#InOven").removeClass("d-none");
+            //document.getElementById("InOven").innerHTML += "<br />";
+            //document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Inside oven</span><span class='float-right'>30 Mins</span></p><br>";
             count[3]++;
+        }
+        else {
+            ExtraHours -= 0.5;
+            TotalTime = (TotalTime - 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image3').src = "/assets/img/4.png";
+            document.getElementById("border3").style.border = "1px solid #B0C9CE";
+            $("#InOven").addClass("d-none");
+            //$("#InOven").html("<p id='InOven' class='d-none'><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p>");
+            count[3] = 0;
         }
     }
 
@@ -469,8 +541,22 @@
             $("#TotalPayment").html(TotalPayment + "$");
             image.src = "/assets/img/2-green.png";
             document.getElementById("border4").style.border = "3px solid #1D7A8C";
-            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Laundry wash & dry</span><span class='float-right'>30 Mins</span></p><br>";
+            $("#InLaundry").removeClass("d-none");
+            //document.getElementById("InLaundry").innerHTML += "<br />";
+            //document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Laundry wash & dry</span><span class='float-right'>30 Mins</span></p><br>";
             count[4]++;
+        }
+        else {
+            ExtraHours -= 0.5;
+            TotalTime = (TotalTime - 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image4').src = "/assets/img/2.png";
+            document.getElementById("border4").style.border = "1px solid #B0C9CE";
+            $("#InLaundry").addClass("d-none");
+            //$("#InLaundry").html("<p id='InLaundry' class='d-none'><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p>");
+            count[4] = 0;
         }
     }
 
@@ -484,8 +570,22 @@
             $("#TotalPayment").html(TotalPayment + "$");
             image.src = "/assets/img/1-green.png";
             document.getElementById("border5").style.border = "3px solid #1D7A8C";
-            document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Interior windows</span><span class='float-right'>30 Mins</span></p><br>";
+            $("#InWindows").removeClass("d-none");
+            //document.getElementById("InWindows").innerHTML += "<br />";
+            //document.getElementById("Extra").innerHTML += "<p><span class='float-left'>Interior windows</span><span class='float-right'>30 Mins</span></p><br>";
             count[5]++;
+        }
+        else {
+            ExtraHours -= 0.5;
+            TotalTime = (TotalTime - 0.5);
+            TotalPayment = TotalTime * HourlyRate;
+            $("#TotalTime").html(TotalTime + " Hrs");
+            $("#TotalPayment").html(TotalPayment + "$");
+            document.getElementById('Image5').src = "/assets/img/1.png";
+            document.getElementById("border5").style.border = "1px solid #B0C9CE";
+            $("#InWindows").addClass("d-none");
+            //$("#InWindows").html("<p id='InWindows' class='d-none'><span class='float-left'>Inside Fridge</span><span class='float-right'>30 Mins</span></p>");
+            count[5] = 0;
         }
     }
 
@@ -578,7 +678,6 @@
         var actionurl = '@Url.Action("AddRequest", "BookService")';
 
         var booking = {};
-
         booking.ZipCode = $("#ZipCode").val();
         booking.bookingStartTime = $("#StartDate").val() + " " + $("#StartTime").val();
         booking.hours = parseFloat($("#Hours").val());
@@ -588,7 +687,7 @@
         booking.SubTotal = TotalTime;
         booking.TotalCost = TotalPayment;
         booking.Comments = $("#Comment").val();
-        booking.HasPets = $("#HavePets").val();
+        booking.HasPets = $("#HavePets:checked").val();
 
 
         $.ajax({
