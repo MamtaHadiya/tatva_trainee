@@ -30,6 +30,7 @@ namespace Helperland.Controllers
         }
 
             [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CustomerSignup(User user)
         {
             if (ModelState.IsValid)
@@ -134,7 +135,7 @@ namespace Helperland.Controllers
                         ViewBag.Firstname = userdata.FirstName;
                         return RedirectToAction("Index", "Customer");
                     }
-                    else if(userdata.UserTypeId == 2)
+                    else if(userdata.UserTypeId == 2 && userdata.IsApproved == true)
                     {
                         userdata.IsActive = true;
                         _db.Users.Update(userdata);
@@ -152,7 +153,9 @@ namespace Helperland.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Helperland");
+                        ViewBag.error = "you are not activated/approved by admin";
+                        return View();
+                        //return RedirectToAction("Index", "Helperland");
                     }
                 }
                 else

@@ -153,7 +153,7 @@ namespace Helperland.Controllers
                 var body2 = "Hi " + customer.FirstName + " Service Request " + service.ServiceRequestId +
                     " has been Edited by Admin.<br>" +
                     "Thankyou";
-                SendEmail(customer.FirstName, body2, subject2);
+                SendEmail(customer.Email, body2, subject2);
 
                 return Json(true);
             }
@@ -172,6 +172,16 @@ namespace Helperland.Controllers
                 service.ModifiedBy = 3;
                 _db.ServiceRequests.Update(service);
                 _db.SaveChanges();
+                var subject = "Service Request Cancelled by Admin";
+                var body = "Hi " + provider.FirstName + " Service Request " + service.ServiceRequestId +
+                    " has been cancelled by Admin.<br>" +
+                    "Thankyou";
+                SendEmail(provider.Email, body, subject);
+                var subject2 = "Service Request cancelled by Admin";
+                var body2 = "Hi " + customer.FirstName + " Service Request " + service.ServiceRequestId +
+                    " has been cancelled by Admin.<br>" +
+                    "Thankyou";
+                SendEmail(customer.Email, body2, subject2);
                 return Json(true);
             }
             return Json(false);
@@ -186,7 +196,7 @@ namespace Helperland.Controllers
                 {
                     userdata.IsActive = true;
                     userdata.ModifiedDate = DateTime.Now;
-                    userdata.ModifiedBy = 3;
+                    userdata.ModifiedBy = (int)HttpContext.Session.GetInt32("userid");
                     _db.Users.Update(userdata);
                     _db.SaveChanges();
                     return Json(true);
@@ -212,7 +222,7 @@ namespace Helperland.Controllers
             {
                 userdata.IsApproved = true;
                 userdata.ModifiedDate = DateTime.Now;
-                userdata.ModifiedBy = 3;
+                userdata.ModifiedBy = (int)HttpContext.Session.GetInt32("userid");
                 _db.Users.Update(userdata);
                 _db.SaveChanges();
                 return Json(true);
@@ -243,7 +253,7 @@ namespace Helperland.Controllers
                 {
                     Sheet.Cells[String.Format("D{0}", row)].Value = "Customer";
                 }
-                if (item.UserTypeId == 2)
+                else if (item.UserTypeId == 2)
                 {
                     Sheet.Cells[String.Format("D{0}", row)].Value = "Service provider";
                 }
@@ -253,7 +263,14 @@ namespace Helperland.Controllers
                 }
                 Sheet.Cells[String.Format("E{0}", row)].Value = item.ZipCode;
                 Sheet.Cells[String.Format("F{0}", row)].Value = item.Mobile;
-                Sheet.Cells[String.Format("G{0}", row)].Value = "Active";
+                if(item.IsActive == true)
+                {
+                    Sheet.Cells[String.Format("G{0}", row)].Value = "Active";
+                }
+                else
+                {
+                    Sheet.Cells[String.Format("G{0}", row)].Value = "InActive";
+                }
                 row++;
             }
 

@@ -107,7 +107,6 @@
             else {
                 formvalues.push({ name: "BookingStartTime", value: "" });
             }
-            alert(JSON.stringify(formvalues));
             $.post("/Admin/EditDetails", formvalues, function (data) {
                if (data == true) {
                     alert("Details Updated Successfully.");

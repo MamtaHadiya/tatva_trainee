@@ -37,19 +37,16 @@
         $("#Searchbtn").click(function (e) {
             e.preventDefault();
             table1.column(0).search([
-                $("#serviceId").val(),
-            ]);
-            table1.column(2).search([
-                $("#customerName").val(),
+                $("#service_id").val(),
             ]);
             table1.column(2).search([
                 $("#postalCode").val(),
             ]);
+            table1.column(2).search([
+                $("#customerName").val(),
+            ]);
             table1.column(3).search([
                 $("#spName").val(),
-            ]);
-            table1.column(4).search([
-                $("#serviceId").val(),
             ]);
             table1.column(1).search([
                 $("#fromdate").val(),
@@ -74,7 +71,7 @@
 <h2><b>Service Requests</b></h2>
 <div class="top_form">
     <form class="form-inline">
-        <input type="text" id="serviceId" name="service_id" class="form-control m-1" placeholder="Service ID">
+        <input type="text" id="service_id" name="service_id" class="form-control m-1" placeholder="Service ID">
         <input type="text" class="form-control m-1" id="postalCode" placeholder="Postal code" />
         <input type="text" class="form-control m-1" id="email" placeholder="Email" />
         <input type="text" class="form-control m-1" id="customerName" placeholder="Customer Name" />
@@ -110,7 +107,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.ServiceRequestId</td>
+                    <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">@item.serviceRequest.ServiceRequestId.ToString()</td>
                     <td onclick="rowclicked(@item.serviceRequest.ServiceRequestId);">
                         <img src="~/assets/img/calendar2.png"> @item.serviceRequest.ServiceStartDate.ToShortDateString()
                         <br /><img src="~/assets/img/layer-14.png"> @item.serviceRequest.ServiceStartDate.ToShortTimeString() - @item.serviceRequest.ServiceStartDate.AddHours(Convert.ToDouble(item.serviceRequest.SubTotal)).ToShortTimeString()

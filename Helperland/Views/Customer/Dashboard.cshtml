@@ -154,16 +154,17 @@
                                 <option value="5:00 PM">5:00 PM</option>
                             </select>
                         </div>
-                    </div>
-                    <script language="javascript">
-                        var today = new Date();
-                        var dd = String(today.getDate() + 1).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
+                        <script language="javascript">
+                            var today = new Date();
+                            var dd = String(today.getDate() + 1).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0');
+                            var yyyy = today.getFullYear();
 
-                        today = yyyy + '-' + mm + '-' + dd;
-                        $('#StartDate').attr('min', today);
-                    </script>
+                            today = yyyy + '-' + mm + '-' + dd;
+                            $('#StartDate').attr('min', today);
+                        </script>
+                    </div>
+                    
                     <span class="text-danger" id="DateTime"></span>
                 </form>
             </div>
